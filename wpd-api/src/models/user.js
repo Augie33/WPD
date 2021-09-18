@@ -21,13 +21,13 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['police','admin'],
+    enum: ['police', 'admin'],
     default: 'police',
   },
   password: {
     type: String,
     required: [true, 'Please add a password'],
-    minlength: 6,
+    minlength: 7,
     select: false,
   },
   token: {
@@ -35,7 +35,6 @@ const UserSchema = new mongoose.Schema({
   },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
-
 
   createdAt: {
     type: Date,
