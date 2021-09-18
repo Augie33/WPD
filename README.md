@@ -4,7 +4,7 @@
 
 ## Folders
   - **wpd-api**: the backend side
-  - **wpd_app**: the Flutter App
+  - **wpd_app**: the Mobile App
   - **wpd-webview**: information page
   - **design**: all Adobe XD files and assets
 
