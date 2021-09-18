@@ -1,0 +1,36 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:routemaster/routemaster.dart';
+
+class BottomNav extends StatelessWidget {
+  const BottomNav({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final tabState = CupertinoTabPage.of(context);
+
+    return CupertinoTabScaffold(
+      controller: tabState.controller,
+      tabBuilder: tabState.tabBuilder,
+      tabBar: CupertinoTabBar(
+        activeColor: Theme.of(context).primaryColor,
+        iconSize: 32,
+        backgroundColor: Theme.of(context).backgroundColor,
+        items: const [
+          BottomNavigationBarItem(
+            label: 'Home',
+            icon: Icon(CupertinoIcons.home),
+          ),
+          BottomNavigationBarItem(
+            label: 'Profile',
+            icon: Icon(CupertinoIcons.profile_circled),
+          ),
+          BottomNavigationBarItem(
+            label: 'More',
+            icon: Icon(Icons.more_horiz),
+          ),
+        ],
+      ),
+    );
+  }
+}
