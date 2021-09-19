@@ -40,7 +40,7 @@ class AppTheme {
         ),
         centerTitle: true,
         titleTextStyle: GoogleFonts.cairo(
-          fontSize: 21.0,
+          fontSize: 18.0,
           fontWeight: FontWeight.w700,
           color: Colors.black,
         ),
@@ -68,7 +68,7 @@ class AppTheme {
           color: Colors.yellow[700],
         ),
         titleTextStyle: GoogleFonts.cairo(
-          fontSize: 21.0,
+          fontSize: 18.0,
           fontWeight: FontWeight.w700,
           color: Colors.white,
         ),

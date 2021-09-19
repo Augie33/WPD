@@ -13,9 +13,11 @@ abstract class AppStartup {
       _requestRest.setUpLogger();
     }
 
-    await Future.delayed(
-      const Duration(seconds: 5),
-    );
+    _requestRest.setUpErrorInterceptor();
+
+    // await Future.delayed(
+    //   const Duration(seconds: 2),
+    // );
   }
 }
 

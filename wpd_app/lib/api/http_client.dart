@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:wpd_app/models/error/custom_error.dart';
 
 import 'json_parsers/json_parsers.dart';
 
@@ -32,6 +33,24 @@ class RequestREST {
         maxWidth: 90,
       ),
     );
+  }
+
+  void setUpErrorInterceptor() {
+    _client.interceptors.add(
+      InterceptorsWrapper(onError: (DioError e, handler) {
+        return handler.next(e); //continue
+      }),
+    );
+  }
+
+  void setUpToken(String token) {
+    _client.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        options.headers['token'] = 'Bearer $token';
+
+        return handler.next(options); //continue
+      },
+    ));
   }
 
   Future<T> executeGet<T>(String endpoint, JsonParser<T> parser,

@@ -22,8 +22,11 @@ class _$AuthTearOff {
   const _$AuthTearOff();
 
   _Auth call(
-      {required String token, @JsonKey(name: 'data') required User user}) {
+      {required bool success,
+      required String token,
+      @JsonKey(name: 'data') required User user}) {
     return _Auth(
+      success: success,
       token: token,
       user: user,
     );
@@ -39,6 +42,7 @@ const $Auth = _$AuthTearOff();
 
 /// @nodoc
 mixin _$Auth {
+  bool get success => throw _privateConstructorUsedError;
   String get token => throw _privateConstructorUsedError;
   @JsonKey(name: 'data')
   User get user => throw _privateConstructorUsedError;
@@ -52,7 +56,7 @@ mixin _$Auth {
 abstract class $AuthCopyWith<$Res> {
   factory $AuthCopyWith(Auth value, $Res Function(Auth) then) =
       _$AuthCopyWithImpl<$Res>;
-  $Res call({String token, @JsonKey(name: 'data') User user});
+  $Res call({bool success, String token, @JsonKey(name: 'data') User user});
 
   $UserCopyWith<$Res> get user;
 }
@@ -67,10 +71,15 @@ class _$AuthCopyWithImpl<$Res> implements $AuthCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? success = freezed,
     Object? token = freezed,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
+      success: success == freezed
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
       token: token == freezed
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -95,7 +104,7 @@ abstract class _$AuthCopyWith<$Res> implements $AuthCopyWith<$Res> {
   factory _$AuthCopyWith(_Auth value, $Res Function(_Auth) then) =
       __$AuthCopyWithImpl<$Res>;
   @override
-  $Res call({String token, @JsonKey(name: 'data') User user});
+  $Res call({bool success, String token, @JsonKey(name: 'data') User user});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -112,10 +121,15 @@ class __$AuthCopyWithImpl<$Res> extends _$AuthCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? success = freezed,
     Object? token = freezed,
     Object? user = freezed,
   }) {
     return _then(_Auth(
+      success: success == freezed
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
       token: token == freezed
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -133,10 +147,14 @@ class __$AuthCopyWithImpl<$Res> extends _$AuthCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_Auth implements _Auth {
   const _$_Auth(
-      {required this.token, @JsonKey(name: 'data') required this.user});
+      {required this.success,
+      required this.token,
+      @JsonKey(name: 'data') required this.user});
 
   factory _$_Auth.fromJson(Map<String, dynamic> json) => _$$_AuthFromJson(json);
 
+  @override
+  final bool success;
   @override
   final String token;
   @override
@@ -145,13 +163,16 @@ class _$_Auth implements _Auth {
 
   @override
   String toString() {
-    return 'Auth(token: $token, user: $user)';
+    return 'Auth(success: $success, token: $token, user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Auth &&
+            (identical(other.success, success) ||
+                const DeepCollectionEquality()
+                    .equals(other.success, success)) &&
             (identical(other.token, token) ||
                 const DeepCollectionEquality().equals(other.token, token)) &&
             (identical(other.user, user) ||
@@ -161,6 +182,7 @@ class _$_Auth implements _Auth {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(success) ^
       const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(user);
 
@@ -177,11 +199,14 @@ class _$_Auth implements _Auth {
 
 abstract class _Auth implements Auth {
   const factory _Auth(
-      {required String token,
+      {required bool success,
+      required String token,
       @JsonKey(name: 'data') required User user}) = _$_Auth;
 
   factory _Auth.fromJson(Map<String, dynamic> json) = _$_Auth.fromJson;
 
+  @override
+  bool get success => throw _privateConstructorUsedError;
   @override
   String get token => throw _privateConstructorUsedError;
   @override

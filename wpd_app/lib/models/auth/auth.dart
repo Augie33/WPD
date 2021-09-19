@@ -10,6 +10,7 @@ part 'auth.g.dart';
 abstract class Auth with _$Auth {
   @JsonSerializable(explicitToJson: true)
   const factory Auth({
+    required bool success,
     required String token,
     @JsonKey(name: 'data') required User user,
   }) = _Auth;
