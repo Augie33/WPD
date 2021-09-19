@@ -32,6 +32,12 @@ class AppTheme {
     return ThemeData(
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
+        actionsIconTheme: IconThemeData(
+          color: Colors.yellow[700],
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
         centerTitle: true,
         titleTextStyle: GoogleFonts.cairo(
           fontSize: 21.0,
@@ -58,6 +64,9 @@ class AppTheme {
     return ThemeData(
       appBarTheme: AppBarTheme(
         centerTitle: true,
+        actionsIconTheme: IconThemeData(
+          color: Colors.yellow[700],
+        ),
         titleTextStyle: GoogleFonts.cairo(
           fontSize: 21.0,
           fontWeight: FontWeight.w700,

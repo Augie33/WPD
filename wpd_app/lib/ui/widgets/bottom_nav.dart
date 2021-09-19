@@ -22,6 +22,10 @@ class BottomNav extends StatelessWidget {
             icon: Icon(CupertinoIcons.home),
           ),
           BottomNavigationBarItem(
+            label: 'Favorite',
+            icon: Icon(CupertinoIcons.square_favorites),
+          ),
+          BottomNavigationBarItem(
             label: 'Profile',
             icon: Icon(CupertinoIcons.profile_circled),
           ),
