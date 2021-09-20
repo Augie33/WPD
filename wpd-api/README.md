@@ -1,7 +1,8 @@
 # WPD Backend
 
-1- Create config.env file </br>
-2- Add these
+1 - Create **config** folder   </br>
+2 - Create **config.env** file </br>
+3 - Add these
 ```env
 NODE_ENV=development
 PORT=3000
@@ -15,7 +16,7 @@ JWT_SECRET=myappcoooooooooooooooooooool
 # JWT_COOKIE_EXPIRE=30
 ```
 
-3- run the app
+4- run the app
 ```shell
 npm run dev
 ```
