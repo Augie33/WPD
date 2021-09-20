@@ -92,12 +92,9 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     success: true,
     data: {
       id: user._id,
-      fullName: user.fullName,
-      phoneNumber: user.phoneNumber,
+      name: user.name,
       email: user.email,
       role: user.role,
-      banned: user.banned,
-      //   isEmailConfirmed: user.isEmailConfirmed,
     },
   });
 });
@@ -238,7 +235,7 @@ const sendTokenResponse = async (user, statusCode, res) => {
 
   res
     .status(statusCode)
-    .cookie('token', token, options)
+    // .cookie('token', token, options)
     .json({
       success: true,
       token,
