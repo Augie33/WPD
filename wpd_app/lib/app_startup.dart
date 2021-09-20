@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/services/service_locator.dart';
-import 'package:wpd_app/ui/screens/home_screen.dart';
 import 'package:wpd_app/ui/screens/splash_screen.dart';
+import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 
 abstract class AppStartup {
   static Future<void> setup() async {
@@ -15,9 +16,9 @@ abstract class AppStartup {
 
     _requestRest.setUpErrorInterceptor();
 
-    // await Future.delayed(
-    //   const Duration(seconds: 2),
-    // );
+    await Future.delayed(
+      const Duration(seconds: 2),
+    );
   }
 }
 
@@ -44,7 +45,10 @@ class _StartUpPageState extends State<StartUpPage> {
       future: startUpFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return const HomeScreen();
+          WidgetsBinding.instance?.addPostFrameCallback((_) {
+            final appState = context.read(AuthStateViewModelProvider.provider);
+            appState.splashing = false;
+          });
         }
 
         return const SplashScreen();

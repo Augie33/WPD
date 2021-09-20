@@ -12,6 +12,7 @@ import 'package:wpd_app/ui/widgets/bottom_nav.dart';
 abstract class AppRoutes {
   static final routes = RouteMap(routes: {
     // '/': (_) => const MaterialPage(child: StartUpPage()),
+
     '/': (_) => const CupertinoTabPage(
           child: BottomNav(),
           paths: ['/home', '/favorite', '/profile', '/more'],
@@ -27,6 +28,15 @@ abstract class AppRoutes {
     // '/feed/profile/:id': (info) =>
     //     MaterialPage(child: ProfilePage(id: info.pathParameters['id'])),
   });
+}
+
+abstract class StartUpAppRoutes {
+  static final routes = RouteMap(
+    onUnknownRoute: (_) => const Redirect('/'),
+    routes: {
+      '/': (_) => const MaterialPage(child: StartUpPage()),
+    },
+  );
 }
 
 abstract class LogoutAppRoutes {

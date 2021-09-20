@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wpd_app/app_startup.dart';
 import 'package:wpd_app/services/service_locator.dart';
 import 'package:wpd_app/utils/app_theme.dart';
 import 'package:wpd_app/utils/bot_toast_observer.dart';
@@ -15,8 +14,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
   setupServiceLocator(sharedPreferences: sharedPreferences);
-
-  await AppStartup.setup();
 
   runApp(
     const ProviderScope(child: MyApp()),
@@ -41,6 +38,10 @@ class MyApp extends StatelessWidget {
           },
           routerDelegate: RoutemasterDelegate(
             routesBuilder: (context) {
+              if (appState.splashing) {
+                return StartUpAppRoutes.routes;
+              }
+
               return appState.isLoggedIn
                   ? AppRoutes.routes
                   : LogoutAppRoutes.routes;

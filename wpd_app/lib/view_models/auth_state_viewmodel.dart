@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/auth_parser.dart';
 import 'package:wpd_app/models/auth/auth.dart';
@@ -19,13 +18,20 @@ class AuthStateViewModel extends ChangeNotifier {
   final _scureStorageService = serviceLocator<ScureStorageService>();
   final _requestRest = serviceLocator<RequestREST>();
 
+  bool _splashing = true;
   User? _myUser;
   bool _loading = false;
   bool _loggedIn = false;
 
+  bool get splashing => _splashing;
   User? get myUser => _myUser;
   bool get isLoading => _loading;
   bool get isLoggedIn => _loggedIn;
+
+  set splashing(bool value) {
+    _splashing = value;
+    notifyListeners();
+  }
 
   Future<void> login(
     BuildContext context,
