@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:wpd_app/models/error/custom_error.dart';
+import 'package:wpd_app/models/user/user.dart';
+import 'package:wpd_app/services/secure_storage/secure_storage_service.dart';
+import 'package:wpd_app/services/service_locator.dart';
 
 import 'json_parsers/json_parsers.dart';
 
@@ -46,11 +49,29 @@ class RequestREST {
   void setUpToken(String token) {
     _client.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
-        options.headers['token'] = 'Bearer $token';
+        options.headers['Authorization'] = 'Bearer $token';
 
         return handler.next(options); //continue
       },
     ));
+  }
+
+  Future<User?> checkToken() async {
+    final _scureStorageService = serviceLocator<ScureStorageService>();
+
+    // Getting the token from the scure Storage
+    String token = await _scureStorageService.getToken() ?? '';
+    setUpToken(token);
+
+    final response = await _client.get('/auth/me');
+
+    if (response.statusCode == 200) {
+      final user = User.fromJson(response.data['data']);
+
+      return user;
+    }
+
+    return null;
   }
 
   Future<T> executeGet<T>(String endpoint, JsonParser<T> parser,

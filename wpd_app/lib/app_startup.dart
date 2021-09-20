@@ -2,12 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/api/http_client.dart';
+import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/services/service_locator.dart';
 import 'package:wpd_app/ui/screens/splash_screen.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 
 abstract class AppStartup {
-  static Future<void> setup() async {
+  static Future<User?> setup() async {
     final _requestRest = serviceLocator<RequestREST>();
 
     if (kReleaseMode) {
@@ -16,9 +17,14 @@ abstract class AppStartup {
 
     _requestRest.setUpErrorInterceptor();
 
+    // Checking the auth
+    final user = await _requestRest.checkToken();
+
     await Future.delayed(
       const Duration(seconds: 2),
     );
+
+    return user;
   }
 }
 
@@ -30,7 +36,7 @@ class StartUpPage extends StatefulWidget {
 }
 
 class _StartUpPageState extends State<StartUpPage> {
-  late Future<void> startUpFuture;
+  late Future<User?> startUpFuture;
 
   @override
   void initState() {
@@ -41,12 +47,18 @@ class _StartUpPageState extends State<StartUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
+    return FutureBuilder<User?>(
       future: startUpFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           WidgetsBinding.instance?.addPostFrameCallback((_) {
             final appState = context.read(AuthStateViewModelProvider.provider);
+
+            // Checking the auth screen
+            if (snapshot.data != null) {
+              appState.setUpWithToken(snapshot.data);
+            }
+            print(snapshot.data);
             appState.splashing = false;
           });
         }

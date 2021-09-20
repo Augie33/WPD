@@ -33,6 +33,11 @@ class AuthStateViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setUpWithToken(User? user) {
+    _myUser = user;
+    _loggedIn = true;
+  }
+
   Future<void> login(
     BuildContext context,
     String email,
