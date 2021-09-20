@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/api/http_client.dart';
@@ -66,8 +67,10 @@ class AuthStateViewModel extends ChangeNotifier {
 
       _myUser = data.user;
 
-      // save the token inside scure storage
-      await _scureStorageService.setToken(data.token);
+      // save the token inside scure storage if the user use mobile (iOS/Android)
+      if (!kIsWeb) {
+        await _scureStorageService.setToken(data.token);
+      }
 
       // set the token header
       _requestRest.setUpToken(data.token);

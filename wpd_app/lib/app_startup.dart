@@ -18,9 +18,13 @@ abstract class AppStartup {
     _requestRest.setUpErrorInterceptor();
 
     // Checking the auth
-    final user = await _requestRest.checkToken();
 
-    return user;
+    if (!kIsWeb) {
+      final user = await _requestRest.checkToken();
+      return user;
+    }
+
+    return null;
   }
 }
 

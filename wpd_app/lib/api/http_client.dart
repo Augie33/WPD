@@ -14,6 +14,8 @@ class RequestREST {
   static final _client = Dio(
     BaseOptions(
       baseUrl: 'http://10.0.2.2:3000/api/v1/',
+
+      // baseUrl: 'http://localhost/api/v1/',
       connectTimeout: 3000, // 3 seconds
       receiveTimeout: 3000, // 3 seconds
       // headers: <String, String>{
