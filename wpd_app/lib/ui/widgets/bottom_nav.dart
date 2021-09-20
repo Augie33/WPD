@@ -8,6 +8,8 @@ class BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabState = CupertinoTabPage.of(context);
+    final brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
 
     return CupertinoTabScaffold(
       controller: tabState.controller,
@@ -15,7 +17,8 @@ class BottomNav extends StatelessWidget {
       tabBar: CupertinoTabBar(
         activeColor: Theme.of(context).primaryColor,
         iconSize: 30,
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor:
+            isDarkMode ? Theme.of(context).backgroundColor : Colors.white,
         items: const [
           BottomNavigationBarItem(
             label: 'Home',

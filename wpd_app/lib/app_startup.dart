@@ -20,10 +20,6 @@ abstract class AppStartup {
     // Checking the auth
     final user = await _requestRest.checkToken();
 
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
-
     return user;
   }
 }
