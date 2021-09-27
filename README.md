@@ -51,12 +51,12 @@ npm run dev
 ```
 ### Mobile Application
 
-1 - Open the **wpd_app** folder
-2- run
+1 - Open the **wpd_app** folder </br>
+2- run </br>
 ```shell
 flutter pub get
-```
-3- run
+``` 
+3- run </br>
 ```shell
 flutter run
 ```
