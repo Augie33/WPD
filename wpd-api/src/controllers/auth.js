@@ -88,6 +88,7 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('Invalid credentials', 401));
   }
 
+
   res.status(200).json({
     success: true,
     data: {
