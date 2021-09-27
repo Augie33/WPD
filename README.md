@@ -14,6 +14,7 @@
         - Elina </br>
   - **weekly_minutes** </br>
   - **reports**: 
+  - **slides**:
 
 
 ## Software Architectural Pattern
