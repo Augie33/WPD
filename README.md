@@ -12,9 +12,9 @@
         - Andrew </br>
         - Dhari </br>
         - Elina </br>
-  - **weekly_minutes** </br>
+  - **weekly_minutes**: Folder compiled of our team's weekly minutes. </br>
   - **reports**: Folder compiled of previous/current semesters class assignments.
-  - **slides**
+  - **slides**: Folder compiled of PowerPoint slides from class assignment.
 
 ## Team members (Roles)
 
