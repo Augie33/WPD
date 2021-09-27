@@ -16,6 +16,9 @@
   - **reports**: Folder compiled of previous/current semesters class assignments.
   - **slides**
 
+## The Final Presentation for the first semester
+
+  https://www.youtube.com/watch?v=DyEXAnuPA0A
 
 ## Software Architectural Pattern
   - Mobile APP -> MVVM (Model–view–viewmodel)
