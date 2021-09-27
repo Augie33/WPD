@@ -14,7 +14,7 @@
         - Elina </br>
   - **weekly_minutes** </br>
   - **reports**: Folder compiled of previous/current semesters class assignments.
-  - **slides**:
+  - **slides**
 
 
 ## Software Architectural Pattern
