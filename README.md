@@ -16,7 +16,7 @@
   - **reports**: Folder compiled of previous/current semesters class assignments.
   - **slides**
 
-## Team members
+## Team members (Roles)
 
 - **Dhari Alenez**: Mobile & backend developer.
   
