@@ -16,7 +16,7 @@
   - **reports**: Folder compiled of previous/current semesters class assignments.
   - **slides**: Folder compiled of PowerPoint slides from class assignment.
 
-## Team members (Roles)
+## Team members (roles) - We Can Do It Team
 
 - **Dhari Alenezi**: Mobile & backend developer.
 - **Elina Do**: Database Developer
@@ -24,9 +24,11 @@
 - **Abdulrahman Alharbi**: UI & UX Designer
   
 
-## The Final Presentation for the first semester
-
-  https://www.youtube.com/watch?v=DyEXAnuPA0A
+## Videos
+  - We Can Do It - Senior Design
+     https://youtu.be/W6ekRtpcY5A
+  - The Final Presentation for the first semester
+     https://youtu.be/DyEXAnuPA0A
   
   
 ## Technologies & Programming Languages
