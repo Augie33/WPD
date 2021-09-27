@@ -18,7 +18,7 @@
 
 ## Team members (Roles)
 
-- **Dhari Alenez**: Mobile & Back-end developer.
+- **Dhari Alenez**: mobile & backend developer.
 - **Elina Do**: Database Developer
 - **Andrew Nguyen**: Full-Stack Developer
 - **Abdulrahman Alharbi**: UI&UX Designer
@@ -49,10 +49,10 @@
 ## Usage
 
 ### WPD Backend & Webview
-
-1 - Create **config** folder   </br>
-2 - Create **config.env** file </br>
-3 - Add these
+1 - Open the **wpd-api** folder </br>
+2 - Create **config** folder   </br>
+3 - Create **config.env** file </br>
+4 - Add these
 ```env
 NODE_ENV=development
 PORT=3000
@@ -66,7 +66,7 @@ JWT_SECRET=myappcoooooooooooooooooooool
 # JWT_COOKIE_EXPIRE=30
 ```
 
-4- run the app
+5- run the app
 ```shell
 npm run dev
 ```
