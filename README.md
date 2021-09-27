@@ -65,8 +65,12 @@ MAX_FILE_UPLOAD=1000000
 JWT_SECRET=myappcoooooooooooooooooooool
 # JWT_COOKIE_EXPIRE=30
 ```
+5- Run
+```shell
+npm install
+```
 
-5- run the app
+6- run the app
 ```shell
 npm run dev
 ```
