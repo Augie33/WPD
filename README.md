@@ -37,7 +37,7 @@
 
 ## Usage
 
-### WPD Backend
+### WPD Backend & Webview
 
 1 - Create **config** folder   </br>
 2 - Create **config.env** file </br>
