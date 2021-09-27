@@ -16,6 +16,11 @@
   - **reports**: Folder compiled of previous/current semesters class assignments.
   - **slides**
 
+## Team members
+
+- **Dhari Alenez**: Mobile & backend developer.
+  
+
 ## The Final Presentation for the first semester
 
   https://www.youtube.com/watch?v=DyEXAnuPA0A
