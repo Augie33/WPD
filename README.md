@@ -3,8 +3,8 @@
 <img src="https://user-images.githubusercontent.com/24327781/134834641-a10c2096-a727-4eda-8da6-e89b12cb5c26.png" width="250" /><img src="https://user-images.githubusercontent.com/24327781/134834647-ce9cd8a0-4a94-4a7c-827c-a351c8478d96.png" width="250" />
 
 ## Folders
-  - **wpd-api**: the backend side folder & files
-  - **wpd_app**: the mobile App folder & files
+  - **wpd-api**: Backend side folder & files
+  - **wpd_app**: Mobile App folder & files
   - **wpd-webview**: Information page when the user scan the QR Code
   - **design**: Adobe XD files and assets
   - **journals** </br>
@@ -33,7 +33,7 @@
    - **Mobile APP**, we used Flutter SDK & Dart programming language. <img src="https://user-images.githubusercontent.com/24327781/134839727-4c5d4e2c-69d5-45ac-ac9e-3dcf86756cd3.png" width="90" />     
 
    - **Backend side**, we used Node.js & Javascript programming language. <img src="https://user-images.githubusercontent.com/24327781/134839809-24df39d9-f8f3-4bc9-8d75-baa1cce1d037.png" width="90" />     
-   - **Database**, we used Mongodb (NoSql) database. <img src="https://user-images.githubusercontent.com/24327781/134839944-bb7316fc-3ab0-473a-b8ad-3f4b40183f3b.png" width="90" />     
+   - **Database**, we used MongoDB (NoSql) database. <img src="https://user-images.githubusercontent.com/24327781/134839944-bb7316fc-3ab0-473a-b8ad-3f4b40183f3b.png" width="90" />     
 
 
 ## Software Architectural Pattern
