@@ -7,12 +7,12 @@
   - **wpd_app**: the Mobile App
   - **wpd-webview**: information page
   - **design**: all Adobe XD files and assets
-  - **journals**
-        - Abdulrahman
-        - Andrew
-        - Dhari
-        - Elina
-  - **weekly_minutes**
+  - **journals** </br>
+        - Abdulrahman </br>
+        - Andrew </br>
+        - Dhari </br>
+        - Elina </br>
+  - **weekly_minutes** </br>
 
 
 ## Software Architectural Pattern
