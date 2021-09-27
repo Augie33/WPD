@@ -27,6 +27,14 @@
 ## The Final Presentation for the first semester
 
   https://www.youtube.com/watch?v=DyEXAnuPA0A
+  
+  
+## Technologies & Programming Languages
+   - <img src="https://user-images.githubusercontent.com/24327781/134839727-4c5d4e2c-69d5-45ac-ac9e-3dcf86756cd3.png" width="90" />     **Mobile APP**, we used Flutter SDK & Dart programming language. 
+
+   - <img src="https://user-images.githubusercontent.com/24327781/134839809-24df39d9-f8f3-4bc9-8d75-baa1cce1d037.png" width="90" />     **Backend side**, we used Node.js & Javascript programming language.
+   - <img src="https://user-images.githubusercontent.com/24327781/134839944-bb7316fc-3ab0-473a-b8ad-3f4b40183f3b.png" width="90" />     **Database**, we used Mongodb (NoSql) database.
+
 
 ## Software Architectural Pattern
   - Mobile APP -> MVVM (Model–view–viewmodel)
