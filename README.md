@@ -21,6 +21,7 @@
 - **Dhari Alenez**: mobile & backend developer.
 - **Elina Do**: Database Developer
 - **Andrew Nguyen**: Full-Stack Developer
+-   Abdulrahman Alharbi: UI&UX Designer
   
 
 ## The Final Presentation for the first semester
