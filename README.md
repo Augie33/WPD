@@ -19,6 +19,7 @@
 ## Team members (Roles)
 
 - **Dhari Alenez**: mobile & backend developer.
+- **Andrew Nguyen**: Full-Stack Developer
   
 
 ## The Final Presentation for the first semester
