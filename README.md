@@ -13,7 +13,8 @@
         - Dhari </br>
         - Elina </br>
   - **weekly_minutes** </br>
-  - **reports**: 
+  - **reports**:
+        - Folder compiled of previous/current semesters class assignments.
   - **slides**:
 
 
