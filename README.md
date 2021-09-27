@@ -18,7 +18,7 @@
 
 ## Team members (Roles)
 
-- **Dhari Alenez**: Mobile & backend developer.
+- **Dhari Alenez**: mobile & backend developer.
   
 
 ## The Final Presentation for the first semester
