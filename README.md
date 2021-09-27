@@ -24,3 +24,41 @@
 
 <img src="https://user-images.githubusercontent.com/24327781/119294381-f248e580-bc19-11eb-80f8-4d3f2107c12b.png" width="600" />
 
+
+## Usage
+
+### WPD Backend
+
+1 - Create **config** folder   </br>
+2 - Create **config.env** file </br>
+3 - Add these
+```env
+NODE_ENV=development
+PORT=3000
+
+MONGODB_URL=mongodb://127.0.0.1:27017/wpd
+
+FILE_UPLOAD_PATH=./src/public/uploads
+MAX_FILE_UPLOAD=1000000
+
+JWT_SECRET=myappcoooooooooooooooooooool
+# JWT_COOKIE_EXPIRE=30
+```
+
+4- run the app
+```shell
+npm run dev
+```
+### Mobile Application
+
+1 - Open the **wpd_app** folder
+2- run
+```shell
+flutter pub get
+```
+3- run
+```shell
+flutter run
+```
+
+
