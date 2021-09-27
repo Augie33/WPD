@@ -19,6 +19,7 @@
 ## Team members (Roles)
 
 - **Dhari Alenez**: mobile & backend developer.
+- **Elina Do**: Database Developer
 - **Andrew Nguyen**: Full-Stack Developer
   
 
