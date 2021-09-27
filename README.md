@@ -3,18 +3,17 @@
 <img src="https://user-images.githubusercontent.com/24327781/134834641-a10c2096-a727-4eda-8da6-e89b12cb5c26.png" width="250" /><img src="https://user-images.githubusercontent.com/24327781/134834647-ce9cd8a0-4a94-4a7c-827c-a351c8478d96.png" width="250" />
 
 ## Folders
-  - **wpd-api**: the backend side
-  - **wpd_app**: the Mobile App
-  - **wpd-webview**: information page
-  - **design**: all Adobe XD files and assets
+  - **wpd-api**: Backend side
+  - **wpd_app**: Mobile App
+  - **wpd-webview**: Information page
+  - **design**: Adobe XD files and assets
   - **journals** </br>
         - Abdulrahman </br>
         - Andrew </br>
         - Dhari </br>
         - Elina </br>
   - **weekly_minutes** </br>
-  - **reports**:
-        - Folder compiled of previous/current semesters class assignments.
+  - **reports**: Folder compiled of previous/current semesters class assignments.
   - **slides**:
 
 
