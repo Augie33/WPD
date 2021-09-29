@@ -46,7 +46,7 @@ exports.getCases = asyncHandler(async (req, res, next) => {
 // @access    Private
 exports.updateCase = asyncHandler(async (req, res, next) => {
 
-    const casee = await Case.findOneAndUpdate({id: req.params.id}, req.body, {
+    const casee = await Case.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
       })
@@ -61,8 +61,7 @@ exports.updateCase = asyncHandler(async (req, res, next) => {
   // @route     DELETE /api/v1/cases/:id
   // @access    Private
   exports.deleteCase = asyncHandler(async (req, res, next) => {
-
-    await Case.findOneAndDelete({id: req.params.id})
+    await Case.findByIdAndDelete(req.params.id);
   
     res.status(200).json({
       success: true,
