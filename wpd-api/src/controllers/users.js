@@ -16,7 +16,7 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
   if(!user){
-    return next(new ErrorResponse('Please provide correct User ID', 400));
+    return next(new ErrorResponse('Please provide correct User ID', 404));
   }
 
   user.token = undefined;
