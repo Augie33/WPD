@@ -15,7 +15,25 @@ exports.getCases = asyncHandler(async (req, res, next) => {
   // @route     GET /api/v1/cases/:id
   // @access    Private
   exports.getCase = asyncHandler(async (req, res, next) => {
-    const casee = await Case.findOne({id: req.params.id});
+    const casee = await Case.findById(req.params.id);
+
+    if(!casee){
+        return next(new ErrorResponse('Please provide correct Case ID', 400));
+    }
+  
+    res.status(200).json({
+      success: true,
+      data: casee,
+    });
+  });
+
+
+    
+  // @desc      Get single case by Case Number
+  // @route     GET /api/v1/cases/number/:caseNumber
+  // @access    Private
+  exports.getCaseByCaseNumber = asyncHandler(async (req, res, next) => {
+    const casee = await Case.findOne({caseNumber: req.params.caseNumber});
 
     if(!casee){
         return next(new ErrorResponse('Please provide correct Case ID', 400));

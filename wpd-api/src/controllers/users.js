@@ -1,4 +1,5 @@
 const asyncHandler = require('../middleware/async');
+const ErrorResponse = require('../utils/error-response');
 const User = require('../models/user');
 
 // @desc      Get all users
@@ -13,6 +14,10 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
 // @access    Private/Admin 
 exports.getUser = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id);
+
+  if(!user){
+    return next(new ErrorResponse('Please provide correct User ID', 400));
+  }
 
   user.token = undefined;
 

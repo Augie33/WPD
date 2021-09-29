@@ -9,6 +9,6 @@ const CaseSchema = new mongoose.Schema({
     }
   });
 
-CaseSchema.plugin(AutoIncrement, {inc_field: 'id'});
+CaseSchema.plugin(AutoIncrement, {inc_field: 'caseNumber'});
 
 module.exports = mongoose.model('Case', CaseSchema);
