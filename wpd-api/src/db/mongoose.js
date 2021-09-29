@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AutoIncrementFactory = require('mongoose-sequence');
 
 const connectDB = async () => {
   const conn = await mongoose.connect(process.env.MONGODB_URL, {
@@ -8,7 +9,10 @@ const connectDB = async () => {
     useUnifiedTopology: true,
   });
 
+
+ 
   console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline.bold);
+
 };
 
 mongoose.connection.on('connected', function () {
