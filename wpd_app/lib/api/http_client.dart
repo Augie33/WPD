@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:wpd_app/models/error/custom_error.dart';
 import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/services/secure_storage/secure_storage_service.dart';
 import 'package:wpd_app/services/service_locator.dart';
@@ -13,7 +12,7 @@ class RequestREST {
   /// HTTP dio client
   static final _client = Dio(
     BaseOptions(
-      baseUrl: 'http://10.0.2.2:3000/api/v1/',
+      baseUrl: 'https://wpd-backend.herokuapp.com/api/v1/',
 
       // baseUrl: 'http://localhost/api/v1/',
       connectTimeout: 3000, // 3 seconds
