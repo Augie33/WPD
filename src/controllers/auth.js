@@ -88,16 +88,14 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('Invalid credentials', 401));
   }
 
+
   res.status(200).json({
     success: true,
     data: {
       id: user._id,
-      fullName: user.fullName,
-      phoneNumber: user.phoneNumber,
+      name: user.name,
       email: user.email,
       role: user.role,
-      banned: user.banned,
-      //   isEmailConfirmed: user.isEmailConfirmed,
     },
   });
 });
@@ -238,7 +236,7 @@ const sendTokenResponse = async (user, statusCode, res) => {
 
   res
     .status(statusCode)
-    .cookie('token', token, options)
+    // .cookie('token', token, options)
     .json({
       success: true,
       token,
