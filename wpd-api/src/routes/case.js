@@ -16,7 +16,7 @@ router.use(protect);
 
 router.get('/', authorize('police'),advancedResults(Case), getCases);
 router.post('/', authorize('police'), createCase);
-router.get('/:id', authorize( 'police'), getCase);
+router.get('/:id', getCase);
 router.get('/number/:caseNumber', authorize( 'police'), getCaseByCaseNumber);
 router.put('/:id', authorize('police'), updateCase);
 router.delete('/:id', authorize('police'), deleteCase);

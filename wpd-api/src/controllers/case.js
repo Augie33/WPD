@@ -13,7 +13,7 @@ exports.getCases = asyncHandler(async (req, res, next) => {
   
   // @desc      Get single case
   // @route     GET /api/v1/cases/:id
-  // @access    Private
+  // @access    public
   exports.getCase = asyncHandler(async (req, res, next) => {
     const casee = await Case.findById(req.params.id);
 

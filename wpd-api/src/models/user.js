@@ -35,7 +35,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
-
+  stationPhoneNumber: {
+    type: String,
+    default: ''
+  },
   role: {
     type: String,
     enum: ['police', 'admin'],
