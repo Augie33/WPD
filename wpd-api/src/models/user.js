@@ -5,9 +5,17 @@ const jwt = require('jsonwebtoken');
 const validator = require('validator');
 
 const UserSchema = new mongoose.Schema({
-  name: {
+  firstName: {
     type: String,
-    required: [true, 'Please add a name'],
+    required: [true, 'Please add first name'],
+  },
+  lastName: {
+    type: String,
+    required: [true, 'Please add last name'],
+  },
+  rank: {
+    type: String,
+    default: ''
   },
   email: {
     type: String,
@@ -19,6 +27,15 @@ const UserSchema = new mongoose.Schema({
       }
     },
   },
+  phoneNumber: {
+    type: String,
+    default: ''
+  },
+  department: {
+    type: String,
+    default: ''
+  },
+
   role: {
     type: String,
     enum: ['police', 'admin'],
