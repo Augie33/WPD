@@ -23,13 +23,23 @@ class _$UserTearOff {
 
   _User call(
       {required String id,
-      required String name,
+      required String firstName,
+      required String lastName,
+      required String rank,
       required String email,
+      required String phoneNumber,
+      required String department,
+      required String stationPhoneNumber,
       @JsonKey(defaultValue: 'police') String? role}) {
     return _User(
       id: id,
-      name: name,
+      firstName: firstName,
+      lastName: lastName,
+      rank: rank,
       email: email,
+      phoneNumber: phoneNumber,
+      department: department,
+      stationPhoneNumber: stationPhoneNumber,
       role: role,
     );
   }
@@ -45,8 +55,13 @@ const $User = _$UserTearOff();
 /// @nodoc
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get firstName => throw _privateConstructorUsedError;
+  String get lastName => throw _privateConstructorUsedError;
+  String get rank => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String get phoneNumber => throw _privateConstructorUsedError;
+  String get department => throw _privateConstructorUsedError;
+  String get stationPhoneNumber => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: 'police')
   String? get role => throw _privateConstructorUsedError;
 
@@ -61,8 +76,13 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      String name,
+      String firstName,
+      String lastName,
+      String rank,
       String email,
+      String phoneNumber,
+      String department,
+      String stationPhoneNumber,
       @JsonKey(defaultValue: 'police') String? role});
 }
 
@@ -77,8 +97,13 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? rank = freezed,
     Object? email = freezed,
+    Object? phoneNumber = freezed,
+    Object? department = freezed,
+    Object? stationPhoneNumber = freezed,
     Object? role = freezed,
   }) {
     return _then(_value.copyWith(
@@ -86,13 +111,33 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: lastName == freezed
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      rank: rank == freezed
+          ? _value.rank
+          : rank // ignore: cast_nullable_to_non_nullable
               as String,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      department: department == freezed
+          ? _value.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as String,
+      stationPhoneNumber: stationPhoneNumber == freezed
+          ? _value.stationPhoneNumber
+          : stationPhoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
       role: role == freezed
           ? _value.role
@@ -109,8 +154,13 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call(
       {String id,
-      String name,
+      String firstName,
+      String lastName,
+      String rank,
       String email,
+      String phoneNumber,
+      String department,
+      String stationPhoneNumber,
       @JsonKey(defaultValue: 'police') String? role});
 }
 
@@ -126,8 +176,13 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? rank = freezed,
     Object? email = freezed,
+    Object? phoneNumber = freezed,
+    Object? department = freezed,
+    Object? stationPhoneNumber = freezed,
     Object? role = freezed,
   }) {
     return _then(_User(
@@ -135,13 +190,33 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: lastName == freezed
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      rank: rank == freezed
+          ? _value.rank
+          : rank // ignore: cast_nullable_to_non_nullable
               as String,
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      department: department == freezed
+          ? _value.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as String,
+      stationPhoneNumber: stationPhoneNumber == freezed
+          ? _value.stationPhoneNumber
+          : stationPhoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
       role: role == freezed
           ? _value.role
@@ -156,8 +231,13 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 class _$_User implements _User {
   const _$_User(
       {required this.id,
-      required this.name,
+      required this.firstName,
+      required this.lastName,
+      required this.rank,
       required this.email,
+      required this.phoneNumber,
+      required this.department,
+      required this.stationPhoneNumber,
       @JsonKey(defaultValue: 'police') this.role});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -165,16 +245,26 @@ class _$_User implements _User {
   @override
   final String id;
   @override
-  final String name;
+  final String firstName;
+  @override
+  final String lastName;
+  @override
+  final String rank;
   @override
   final String email;
+  @override
+  final String phoneNumber;
+  @override
+  final String department;
+  @override
+  final String stationPhoneNumber;
   @override
   @JsonKey(defaultValue: 'police')
   final String? role;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, role: $role)';
+    return 'User(id: $id, firstName: $firstName, lastName: $lastName, rank: $rank, email: $email, phoneNumber: $phoneNumber, department: $department, stationPhoneNumber: $stationPhoneNumber, role: $role)';
   }
 
   @override
@@ -183,10 +273,25 @@ class _$_User implements _User {
         (other is _User &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.firstName, firstName) ||
+                const DeepCollectionEquality()
+                    .equals(other.firstName, firstName)) &&
+            (identical(other.lastName, lastName) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastName, lastName)) &&
+            (identical(other.rank, rank) ||
+                const DeepCollectionEquality().equals(other.rank, rank)) &&
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.phoneNumber, phoneNumber)) &&
+            (identical(other.department, department) ||
+                const DeepCollectionEquality()
+                    .equals(other.department, department)) &&
+            (identical(other.stationPhoneNumber, stationPhoneNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.stationPhoneNumber, stationPhoneNumber)) &&
             (identical(other.role, role) ||
                 const DeepCollectionEquality().equals(other.role, role)));
   }
@@ -195,8 +300,13 @@ class _$_User implements _User {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(firstName) ^
+      const DeepCollectionEquality().hash(lastName) ^
+      const DeepCollectionEquality().hash(rank) ^
       const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phoneNumber) ^
+      const DeepCollectionEquality().hash(department) ^
+      const DeepCollectionEquality().hash(stationPhoneNumber) ^
       const DeepCollectionEquality().hash(role);
 
   @JsonKey(ignore: true)
@@ -213,8 +323,13 @@ class _$_User implements _User {
 abstract class _User implements User {
   const factory _User(
       {required String id,
-      required String name,
+      required String firstName,
+      required String lastName,
+      required String rank,
       required String email,
+      required String phoneNumber,
+      required String department,
+      required String stationPhoneNumber,
       @JsonKey(defaultValue: 'police') String? role}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -222,9 +337,19 @@ abstract class _User implements User {
   @override
   String get id => throw _privateConstructorUsedError;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get firstName => throw _privateConstructorUsedError;
+  @override
+  String get lastName => throw _privateConstructorUsedError;
+  @override
+  String get rank => throw _privateConstructorUsedError;
   @override
   String get email => throw _privateConstructorUsedError;
+  @override
+  String get phoneNumber => throw _privateConstructorUsedError;
+  @override
+  String get department => throw _privateConstructorUsedError;
+  @override
+  String get stationPhoneNumber => throw _privateConstructorUsedError;
   @override
   @JsonKey(defaultValue: 'police')
   String? get role => throw _privateConstructorUsedError;

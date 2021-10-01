@@ -7,8 +7,13 @@ part 'user.g.dart';
 abstract class User with _$User {
   const factory User({
     required String id,
-    required String name,
+    required String firstName,
+    required String lastName,
+    required String rank,
     required String email,
+    required String phoneNumber,
+    required String department,
+    required String stationPhoneNumber,
     @JsonKey(defaultValue: 'police') String? role,
   }) = _User;
 
