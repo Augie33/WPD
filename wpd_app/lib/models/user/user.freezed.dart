@@ -22,7 +22,7 @@ class _$UserTearOff {
   const _$UserTearOff();
 
   _User call(
-      {required String id,
+      {@JsonKey(name: '_id') required String id,
       required String firstName,
       required String lastName,
       required String rank,
@@ -30,7 +30,7 @@ class _$UserTearOff {
       required String phoneNumber,
       required String department,
       required String stationPhoneNumber,
-      @JsonKey(defaultValue: 'police') String? role}) {
+      required String role}) {
     return _User(
       id: id,
       firstName: firstName,
@@ -54,6 +54,7 @@ const $User = _$UserTearOff();
 
 /// @nodoc
 mixin _$User {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
@@ -62,8 +63,7 @@ mixin _$User {
   String get phoneNumber => throw _privateConstructorUsedError;
   String get department => throw _privateConstructorUsedError;
   String get stationPhoneNumber => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: 'police')
-  String? get role => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -75,7 +75,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String firstName,
       String lastName,
       String rank,
@@ -83,7 +83,7 @@ abstract class $UserCopyWith<$Res> {
       String phoneNumber,
       String department,
       String stationPhoneNumber,
-      @JsonKey(defaultValue: 'police') String? role});
+      String role});
 }
 
 /// @nodoc
@@ -142,7 +142,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       role: role == freezed
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -153,7 +153,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$UserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String firstName,
       String lastName,
       String rank,
@@ -161,7 +161,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String phoneNumber,
       String department,
       String stationPhoneNumber,
-      @JsonKey(defaultValue: 'police') String? role});
+      String role});
 }
 
 /// @nodoc
@@ -221,7 +221,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       role: role == freezed
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -230,7 +230,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_User implements _User {
   const _$_User(
-      {required this.id,
+      {@JsonKey(name: '_id') required this.id,
       required this.firstName,
       required this.lastName,
       required this.rank,
@@ -238,11 +238,12 @@ class _$_User implements _User {
       required this.phoneNumber,
       required this.department,
       required this.stationPhoneNumber,
-      @JsonKey(defaultValue: 'police') this.role});
+      required this.role});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final String firstName;
@@ -259,8 +260,7 @@ class _$_User implements _User {
   @override
   final String stationPhoneNumber;
   @override
-  @JsonKey(defaultValue: 'police')
-  final String? role;
+  final String role;
 
   @override
   String toString() {
@@ -322,7 +322,7 @@ class _$_User implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required String id,
+      {@JsonKey(name: '_id') required String id,
       required String firstName,
       required String lastName,
       required String rank,
@@ -330,11 +330,12 @@ abstract class _User implements User {
       required String phoneNumber,
       required String department,
       required String stationPhoneNumber,
-      @JsonKey(defaultValue: 'police') String? role}) = _$_User;
+      required String role}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   @override
   String get firstName => throw _privateConstructorUsedError;
@@ -351,8 +352,7 @@ abstract class _User implements User {
   @override
   String get stationPhoneNumber => throw _privateConstructorUsedError;
   @override
-  @JsonKey(defaultValue: 'police')
-  String? get role => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;

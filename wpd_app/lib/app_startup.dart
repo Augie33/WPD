@@ -11,14 +11,13 @@ abstract class AppStartup {
   static Future<User?> setup() async {
     final _requestRest = serviceLocator<RequestREST>();
 
+    _requestRest.setUpErrorInterceptor();
+
     if (kReleaseMode) {
       _requestRest.setUpLogger();
     }
 
-    _requestRest.setUpErrorInterceptor();
-
     // Checking the auth
-
     if (!kIsWeb) {
       final user = await _requestRest.checkToken();
       return user;

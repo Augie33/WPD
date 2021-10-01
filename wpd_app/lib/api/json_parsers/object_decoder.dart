@@ -11,3 +11,8 @@ mixin ListDecoder<T> on JsonParser<T> {
   List<dynamic> decodeJsonList(String json) =>
       jsonDecode(json) as List<dynamic>;
 }
+
+mixin ListDecoderData<T> on JsonParser<T> {
+  List<dynamic> decodeJsonList(String json) =>
+      jsonDecode(json)['data'] as List<dynamic>;
+}

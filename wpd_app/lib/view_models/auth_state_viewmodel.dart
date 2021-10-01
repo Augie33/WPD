@@ -44,20 +44,14 @@ class AuthStateViewModel extends ChangeNotifier {
     String email,
     String password,
   ) async {
-    _loading = true;
-    notifyListeners();
-
     try {
       _loading = true;
       notifyListeners();
-
       var data = await _requestRest
           .executePost<Auth>('/auth/login', const AuthParser(), data: {
         'email': email,
         'password': password,
       });
-
-      await Future.delayed(const Duration(seconds: 2));
 
       if (!data.success) {
         _loggedIn = false;
@@ -81,6 +75,8 @@ class AuthStateViewModel extends ChangeNotifier {
       _loading = false;
       notifyListeners();
     } on DioError catch (e) {
+      BotToast.showText(text: e.message);
+
       if (e.response?.statusCode == 401) {
         BotToast.showText(text: 'Please, type correct email & password');
       }

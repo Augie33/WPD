@@ -6,7 +6,7 @@ part 'user.g.dart';
 @freezed
 abstract class User with _$User {
   const factory User({
-    required String id,
+    @JsonKey(name: '_id') required String id,
     required String firstName,
     required String lastName,
     required String rank,
@@ -14,7 +14,7 @@ abstract class User with _$User {
     required String phoneNumber,
     required String department,
     required String stationPhoneNumber,
-    @JsonKey(defaultValue: 'police') String? role,
+    required String role,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

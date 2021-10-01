@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:wpd_app/services/secure_storage/secure_storage_service.dart';
+import 'package:wpd_app/api/http_client.dart';
+import 'package:wpd_app/api/json_parsers/case_list_parser.dart';
+import 'package:wpd_app/api/json_parsers/case_parser.dart';
+import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/services/service_locator.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _scureStorageService = serviceLocator<ScureStorageService>();
+  final _requestRest = serviceLocator<RequestREST>();
 
   String? token = 'N/A';
 
@@ -44,7 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ElevatedButton(
                 child: const Text('Get Token'),
                 onPressed: () async {
-                  token = await _scureStorageService.getToken();
+                  var data = await _requestRest.executeGet<List<Case>>(
+                    '/cases',
+                    const CaseListParser(),
+                  );
+
+                  print(data);
                   setState(() {});
                 },
               ),
