@@ -3,29 +3,22 @@ const mongoose = require('mongoose');
 const colors = require('colors');
 const dotenv = require('dotenv');
 
-
 console.log(__dirname);
 
 // Load env vars
-dotenv.config({ path: '../config/config.env' });
-
-
+dotenv.config({ path: './config/config.env' });
 
 // Load models
 const Case = require('./models/case');
 const User = require('./models/User');
 
-
 // Connect to DB
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
-
-
-
 
 // Read JSON files
 const cases = JSON.parse(
@@ -35,7 +28,6 @@ const cases = JSON.parse(
 const users = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8')
 );
-
 
 // Import into DB
 const importData = async () => {
