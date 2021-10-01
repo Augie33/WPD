@@ -30,6 +30,7 @@ class ProfileScreen extends StatelessWidget {
             margin: const EdgeInsets.only(top: 30),
             padding: const EdgeInsets.all(8.0),
             child: Card(
+              elevation: 5,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -117,7 +118,7 @@ class CustomText extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .headline6!
-                .copyWith(color: Colors.yellow[700]),
+                .copyWith(color: Colors.yellow[800]),
           ),
         ],
       ),
