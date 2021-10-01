@@ -87,9 +87,15 @@ exports.getMe = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: {
-      id: user._id,
-      name: user.name,
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phoneNumber: user.phoneNumber,
+      rank: user.rank,
       email: user.email,
+      phoneNumber: user.phoneNumber,
+      department: user.department,
+      stationPhoneNumber: user.stationPhoneNumber,
       role: user.role,
     },
   });
@@ -236,7 +242,7 @@ const sendTokenResponse = async (user, statusCode, res) => {
       success: true,
       token,
       data: {
-        id: user._id,
+        _id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
         phoneNumber: user.phoneNumber,
@@ -246,7 +252,6 @@ const sendTokenResponse = async (user, statusCode, res) => {
         department: user.department,
         stationPhoneNumber: user.stationPhoneNumber,
         role: user.role,
-        banned: user.banned,
         // isEmailConfirmed: user.isEmailConfirmed,
       },
     });
