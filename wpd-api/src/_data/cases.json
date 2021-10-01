@@ -1,0 +1,23 @@
+[
+    {
+      "_id": "5d713995b721c3bb38c1f5d0",
+      "title": "Strangulation",
+      "description": "The Wichita Police Department recognizes non-fatal strangulation is one of the most lethal forms of domestic violence. Strangulation is a high-risk indicator for future serious assaults and homicide.",
+      "url": "https://www.wichita.gov/WPD/DVS/Pages/default.aspx",
+      "urlPDF":"https://www.wichita.gov/WPD/DVS/Documents/Facts%20Victims%20of%20Strangulation%20(Choking)%20Need%20to%20Know.pdf"
+    },
+    {
+      "_id": "5d713a66ec8f2b88b8f830b8",
+      "title": "Auto Theft",
+      "description": "The Auto Theft Section consists of four detectives that are supervised by a Lieutenant. This section is responsible for the investigation of all automobile thefts in the City of Wichita.",
+      "url": "https://www.wichita.gov/WPD/Investigations/Pages/AutoTheft.aspx",
+      "urlPDF":"https://www.wichita.gov/WPD/Investigations/Documents/Theft%20Victims%20Packet%20PDF.pdf"
+    },
+    {
+      "_id": "5d725a037b292f5f8ceff787",
+      "title": "Burglary",
+      "description": "The Burglary Section consists of eight Detectives that are supervised by one Lieutenant. This section is responsible for the investigation of all burglaries, both residence and non-residence, and all vandalisms (except vandalisms to automobiles) that occur in the City of Wichita.",
+      "url": "https://www.wichita.gov/WPD/Investigations/Pages/Burglary.aspx",
+      "urlPDF":"https://www.wichita.gov/WPD/Investigations/Documents/Theft%20Victims%20Packet%20PDF.pdf"
+    }
+  ]
