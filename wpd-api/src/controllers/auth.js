@@ -17,8 +17,6 @@ exports.register = asyncHandler(async (req, res, next) => {
     phoneNumber,
   });
 
- 
-
   sendTokenResponse(user, 200, res);
 });
 
@@ -54,8 +52,6 @@ exports.login = asyncHandler(async (req, res, next) => {
   sendTokenResponse(user, 200, res);
 });
 
-
-
 // @desc      Log user out / clear cookie
 // @route     GET /api/v1/auth/logout
 // @access    Public
@@ -87,7 +83,6 @@ exports.getMe = asyncHandler(async (req, res, next) => {
   if (!user) {
     return next(new ErrorResponse('Invalid credentials', 401));
   }
-
 
   res.status(200).json({
     success: true,
@@ -242,9 +237,14 @@ const sendTokenResponse = async (user, statusCode, res) => {
       token,
       data: {
         id: user._id,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         phoneNumber: user.phoneNumber,
+        rank: user.rank,
         email: user.email,
+        phoneNumber: user.phoneNumber,
+        department: user.department,
+        stationPhoneNumber: user.stationPhoneNumber,
         role: user.role,
         banned: user.banned,
         // isEmailConfirmed: user.isEmailConfirmed,

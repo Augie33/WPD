@@ -88,4 +88,16 @@ flutter pub get
 flutter run
 ```
 
+### Database Seeder
+
+To seed the database with users and cases with data from the "\_data" folder, run
+
+```
+# Destroy all data
+node src/seeder -d
+
+# Import all data
+node src/seeder -i
+```
+
 
