@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -13,10 +12,11 @@ class ProfileScreen extends StatelessWidget {
         title: const Text('Profile'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit),
+            icon: const Icon(Icons.logout),
+            color: Colors.redAccent,
             iconSize: 28,
-            onPressed: () {
-              Routemaster.of(context).push('edit');
+            onPressed: () async {
+              await context.read(AuthStateViewModelProvider.provider).logout();
             },
           )
         ],
@@ -43,42 +43,44 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomText(
-                            label: 'Full name',
-                            data: '${user?.firstName} ${user?.lastName}',
-                          ),
-                          CustomText(
-                            label: 'Rank',
-                            data: '${user?.rank}',
-                          ),
-                          CustomText(
-                            label: 'Email',
-                            data: '${user?.email}',
-                          ),
-                          CustomText(
-                            label: 'Phone number',
-                            data: '${user?.phoneNumber}',
-                          ),
-                          CustomText(
-                            label: 'Role',
-                            data: '${user?.role}',
-                          ),
-                          CustomText(
-                            label: 'Department',
-                            data: '${user?.department}',
-                          ),
-                          CustomText(
-                            label: 'Station Phone Number',
-                            data: '${user?.phoneNumber}',
-                          ),
-                        ],
-                      ),
-                    )
+                    appState.myUser == null
+                        ? const SizedBox()
+                        : Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomText(
+                                  label: 'Full name',
+                                  data: '${user?.firstName} ${user?.lastName}',
+                                ),
+                                CustomText(
+                                  label: 'Rank',
+                                  data: '${user?.rank}',
+                                ),
+                                CustomText(
+                                  label: 'Email',
+                                  data: '${user?.email}',
+                                ),
+                                CustomText(
+                                  label: 'Phone number',
+                                  data: '${user?.phoneNumber}',
+                                ),
+                                CustomText(
+                                  label: 'Role',
+                                  data: '${user?.role}',
+                                ),
+                                CustomText(
+                                  label: 'Department',
+                                  data: '${user?.department}',
+                                ),
+                                CustomText(
+                                  label: 'Station Phone Number',
+                                  data: '${user?.phoneNumber}',
+                                ),
+                              ],
+                            ),
+                          )
                   ],
                 ),
               ),

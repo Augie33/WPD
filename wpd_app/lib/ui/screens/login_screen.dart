@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:validators/validators.dart';
 import 'package:wpd_app/ui/widgets/custom_form_field.dart';
+import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/utils/app_theme.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 
@@ -95,17 +96,7 @@ class LoginScreen extends HookWidget {
                             watch(AuthStateViewModelProvider.provider);
 
                         return viewModel.isLoading
-                            ? Card(
-                                elevation: 6,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: CircularProgressIndicator(
-                                      color: Theme.of(context).primaryColor),
-                                ),
-                              )
+                            ? const AppLoader()
                             : SizedBox(
                                 height: 50,
                                 width: 120,

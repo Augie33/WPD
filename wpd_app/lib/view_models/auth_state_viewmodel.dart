@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/auth_parser.dart';
+import 'package:wpd_app/api/json_parsers/void_parser.dart';
 import 'package:wpd_app/models/auth/auth.dart';
 import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/services/secure_storage/secure_storage_service.dart';
 import 'package:wpd_app/services/service_locator.dart';
+import 'package:wpd_app/ui/widgets/loader.dart';
 
 abstract class AuthStateViewModelProvider {
   static final provider = ChangeNotifierProvider((ref) => AuthStateViewModel());
@@ -84,6 +86,39 @@ class AuthStateViewModel extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       BotToast.showText(text: 'Error');
+      _loading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> logout() async {
+    // remove the token inside scure storage if the user use mobile (iOS/Android)
+    try {
+      _loading = true;
+      BotToast.showCustomLoading(
+        toastBuilder: (_) {
+          return const AppLoader();
+        },
+      );
+      notifyListeners();
+      await _requestRest.executePost<void>(
+        '/auth/logout',
+        const VoidParser(),
+      );
+
+      if (!kIsWeb) {
+        await _scureStorageService.deleteToken();
+      }
+      // nav
+      _loggedIn = false;
+      _loading = false;
+      _myUser = null;
+
+      notifyListeners();
+      BotToast.closeAllLoading();
+    } catch (e) {
+      BotToast.showText(text: 'Error');
+      BotToast.closeAllLoading();
       _loading = false;
       notifyListeners();
     }
