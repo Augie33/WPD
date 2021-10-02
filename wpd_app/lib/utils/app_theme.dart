@@ -58,35 +58,43 @@ class AppTheme {
           const TextSelectionThemeData(selectionColor: Colors.yellow),
       textTheme: lightTextTheme,
       colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: Colors.white,
+        splashColor: Colors.white12,
+        backgroundColor: Colors.yellow[700],
+      ),
     );
   }
 
   static ThemeData dark() {
     return ThemeData(
-      appBarTheme: AppBarTheme(
-        centerTitle: true,
-        elevation: 1,
-        actionsIconTheme: IconThemeData(
-          color: Colors.yellow[700],
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          elevation: 1,
+          actionsIconTheme: IconThemeData(
+            color: Colors.yellow[700],
+          ),
+          titleTextStyle: GoogleFonts.cairo(
+            fontSize: 18.0,
+            fontWeight: FontWeight.w700,
+            color: Colors.white,
+          ),
         ),
-        titleTextStyle: GoogleFonts.cairo(
-          fontSize: 18.0,
-          fontWeight: FontWeight.w700,
-          color: Colors.white,
+        brightness: Brightness.dark,
+        primaryColor: Colors.yellow[700],
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.yellow[700]),
+          ),
         ),
-      ),
-      brightness: Brightness.dark,
-      primaryColor: Colors.yellow[700],
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.yellow[700]),
-        ),
-      ),
-      backgroundColor: const Color(0xff3A3A3A),
-      textTheme: darkTextTheme,
-      // colorScheme: ColorScheme.fromSwatch().copyWith(
-      //   secondary: Colors.red[700],
-      // ),
-    );
+        backgroundColor: const Color(0xff3A3A3A),
+        textTheme: darkTextTheme,
+        // colorScheme: ColorScheme.fromSwatch().copyWith(
+        //   secondary: Colors.red[700],
+        // ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.yellow[700],
+        ));
   }
 }

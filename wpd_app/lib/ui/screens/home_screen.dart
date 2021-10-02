@@ -60,6 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(
+          Icons.search,
+          size: 30,
+        ),
+        onPressed: () {},
+      ),
     );
   }
 }
