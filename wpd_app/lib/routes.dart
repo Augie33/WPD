@@ -8,6 +8,7 @@ import 'package:wpd_app/ui/screens/home_screen.dart';
 import 'package:wpd_app/ui/screens/login_screen.dart';
 import 'package:wpd_app/ui/screens/more_screen.dart';
 import 'package:wpd_app/ui/screens/profile_screen.dart';
+import 'package:wpd_app/ui/screens/search_screen.dart';
 import 'package:wpd_app/ui/widgets/bottom_nav.dart';
 
 abstract class AppRoutes {
@@ -25,6 +26,7 @@ abstract class AppRoutes {
     '/login': (_) => MaterialPage(child: LoginScreen()),
 
     '/home/add': (_) => const MaterialPage(child: AddCaseScreen()),
+    '/home/search': (_) => const MaterialPage(child: SearchCasesScreen()),
     '/profile/edit': (_) => const MaterialPage(child: EditProfileScreen()),
     // '/settings': (_) => MaterialPage(child: SettingsPage()),
     // '/feed/profile/:id': (info) =>

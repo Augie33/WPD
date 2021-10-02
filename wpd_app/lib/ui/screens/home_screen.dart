@@ -78,7 +78,9 @@ class HomeScreen extends ConsumerWidget {
           Icons.search,
           size: 30,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Routemaster.of(context).push('search');
+        },
       ),
     );
   }
