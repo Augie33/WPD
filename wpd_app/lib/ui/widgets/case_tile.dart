@@ -23,10 +23,13 @@ class CaseTile extends StatelessWidget {
                 myCase.title,
                 style: Theme.of(context).textTheme.headline1,
               ),
-              subtitle: Text(
-                myCase.description,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
+              subtitle: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Text(
+                  myCase.description,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,

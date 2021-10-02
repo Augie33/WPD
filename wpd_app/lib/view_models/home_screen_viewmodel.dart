@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wpd_app/api/http_client.dart';
+import 'package:wpd_app/api/json_parsers/case_list_parser.dart';
 import 'package:wpd_app/models/case/case.dart';
+import 'package:wpd_app/services/service_locator.dart';
 
 abstract class HomeScreenViewModelProvider {
   static final provider =
@@ -8,6 +11,8 @@ abstract class HomeScreenViewModelProvider {
 }
 
 class HomeScreenViewModel extends ChangeNotifier {
+  final _requestRest = serviceLocator<RequestREST>();
+
   List<Case> myCases = [];
 
   bool _loading = false;
@@ -15,37 +20,16 @@ class HomeScreenViewModel extends ChangeNotifier {
 
   Future<List<Case>> getCases() async {
     await Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 2),
     );
 
-    return [
-      const Case(
-        id: '123123',
-        title: 'Test1',
-        description:
-            'SDASDasdasdadasdlaskdlasdasdasdasdasdasdasdasdaskdl;askdl;akdlaskdl;askd;laskdl;askdl;askdl;aksl;dkasl;dkAS',
-        url: 'mongodb.com',
-        urlPDF: 'google.com',
-        caseNumber: 1,
-      ),
-      const Case(
-        id: '123123',
-        title: 'Test2',
-        description:
-            'SDASDasdasdadasdlaskdlasdasdasdasdasdasdasdasdaskdl;askdl;akdlaskdl;askd;laskdl;askdl;askdl;aksl;dkasl;dkAS',
-        url: 'mongodb.com',
-        urlPDF: 'google.com',
-        caseNumber: 1,
-      ),
-      const Case(
-        id: '123123',
-        title: 'Test3',
-        description:
-            'SDASDasdasdadasdlaskdlasdasdasdasdasdasdasdasdaskdl;askdl;akdlaskdl;askd;laskdl;askdl;askdl;aksl;dkasl;dkAS',
-        url: 'mongodb.com',
-        urlPDF: 'google.com',
-        caseNumber: 1,
-      ),
-    ];
+    var data = await _requestRest.executeGet<List<Case>>(
+      '/cases',
+      const CaseListParser(),
+    );
+
+    myCases = data;
+
+    return data;
   }
 }

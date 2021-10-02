@@ -35,23 +35,31 @@ class HomeScreen extends ConsumerWidget {
         builder: (BuildContext context, AsyncSnapshot<List<Case>> snapshot) {
           final data = snapshot.data;
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return const ShimmerLoader();
-              },
+            return AbsorbPointer(
+              child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return const ShimmerLoader();
+                },
+              ),
             );
           }
 
           if (snapshot.hasError) {
-            return const Center(
-              child: Text('Error :('),
+            return Center(
+              child: Text(
+                'Error :(',
+                style: Theme.of(context).textTheme.headline1,
+              ),
             );
           }
 
           if (data == null || data.isEmpty) {
-            return const Center(
-              child: Text('Please, add more cases'),
+            return Center(
+              child: Text(
+                'Please, add more cases',
+                style: Theme.of(context).textTheme.headline1,
+              ),
             );
           }
 
