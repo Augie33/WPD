@@ -16,7 +16,7 @@ class BottomNav extends StatelessWidget {
       tabBuilder: tabState.tabBuilder,
       tabBar: CupertinoTabBar(
         activeColor: Theme.of(context).primaryColor,
-        iconSize: 30,
+        iconSize: 32,
         backgroundColor:
             isDarkMode ? Theme.of(context).backgroundColor : Colors.white,
         items: const [
