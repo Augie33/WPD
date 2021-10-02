@@ -30,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
             margin: const EdgeInsets.only(top: 30),
             padding: const EdgeInsets.all(8.0),
             child: Card(
-              elevation: 5,
+              elevation: 1,
               child: SingleChildScrollView(
                 child: Column(
                   children: [

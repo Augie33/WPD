@@ -32,6 +32,7 @@ class AppTheme {
     return ThemeData(
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
+        elevation: 0,
         actionsIconTheme: IconThemeData(
           color: Colors.yellow[700],
         ),
@@ -64,6 +65,7 @@ class AppTheme {
     return ThemeData(
       appBarTheme: AppBarTheme(
         centerTitle: true,
+        elevation: 1,
         actionsIconTheme: IconThemeData(
           color: Colors.yellow[700],
         ),
