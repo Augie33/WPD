@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/case_list_parser.dart';
 import 'package:wpd_app/api/json_parsers/case_parser.dart';
 import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/services/service_locator.dart';
+import 'package:wpd_app/ui/widgets/case_tile.dart';
+import 'package:wpd_app/ui/widgets/loader.dart';
+import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
+import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final _requestRest = serviceLocator<RequestREST>();
-
-  String? token = 'N/A';
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -34,31 +30,40 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(token!),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                child: const Text('Get Token'),
-                onPressed: () async {
-                  var data = await _requestRest.executeGet<List<Case>>(
-                    '/cases',
-                    const CaseListParser(),
-                  );
+      body: FutureBuilder<List<Case>>(
+        future: watch(HomeScreenViewModelProvider.provider).getCases(),
+        builder: (BuildContext context, AsyncSnapshot<List<Case>> snapshot) {
+          final data = snapshot.data;
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return const ShimmerLoader();
+              },
+            );
+          }
 
-                  print(data);
-                  setState(() {});
-                },
-              ),
-            )
-          ],
-        ),
+          if (snapshot.hasError) {
+            return const Center(
+              child: Text('Error :('),
+            );
+          }
+
+          if (data == null || data.isEmpty) {
+            return const Center(
+              child: Text('Please, add more cases'),
+            );
+          }
+
+          return ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              final myCase = data[index];
+
+              return CaseTile(myCase: myCase);
+            },
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(
