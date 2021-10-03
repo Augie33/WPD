@@ -15,8 +15,8 @@ class HomeScreenViewModel extends ChangeNotifier {
 
   List<Case> myCases = [];
 
-  bool _loading = false;
-  bool get isLoading => _loading;
+  // bool _loading = false;
+  // bool get isLoading => _loading;
 
   Future<List<Case>> getCases() async {
     await Future.delayed(
@@ -24,7 +24,7 @@ class HomeScreenViewModel extends ChangeNotifier {
     );
 
     var data = await _requestRest.executeGet<List<Case>>(
-      '/cases',
+      '/cases?sort=title',
       const CaseListParser(),
     );
 

@@ -6,7 +6,7 @@ class AppTheme {
     bodyText1: GoogleFonts.cairo(
         fontSize: 14.0, fontWeight: FontWeight.w700, color: Colors.black),
     headline1: GoogleFonts.cairo(
-        fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.black),
+        fontSize: 28.0, fontWeight: FontWeight.bold, color: Colors.black),
     headline2: GoogleFonts.cairo(
         fontSize: 21.0, fontWeight: FontWeight.w700, color: Colors.black),
     headline3: GoogleFonts.cairo(
@@ -19,7 +19,7 @@ class AppTheme {
     bodyText1: GoogleFonts.cairo(
         fontSize: 14.0, fontWeight: FontWeight.w600, color: Colors.white),
     headline1: GoogleFonts.cairo(
-        fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.white),
+        fontSize: 28.0, fontWeight: FontWeight.bold, color: Colors.white),
     headline2: GoogleFonts.cairo(
         fontSize: 21.0, fontWeight: FontWeight.w700, color: Colors.white),
     headline3: GoogleFonts.cairo(
