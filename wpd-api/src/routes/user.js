@@ -10,13 +10,15 @@ const {
 
 const User = require('../models/user');
 
+router.get('/:id', getUser);
+
 const router = express.Router();
 
 const { protect, authorize } = require('../middleware/auth');
 
 router.use(protect);
 
-router.get('/', authorize('admin', 'police'),advancedResults(User), getUsers);
+router.get('/', authorize('admin', 'police'), advancedResults(User), getUsers);
 router.post('/', authorize('admin'), createUser);
 router.get('/:id', authorize('admin', 'police'), getUser);
 router.put('/:id', authorize('admin'), updateUser);
