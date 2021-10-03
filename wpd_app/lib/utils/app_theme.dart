@@ -69,6 +69,7 @@ class AppTheme {
   static ThemeData dark() {
     return ThemeData(
         appBarTheme: AppBarTheme(
+          backgroundColor: Colors.grey[800],
           centerTitle: true,
           elevation: 1,
           actionsIconTheme: IconThemeData(
