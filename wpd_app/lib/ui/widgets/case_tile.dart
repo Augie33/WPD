@@ -16,6 +16,9 @@ class CaseTile extends StatelessWidget {
       child: Card(
         child: InkWell(
           onTap: () {},
+          customBorder: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
             child: ListTile(
