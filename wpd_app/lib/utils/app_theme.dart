@@ -82,6 +82,10 @@ class AppTheme {
         ),
         brightness: Brightness.dark,
         primaryColor: Colors.yellow[700],
+        colorScheme: ColorScheme.dark(
+          surface: const Color(0xff3A3A3A),
+          secondary: Colors.yellow[700] ?? Colors.yellow,
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.yellow[700]),
