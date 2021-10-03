@@ -29,61 +29,74 @@ class ProfileScreen extends StatelessWidget {
           return Container(
             margin: const EdgeInsets.only(top: 30),
             padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 1,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                          'assets/logo.png',
-                          height: 130,
-                          width: 130,
-                        ),
-                      ),
-                    ),
-                    appState.myUser == null
-                        ? const SizedBox()
-                        : Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomText(
-                                  label: 'Full name',
-                                  data: '${user?.firstName} ${user?.lastName}',
-                                ),
-                                CustomText(
-                                  label: 'Rank',
-                                  data: '${user?.rank}',
-                                ),
-                                CustomText(
-                                  label: 'Email',
-                                  data: '${user?.email}',
-                                ),
-                                CustomText(
-                                  label: 'Phone number',
-                                  data: '${user?.phoneNumber}',
-                                ),
-                                CustomText(
-                                  label: 'Role',
-                                  data: '${user?.role}',
-                                ),
-                                CustomText(
-                                  label: 'Department',
-                                  data: '${user?.department}',
-                                ),
-                                CustomText(
-                                  label: 'Station Phone Number',
-                                  data: '${user?.phoneNumber}',
-                                ),
-                              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Card(
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(
+                              'assets/logo.png',
+                              height: 130,
+                              width: 130,
                             ),
-                          )
-                  ],
-                ),
+                          ),
+                        ),
+                        appState.myUser == null
+                            ? const SizedBox()
+                            : Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CustomText(
+                                      label: 'Full name',
+                                      data:
+                                          '${user?.firstName} ${user?.lastName}',
+                                    ),
+                                    CustomText(
+                                      label: 'Rank',
+                                      data: '${user?.rank}',
+                                    ),
+                                    CustomText(
+                                      label: 'Email',
+                                      data: '${user?.email}',
+                                    ),
+                                    CustomText(
+                                      label: 'Phone number',
+                                      data: '${user?.phoneNumber}',
+                                    ),
+                                    CustomText(
+                                      label: 'Role',
+                                      data: '${user?.role}',
+                                    ),
+                                    CustomText(
+                                      label: 'Department',
+                                      data: '${user?.department}',
+                                    ),
+                                    CustomText(
+                                      label: 'Station Phone Number',
+                                      data: '${user?.phoneNumber}',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    // TODO: QR profile logic
+                    padding: const EdgeInsets.all(20),
+                    child: Icon(
+                      Icons.qr_code_2_outlined,
+                      size: 170,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  )
+                ],
               ),
             ),
           );
