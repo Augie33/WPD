@@ -54,8 +54,11 @@ class AppTheme {
           backgroundColor: MaterialStateProperty.all(Colors.yellow[700]),
         ),
       ),
-      textSelectionTheme:
-          const TextSelectionThemeData(selectionColor: Colors.yellow),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: Colors.yellowAccent.shade700,
+        selectionColor: Colors.yellowAccent.shade700,
+        selectionHandleColor: Colors.yellowAccent.shade700,
+      ),
       textTheme: lightTextTheme,
       colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.black),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -85,7 +88,12 @@ class AppTheme {
         primaryColor: Colors.yellow[700],
         colorScheme: ColorScheme.dark(
           surface: const Color(0xff3A3A3A),
-          secondary: Colors.yellow[700] ?? Colors.yellow,
+          secondary: Colors.yellow.shade700,
+        ),
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Colors.yellowAccent.shade700,
+          selectionColor: Colors.yellowAccent.shade700,
+          selectionHandleColor: Colors.yellowAccent.shade700,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
