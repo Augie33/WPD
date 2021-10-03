@@ -23,7 +23,7 @@ class SearchCaseViewModel extends ChangeNotifier {
     notifyListeners();
 
     var data = await _requestRest.executeGet<List<Case>>(
-      '/cases?sort=title&all=$search',
+      '/cases?sort=title&all=$search&limit=1000',
       const CaseListParser(),
     );
 

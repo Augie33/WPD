@@ -24,7 +24,7 @@ class HomeScreenViewModel extends ChangeNotifier {
     );
 
     var data = await _requestRest.executeGet<List<Case>>(
-      '/cases?sort=title',
+      '/cases?sort=title&limit=1000',
       const CaseListParser(),
     );
 
