@@ -78,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
                                       data: '${user?.department}',
                                     ),
                                     CustomText(
-                                      label: 'Station Phone Number',
+                                      label: 'Station Number',
                                       data: '${user?.phoneNumber}',
                                     ),
                                   ],
