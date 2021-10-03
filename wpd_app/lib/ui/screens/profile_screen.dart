@@ -26,10 +26,10 @@ class ProfileScreen extends StatelessWidget {
           final appState = watch(AuthStateViewModelProvider.provider);
           final user = appState.myUser;
 
-          return Container(
-            margin: const EdgeInsets.only(top: 30),
-            padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
+          return SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
                   Card(
