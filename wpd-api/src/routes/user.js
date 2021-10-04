@@ -9,10 +9,9 @@ const {
 } = require('../controllers/users');
 
 const User = require('../models/user');
+const router = express.Router();
 
 router.get('/:id', getUser);
-
-const router = express.Router();
 
 const { protect, authorize } = require('../middleware/auth');
 
