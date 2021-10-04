@@ -22,8 +22,9 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   }
 
   user.token = undefined;
-  user._id = undefined;
   user.role = undefined;
+  user.createdAt = undefined;
+  user.__v = undefined;
 
   res.status(200).json({
     success: true,
