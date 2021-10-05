@@ -27,6 +27,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
+        leading: IconButton(
+          iconSize: 30,
+          tooltip: 'Refresh',
+          color: Theme.of(context).primaryColor,
+          icon: const Icon(Icons.refresh),
+          onPressed: () {
+            context.read(HomeScreenViewModelProvider.provider).getCases();
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -43,13 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
           final homeViewModel = watch(HomeScreenViewModelProvider.provider);
 
           return homeViewModel.isLoading
-              ? AbsorbPointer(
-                  child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return const ShimmerLoader();
-                    },
-                  ),
+              ? ListView.builder(
+                  itemCount: 7,
+                  itemBuilder: (context, index) {
+                    return const ShimmerLoader();
+                  },
                 )
               : homeViewModel.myCases.isEmpty
                   ? Center(
