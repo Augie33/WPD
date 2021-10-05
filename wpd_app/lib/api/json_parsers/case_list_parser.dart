@@ -7,8 +7,6 @@ class CaseListParser extends JsonParser<List<Case>>
 
   @override
   Future<List<Case>> parseFromJson(String json) async {
-    print(json);
-
     return decodeJsonList(json)
         .map((value) => Case.fromJson(value as Map<String, dynamic>))
         .toList();
