@@ -12,94 +12,94 @@ class ProfileScreen extends ConsumerWidget {
     final appState = watch(AuthStateViewModelProvider.provider);
     final profileState = watch(ProfileScreenViewModelProvider.provider);
     final user = appState.myUser;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        leading: IconButton(
-          tooltip: 'NFC',
-          color: Theme.of(context).primaryColor,
-          icon: const Icon(
-            Icons.nfc,
-          ),
-          onPressed: () {},
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Profile'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              color: Colors.redAccent,
+              iconSize: 28,
+              tooltip: 'Logout',
+              onPressed: () async {
+                await context
+                    .read(AuthStateViewModelProvider.provider)
+                    .logout();
+              },
+            )
+          ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            color: Colors.redAccent,
-            iconSize: 28,
-            tooltip: 'Logout',
-            onPressed: () async {
-              await context.read(AuthStateViewModelProvider.provider).logout();
-            },
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Card(
-                child: Column(
-                  children: [
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                          'assets/logo.png',
-                          height: 130,
-                          width: 130,
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Card(
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            'assets/logo.png',
+                            height: 130,
+                            width: 130,
+                          ),
                         ),
                       ),
-                    ),
-                    appState.myUser == null
-                        ? const SizedBox()
-                        : Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomText(
-                                  label: 'Full name',
-                                  data: '${user?.firstName} ${user?.lastName}',
-                                ),
-                                CustomText(
-                                  label: 'Rank',
-                                  data: '${user?.rank}',
-                                ),
-                                CustomText(
-                                  label: 'Email',
-                                  data: '${user?.email}',
-                                ),
-                                CustomText(
-                                  label: 'Phone number',
-                                  data: '${user?.phoneNumber}',
-                                ),
-                                CustomText(
-                                  label: 'Role',
-                                  data: '${user?.role}',
-                                ),
-                                CustomText(
-                                  label: 'Department',
-                                  data: '${user?.department}',
-                                ),
-                                CustomText(
-                                  label: 'Station Number',
-                                  data: '${user?.phoneNumber}',
-                                ),
-                              ],
+                      appState.myUser == null
+                          ? const SizedBox()
+                          : Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomText(
+                                    label: 'Full name',
+                                    data:
+                                        '${user?.firstName} ${user?.lastName}',
+                                  ),
+                                  CustomText(
+                                    label: 'Rank',
+                                    data: '${user?.rank}',
+                                  ),
+                                  CustomText(
+                                    label: 'Email',
+                                    data: '${user?.email}',
+                                  ),
+                                  CustomText(
+                                    label: 'Phone number',
+                                    data: '${user?.phoneNumber}',
+                                  ),
+                                  CustomText(
+                                    label: 'Role',
+                                    data: '${user?.role}',
+                                  ),
+                                  CustomText(
+                                    label: 'Department',
+                                    data: '${user?.department}',
+                                  ),
+                                  CustomText(
+                                    label: 'Station Number',
+                                    data: '${user?.phoneNumber}',
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              if (user != null)
-                Container(
-                  padding: const EdgeInsets.only(top: 3),
-                  child: profileState.getQR(user.id),
-                )
-            ],
+                if (user != null)
+                  Container(
+                    padding: const EdgeInsets.only(top: 3),
+                    child: profileState.getQR(user.id),
+                  )
+              ],
+            ),
           ),
         ),
       ),
@@ -133,7 +133,7 @@ class CustomText extends StatelessWidget {
                 .headline6!
                 .copyWith(fontSize: width < 500 ? 16 : 20),
           ),
-          Text(
+          SelectableText(
             data,
             style: Theme.of(context).textTheme.headline6!.copyWith(
                   color: Colors.yellow[800],
