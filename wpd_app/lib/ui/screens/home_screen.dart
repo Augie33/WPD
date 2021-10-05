@@ -33,7 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Theme.of(context).primaryColor,
           icon: const Icon(Icons.refresh),
           onPressed: () {
-            context.read(HomeScreenViewModelProvider.provider).getCases();
+            context
+                .read(HomeScreenViewModelProvider.provider)
+                .getCases(refresh: true);
           },
         ),
         actions: [

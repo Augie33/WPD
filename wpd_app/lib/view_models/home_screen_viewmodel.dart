@@ -19,8 +19,12 @@ class HomeScreenViewModel extends ChangeNotifier {
   bool _loading = false;
   bool get isLoading => _loading;
 
-  Future<void> getCases() async {
+  void getCases({bool refresh = false}) async {
     _loading = true;
+
+    if (refresh == true) {
+      notifyListeners();
+    }
 
     await Future.delayed(
       const Duration(seconds: 2),
