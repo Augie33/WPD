@@ -6,8 +6,9 @@ import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/services/service_locator.dart';
 
 abstract class SearchScreenViewModelProvider {
-  static final provider =
-      ChangeNotifierProvider((ref) => SearchCaseViewModel());
+  static final provider = ChangeNotifierProvider(
+    (ref) => SearchCaseViewModel(),
+  );
 }
 
 class SearchCaseViewModel extends ChangeNotifier {
