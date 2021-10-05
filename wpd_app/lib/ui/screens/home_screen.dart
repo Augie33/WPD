@@ -70,53 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
           },
         ),
-
-        // return FutureBuilder<List<Case>>(
-        //   future: watch(HomeScreenViewModelProvider.provider).getCases(),
-        //   builder:
-        //       (BuildContext context, AsyncSnapshot<List<Case>> snapshot) {
-        //     final data = snapshot.data;
-        //     if (snapshot.connectionState == ConnectionState.waiting) {
-        // return AbsorbPointer(
-        //   child: ListView.builder(
-        //     itemCount: 10,
-        //     itemBuilder: (context, index) {
-        //       return const ShimmerLoader();
-        //     },
-        //   ),
-        // );
-        //     }
-
-        //     if (snapshot.hasError) {
-        //       return Center(
-        //         child: Text(
-        //           'Error :(',
-        //           style: Theme.of(context).textTheme.headline1,
-        //         ),
-        //       );
-        //     }
-
-        //     if (data == null || data.isEmpty) {
-        //       return Center(
-        //         child: Text(
-        //           'Please, add more cases',
-        //           style: Theme.of(context).textTheme.headline1,
-        //         ),
-        //       );
-        //     }
-
-        //     return ListView.builder(
-        //       itemCount: data.length,
-        //       itemBuilder: (context, index) {
-        //         final myCase = data[index];
-
-        //         return CaseTile(myCase: myCase);
-        //       },
-        //     );
-        //   },
-        // );
-        //   },
-        // ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(
             Icons.search,
