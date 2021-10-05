@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/models/case/case.dart';
 
 class CaseTile extends StatelessWidget {
@@ -15,7 +16,9 @@ class CaseTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 3),
       child: Card(
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Routemaster.of(context).push('/case/${myCase.id}');
+          },
           customBorder: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(4.0)),
           ),

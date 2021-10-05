@@ -19,6 +19,19 @@ class AppLoader extends StatelessWidget {
   }
 }
 
+class ScreenLoader extends StatelessWidget {
+  const ScreenLoader({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: AppLoader(),
+      ),
+    );
+  }
+}
+
 class ShimmerLoader extends StatelessWidget {
   const ShimmerLoader({Key? key}) : super(key: key);
 
