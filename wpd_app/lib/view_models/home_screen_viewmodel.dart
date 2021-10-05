@@ -16,10 +16,13 @@ class HomeScreenViewModel extends ChangeNotifier {
 
   List<Case> myCases = [];
 
-  // bool _loading = false;
-  // bool get isLoading => _loading;
+  bool _loading = false;
+  bool get isLoading => _loading;
 
-  Future<List<Case>> getCases() async {
+  Future<void> getCases() async {
+    _loading = true;
+    notifyListeners();
+
     await Future.delayed(
       const Duration(seconds: 2),
     );
@@ -30,7 +33,7 @@ class HomeScreenViewModel extends ChangeNotifier {
     );
 
     myCases = data;
-
-    return data;
+    _loading = false;
+    notifyListeners();
   }
 }

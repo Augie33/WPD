@@ -13,8 +13,6 @@ import 'package:wpd_app/ui/widgets/bottom_nav.dart';
 
 abstract class AppRoutes {
   static final routes = RouteMap(routes: {
-    // '/': (_) => const MaterialPage(child: StartUpPage()),
-
     '/': (_) => const CupertinoTabPage(
           child: BottomNav(),
           paths: ['/home', '/favorite', '/profile', '/more'],
