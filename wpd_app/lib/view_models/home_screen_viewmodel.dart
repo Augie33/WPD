@@ -19,7 +19,7 @@ class HomeScreenViewModel extends ChangeNotifier {
   bool _loading = false;
   bool get isLoading => _loading;
 
-  void getCases({bool refresh = false}) async {
+  Future<void> getCases({bool refresh = false}) async {
     _loading = true;
 
     if (refresh == true) {
