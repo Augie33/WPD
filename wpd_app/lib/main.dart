@@ -17,9 +17,12 @@ Future<void> main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   setupServiceLocator(sharedPreferences: sharedPreferences);
 
+  Routemaster.setPathUrlStrategy();
+
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
+      // enabled: !kReleaseMode,
+      enabled: false,
       builder: (context) => const ProviderScope(
         child: MyApp(),
       ),
@@ -38,6 +41,7 @@ class MyApp extends StatelessWidget {
         final botToastBuilder = BotToastInit();
 
         return MaterialApp.router(
+          title: 'WPD',
           debugShowCheckedModeBanner: false,
           locale: DevicePreview.locale(context),
           builder: (context, child) {
