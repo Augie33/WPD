@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
+import 'package:wpd_app/view_models/profile_screen_viewmodel.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -10,11 +11,20 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
+        leading: IconButton(
+          tooltip: 'NFC',
+          color: Theme.of(context).primaryColor,
+          icon: const Icon(
+            Icons.nfc,
+          ),
+          onPressed: () {},
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
             color: Colors.redAccent,
             iconSize: 28,
+            tooltip: 'Logout',
             onPressed: () async {
               await context.read(AuthStateViewModelProvider.provider).logout();
             },
@@ -24,6 +34,7 @@ class ProfileScreen extends StatelessWidget {
       body: Consumer(
         builder: (context, watch, child) {
           final appState = watch(AuthStateViewModelProvider.provider);
+          final profileState = watch(ProfileScreenViewModelProvider.provider);
           final user = appState.myUser;
 
           return SingleChildScrollView(
@@ -87,13 +98,8 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    // TODO: QR profile logic
-                    padding: const EdgeInsets.all(20),
-                    child: Icon(
-                      Icons.qr_code_2_outlined,
-                      size: 170,
-                      color: Theme.of(context).primaryColor,
-                    ),
+                    padding: const EdgeInsets.only(top: 3),
+                    child: profileState.getQR(user!.id),
                   )
                 ],
               ),

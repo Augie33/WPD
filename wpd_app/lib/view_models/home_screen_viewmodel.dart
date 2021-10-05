@@ -6,8 +6,9 @@ import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/services/service_locator.dart';
 
 abstract class HomeScreenViewModelProvider {
-  static final provider =
-      ChangeNotifierProvider((ref) => HomeScreenViewModel());
+  static final provider = ChangeNotifierProvider(
+    (ref) => HomeScreenViewModel(),
+  );
 }
 
 class HomeScreenViewModel extends ChangeNotifier {
