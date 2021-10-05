@@ -24,6 +24,7 @@ class HomeScreen extends ConsumerWidget {
             icon: const Icon(Icons.add),
             // color: Theme.of(context).primaryColor,
             iconSize: 32,
+            tooltip: 'Add Case',
             onPressed: () {
               Routemaster.of(context).push('add');
             },
