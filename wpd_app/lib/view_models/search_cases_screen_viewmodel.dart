@@ -20,6 +20,7 @@ class SearchCaseViewModel extends ChangeNotifier {
 
   Future<void> searchCases(String search) async {
     _loading = true;
+    myCases = [];
     notifyListeners();
 
     var data = await _requestRest.executeGet<List<Case>>(

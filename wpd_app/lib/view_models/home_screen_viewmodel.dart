@@ -21,7 +21,6 @@ class HomeScreenViewModel extends ChangeNotifier {
 
   Future<void> getCases() async {
     _loading = true;
-    notifyListeners();
 
     await Future.delayed(
       const Duration(seconds: 2),
