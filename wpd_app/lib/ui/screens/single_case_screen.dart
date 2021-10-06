@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -176,7 +177,7 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                       onTap: () async {
                                         await canLaunch(myCase.url)
                                             ? await launch(myCase.url)
-                                            : throw 'Could not launch ${myCase.url}';
+                                            : BotToast.showText(text: 'Error');
                                       },
                                       child: Text(
                                         myCase.url,
@@ -211,16 +212,28 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                           Theme.of(context).textTheme.headline3,
                                     ),
                                   ),
-                                  Container(
-                                    height: 600,
-                                    padding: const EdgeInsets.only(
-                                      left: 20,
-                                      right: 20,
-                                      top: 10,
-                                      bottom: 20,
-                                    ),
-                                    child: singalCaseViewModel.showPDF(),
-                                  )
+                                  myCase.urlPDF == ''
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Center(
+                                            child: Text(
+                                              'N/A',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1,
+                                            ),
+                                          ),
+                                        )
+                                      : Container(
+                                          height: 600,
+                                          padding: const EdgeInsets.only(
+                                            left: 20,
+                                            right: 20,
+                                            top: 10,
+                                            bottom: 20,
+                                          ),
+                                          child: singalCaseViewModel.showPDF(),
+                                        )
                                 ],
                               ),
                             ),
