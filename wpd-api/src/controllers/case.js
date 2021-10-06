@@ -1,6 +1,7 @@
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/error-response');
 const Case = require('../models/case');
+const User = require('../models/user');
 
 
 
@@ -45,6 +46,32 @@ exports.getCases = asyncHandler(async (req, res, next) => {
     });
   });
   
+
+  // @desc      Get Case with Police info
+  // @route     GET /api/v1/cases/:caseNumber/:userId
+  // @access    Private
+  exports.getCaseAndPoliceInfo = asyncHandler(async (req, res, next) => {
+    const casee = await Case.findById(req.params.caseNumber);
+
+
+    const user = await User.findById(req.params.userId);
+
+    if(!casee || !user){
+        return next(new ErrorResponse('Please provide correct Case ID & User ID', 404));
+    }
+
+
+
+  
+    res.status(200).json({
+      success: true,
+      data: {
+        ...casee,
+        ...user
+      },
+    });
+  });
+
   // @desc      Create case
   // @route     POST /api/v1/cases
   // @access    Private
