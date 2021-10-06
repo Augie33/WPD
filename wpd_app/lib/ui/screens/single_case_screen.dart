@@ -224,15 +224,46 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                             ),
                                           ),
                                         )
-                                      : Container(
-                                          height: 600,
-                                          padding: const EdgeInsets.only(
-                                            left: 20,
-                                            right: 20,
-                                            top: 10,
-                                            bottom: 20,
-                                          ),
-                                          child: singalCaseViewModel.showPDF(),
+                                      : Column(
+                                          children: [
+                                            Container(
+                                              height: 600,
+                                              padding: const EdgeInsets.only(
+                                                left: 20,
+                                                right: 20,
+                                                top: 10,
+                                                bottom: 20,
+                                              ),
+                                              child:
+                                                  singalCaseViewModel.showPDF(),
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.only(
+                                                left: 20,
+                                                right: 20,
+                                                bottom: 15,
+                                              ),
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  await canLaunch(myCase.urlPDF)
+                                                      ? await launch(
+                                                          myCase.urlPDF)
+                                                      : BotToast.showText(
+                                                          text: 'Error');
+                                                },
+                                                child: Text(
+                                                  myCase.urlPDF,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color: Theme.of(context)
+                                                            .primaryColor,
+                                                      ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         )
                                 ],
                               ),

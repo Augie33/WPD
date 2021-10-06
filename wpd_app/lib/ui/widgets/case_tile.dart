@@ -30,7 +30,7 @@ class CaseTile extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headline2!
-                    .copyWith(fontSize: 23),
+                    .copyWith(fontSize: 22),
               ),
               subtitle: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
