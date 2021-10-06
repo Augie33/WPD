@@ -63,6 +63,7 @@ dependencies:
   qr_flutter: ^4.0.0
   device_preview: ^0.7.4
   flutter_cached_pdfview: ^0.4.0-nullsafety
+  share_plus: ^3.0.1
   
 
 dev_dependencies:

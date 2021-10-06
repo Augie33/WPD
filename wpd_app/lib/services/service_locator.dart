@@ -7,6 +7,8 @@ import 'package:wpd_app/services/qr/qr_service.dart';
 import 'package:wpd_app/services/qr/qr_implementation.dart';
 import 'package:wpd_app/services/secure_storage/secure_storage_implementation.dart';
 import 'package:wpd_app/services/secure_storage/secure_storage_service.dart';
+import 'package:wpd_app/services/share/share_implementation.dart';
+import 'package:wpd_app/services/share/share_service.dart';
 import 'package:wpd_app/services/storage/storage_service.dart';
 import 'package:wpd_app/services/storage/storage_service_implementation.dart';
 
@@ -19,8 +21,12 @@ void setupServiceLocator({required SharedPreferences sharedPreferences}) {
     () => PDFImpl(),
   );
 
-  serviceLocator.registerLazySingleton<QrService>(
-    () => QrImpl2(),
+  serviceLocator.registerLazySingleton<QRService>(
+    () => QRImpl2(),
+  );
+
+  serviceLocator.registerLazySingleton<ShareService>(
+    () => ShareImpl(),
   );
 
   serviceLocator.registerLazySingleton<StorageService>(

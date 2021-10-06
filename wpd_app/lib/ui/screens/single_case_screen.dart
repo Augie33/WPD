@@ -101,7 +101,9 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                       CustomButton(
                                         icon: Icons.share,
                                         label: 'Share',
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          await singalCaseViewModel.shareCase();
+                                        },
                                       ),
                                     ],
                                   ),

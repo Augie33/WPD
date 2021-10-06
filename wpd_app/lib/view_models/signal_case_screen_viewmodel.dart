@@ -10,6 +10,7 @@ import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/services/pdf/pdf_service.dart';
 import 'package:wpd_app/services/qr/qr_service.dart';
 import 'package:wpd_app/services/service_locator.dart';
+import 'package:wpd_app/services/share/share_service.dart';
 
 abstract class SingalCaseScreenViewModelProvider {
   static final provider = ChangeNotifierProvider(
@@ -19,8 +20,9 @@ abstract class SingalCaseScreenViewModelProvider {
 
 class SingalCaseScreenViewModel extends ChangeNotifier {
   final _requestRest = serviceLocator<RequestREST>();
-  final _qrService = serviceLocator<QrService>();
+  final _qrService = serviceLocator<QRService>();
   final _pdfService = serviceLocator<PDFService>();
+  final _shareService = serviceLocator<ShareService>();
 
   Case? _case;
 
@@ -72,6 +74,12 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
   }
 
   Widget showQR() {
+    // TODO: ADD URL
     return _qrService.generateQR(value: myCase!.id, size: 300);
+  }
+
+  Future<void> shareCase() async {
+    // TODO: ADD URL
+    await _shareService.shareURL(url: 'https://www.google.com');
   }
 }

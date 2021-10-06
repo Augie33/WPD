@@ -11,7 +11,7 @@ abstract class ProfileScreenViewModelProvider {
 }
 
 class ProfileScreenViewModel extends ChangeNotifier {
-  final _requestRest = serviceLocator<QrService>();
+  final _requestRest = serviceLocator<QRService>();
 
   Widget getQR(String id) {
     return _requestRest.generateQR(

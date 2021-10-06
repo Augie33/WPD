@@ -3,7 +3,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:wpd_app/services/qr/qr_service.dart';
 
-class QrImpl1 implements QrService {
+class QRImpl1 implements QRService {
   @override
   Widget generateQR({required String value, double size = 200}) {
     return PrettyQr(
@@ -18,7 +18,7 @@ class QrImpl1 implements QrService {
   }
 }
 
-class QrImpl2 implements QrService {
+class QRImpl2 implements QRService {
   @override
   Widget generateQR({required String value, double size = 200}) {
     return QrImage(
