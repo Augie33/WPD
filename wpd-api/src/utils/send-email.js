@@ -1,15 +1,18 @@
-const sgMail = require('@sendgrid/mail')
+const sgMail = require('@sendgrid/mail');
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-const sendCaseEmail = async ({email, subject,url}) =>  {
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-  await  sgMail.send({
+const sendCaseEmail =  async ({email, title, url}) => {
+
+    const msg = {
         to: email,
-        from: 'test@gmail.com',
-        subject: subject,
-        text: `Case link: ${url}`
-    })
+        from: 'dmakwt1@gmail.com', // Use the email address or domain you verified above
+        subject: title,
+        text: `Case: ${url}`,
+      };
+      
+     await sgMail.send(msg);
 }
 
 
