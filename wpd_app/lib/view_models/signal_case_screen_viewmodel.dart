@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 import 'package:wpd_app/api/http_client.dart';
@@ -70,5 +71,7 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
     return _pdfService.showPDF(_case!.urlPDF);
   }
 
-  Future<void> showQR() async {}
+  Widget showQR() {
+    return _qrService.generateQR(value: myCase!.id, size: 300);
+  }
 }

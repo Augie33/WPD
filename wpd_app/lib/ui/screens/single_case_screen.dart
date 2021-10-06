@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wpd_app/ui/widgets/custom_button.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
@@ -88,7 +89,9 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                       CustomButton(
                                         icon: Icons.qr_code_2,
                                         label: 'QR',
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Routemaster.of(context).push('qr');
+                                        },
                                       ),
                                       CustomButton(
                                         icon: Icons.email,
@@ -277,6 +280,26 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                     ),
                   );
       },
+    );
+  }
+}
+
+class QRScreen extends ConsumerWidget {
+  const QRScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, watch) {
+    final singalCaseViewModel =
+        watch(SingalCaseScreenViewModelProvider.provider);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('QR'),
+      ),
+      body: Center(
+        child: Card(
+          child: singalCaseViewModel.showQR(),
+        ),
+      ),
     );
   }
 }
