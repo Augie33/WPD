@@ -113,11 +113,11 @@ exports.deleteCase = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v1/cases/email
 // @access    Private
 exports.sendEmail = asyncHandler(async (req, res, next) => {
-  // await sendCaseEmail({
-  //   email: req.body.email,
-  //   subject: req.body.subject,
-  //   url: req.body.url
-  // });
+  await sendCaseEmail({
+    email: req.body.email,
+    subject: req.body.subject,
+    url: req.body.url,
+  });
 
   res.status(200).json();
 });
