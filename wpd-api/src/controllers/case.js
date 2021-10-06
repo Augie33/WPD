@@ -48,11 +48,10 @@ exports.getCases = asyncHandler(async (req, res, next) => {
   
 
   // @desc      Get Case with Police info
-  // @route     GET /api/v1/cases/:caseNumber/:userId
+  // @route     GET /api/v1/cases/:caseId/:userId
   // @access    Private
   exports.getCaseAndPoliceInfo = asyncHandler(async (req, res, next) => {
-    const casee = await Case.findById(req.params.caseNumber);
-
+    const casee = await Case.findById(req.params.caseId);
 
     const user = await User.findById(req.params.userId);
 
