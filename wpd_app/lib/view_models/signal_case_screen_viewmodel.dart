@@ -74,12 +74,12 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
   }
 
   Widget showQR() {
-    // TODO: ADD URL
+    // TODO: ADD URL (include your info or not)
     return _qrService.generateQR(value: myCase!.id, size: 300);
   }
 
   Future<void> shareCase() async {
-    // TODO: ADD URL
+    // TODO: ADD URL (include your info or not)
     await _shareService.shareURL(url: 'https://www.google.com');
   }
 }
