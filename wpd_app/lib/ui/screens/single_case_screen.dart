@@ -108,8 +108,9 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                     title: const Text(
                                       'Include your info',
                                     ),
-                                    value: true,
-                                    onChanged: (_) {},
+                                    value: singalCaseViewModel.inclueInfo,
+                                    onChanged:
+                                        singalCaseViewModel.toggleInclueInfo,
                                   )
                                 ],
                               ),

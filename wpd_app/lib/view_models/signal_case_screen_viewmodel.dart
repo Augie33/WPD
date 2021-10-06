@@ -23,6 +23,8 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
 
   Case? _case;
 
+  bool _inclueInfo = false;
+  bool get inclueInfo => _inclueInfo;
   bool _loading = false;
   bool get isLoading => _loading;
   Case? get myCase => _case;
@@ -54,6 +56,12 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
     }
   }
 
+  void toggleInclueInfo(bool value) {
+    _inclueInfo = value;
+    print(_inclueInfo);
+    notifyListeners();
+  }
+
   Widget showPDF() {
     if (_case == null) {
       return const SizedBox();
@@ -61,4 +69,6 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
 
     return _pdfService.showPDF(_case!.urlPDF);
   }
+
+  Future<void> showQR() async {}
 }
