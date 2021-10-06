@@ -196,84 +196,80 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                               ),
                             ),
                           ),
-                          if (!kIsWeb)
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Card(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      padding: const EdgeInsets.only(
-                                        left: 20,
-                                        top: 10,
-                                      ),
-                                      child: Text(
-                                        'PDF',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline3,
-                                      ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    padding: const EdgeInsets.only(
+                                      left: 20,
+                                      top: 10,
                                     ),
-                                    myCase.urlPDF == ''
-                                        ? Padding(
-                                            padding: const EdgeInsets.all(20.0),
-                                            child: Center(
-                                              child: Text(
-                                                'N/A',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText1,
-                                              ),
+                                    child: Text(
+                                      'PDF',
+                                      style:
+                                          Theme.of(context).textTheme.headline3,
+                                    ),
+                                  ),
+                                  myCase.urlPDF == ''
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Center(
+                                            child: Text(
+                                              'N/A',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1,
                                             ),
-                                          )
-                                        : Column(
-                                            children: [
-                                              Container(
-                                                height: 600,
-                                                padding: const EdgeInsets.only(
-                                                  left: 20,
-                                                  right: 20,
-                                                  top: 10,
-                                                  bottom: 20,
-                                                ),
-                                                child: singalCaseViewModel
-                                                    .showPDF(),
+                                          ),
+                                        )
+                                      : Column(
+                                          children: [
+                                            Container(
+                                              height: 600,
+                                              padding: const EdgeInsets.only(
+                                                left: 20,
+                                                right: 20,
+                                                top: 10,
+                                                bottom: 20,
                                               ),
-                                              Container(
-                                                padding: const EdgeInsets.only(
-                                                  left: 20,
-                                                  right: 20,
-                                                  bottom: 15,
+                                              child:
+                                                  singalCaseViewModel.showPDF(),
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.only(
+                                                left: 20,
+                                                right: 20,
+                                                bottom: 15,
+                                              ),
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  await canLaunch(myCase.urlPDF)
+                                                      ? await launch(
+                                                          myCase.urlPDF)
+                                                      : BotToast.showText(
+                                                          text: 'Error');
+                                                },
+                                                child: Text(
+                                                  myCase.urlPDF,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText1!
+                                                      .copyWith(
+                                                        color: Theme.of(context)
+                                                            .primaryColor,
+                                                      ),
                                                 ),
-                                                child: GestureDetector(
-                                                  onTap: () async {
-                                                    await canLaunch(
-                                                            myCase.urlPDF)
-                                                        ? await launch(
-                                                            myCase.urlPDF)
-                                                        : BotToast.showText(
-                                                            text: 'Error');
-                                                  },
-                                                  child: Text(
-                                                    myCase.urlPDF,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText1!
-                                                        .copyWith(
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .primaryColor,
-                                                        ),
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          )
-                                  ],
-                                ),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                ],
                               ),
                             ),
+                          ),
                           const SizedBox(height: 10),
                         ],
                       ),
