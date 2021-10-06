@@ -3,28 +3,28 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static TextTheme lightTextTheme = TextTheme(
-    bodyText1: GoogleFonts.cairo(
+    bodyText1: GoogleFonts.openSans(
         fontSize: 14.0, fontWeight: FontWeight.w700, color: Colors.black),
-    headline1: GoogleFonts.cairo(
+    headline1: GoogleFonts.openSans(
         fontSize: 28.0, fontWeight: FontWeight.bold, color: Colors.black),
-    headline2: GoogleFonts.cairo(
+    headline2: GoogleFonts.openSans(
         fontSize: 21.0, fontWeight: FontWeight.w700, color: Colors.black),
-    headline3: GoogleFonts.cairo(
+    headline3: GoogleFonts.openSans(
         fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.black),
-    headline6: GoogleFonts.cairo(
+    headline6: GoogleFonts.openSans(
         fontSize: 20.0, fontWeight: FontWeight.w600, color: Colors.black),
   );
 
   static TextTheme darkTextTheme = TextTheme(
-    bodyText1: GoogleFonts.cairo(
+    bodyText1: GoogleFonts.openSans(
         fontSize: 14.0, fontWeight: FontWeight.w600, color: Colors.white),
-    headline1: GoogleFonts.cairo(
+    headline1: GoogleFonts.openSans(
         fontSize: 28.0, fontWeight: FontWeight.bold, color: Colors.white),
-    headline2: GoogleFonts.cairo(
+    headline2: GoogleFonts.openSans(
         fontSize: 21.0, fontWeight: FontWeight.w700, color: Colors.white),
-    headline3: GoogleFonts.cairo(
+    headline3: GoogleFonts.openSans(
         fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.white),
-    headline6: GoogleFonts.cairo(
+    headline6: GoogleFonts.openSans(
         fontSize: 20.0, fontWeight: FontWeight.w600, color: Colors.white),
   );
 
@@ -40,7 +40,7 @@ class AppTheme {
           color: Colors.black,
         ),
         centerTitle: true,
-        titleTextStyle: GoogleFonts.cairo(
+        titleTextStyle: GoogleFonts.openSans(
           fontSize: 18.0,
           fontWeight: FontWeight.w700,
           color: Colors.black,
@@ -78,7 +78,7 @@ class AppTheme {
           actionsIconTheme: IconThemeData(
             color: Colors.yellow[700],
           ),
-          titleTextStyle: GoogleFonts.cairo(
+          titleTextStyle: GoogleFonts.openSans(
             fontSize: 18.0,
             fontWeight: FontWeight.w700,
             color: Colors.white,

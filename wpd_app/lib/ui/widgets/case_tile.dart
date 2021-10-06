@@ -27,7 +27,10 @@ class CaseTile extends StatelessWidget {
             child: ListTile(
               title: Text(
                 myCase.title,
-                style: Theme.of(context).textTheme.headline1,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2!
+                    .copyWith(fontSize: 23),
               ),
               subtitle: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),

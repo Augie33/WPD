@@ -1,10 +1,13 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/case_parser.dart';
 import 'package:wpd_app/models/case/case.dart';
+import 'package:wpd_app/services/pdf/pdf_service.dart';
+import 'package:wpd_app/services/qr/qr_service.dart';
 import 'package:wpd_app/services/service_locator.dart';
 
 abstract class SingalCaseScreenViewModelProvider {
@@ -15,6 +18,8 @@ abstract class SingalCaseScreenViewModelProvider {
 
 class SingalCaseScreenViewModel extends ChangeNotifier {
   final _requestRest = serviceLocator<RequestREST>();
+  final _qrService = serviceLocator<QrService>();
+  final _pdfService = serviceLocator<PDFService>();
 
   Case? _case;
 
@@ -47,5 +52,13 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
       _loading = false;
       notifyListeners();
     }
+  }
+
+  Widget showPDF() {
+    if (_case == null) {
+      return const SizedBox();
+    }
+
+    return _pdfService.showPDF(_case!.urlPDF);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wpd_app/services/qr/qr.dart';
+import 'package:wpd_app/services/qr/qr_service.dart';
 import 'package:wpd_app/services/service_locator.dart';
 
 abstract class ProfileScreenViewModelProvider {

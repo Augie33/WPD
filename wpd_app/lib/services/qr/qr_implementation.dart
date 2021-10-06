@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
-import 'package:wpd_app/services/qr/qr.dart';
+import 'package:wpd_app/services/qr/qr_service.dart';
 
 class QrImpl1 implements QrService {
   @override
