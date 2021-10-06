@@ -55,6 +55,9 @@ exports.getCases = asyncHandler(async (req, res, next) => {
 
     const user = await User.findById(req.params.userId);
 
+
+
+
     if(!casee || !user){
         return next(new ErrorResponse('Please provide correct Case ID & User ID', 404));
     }
@@ -65,8 +68,8 @@ exports.getCases = asyncHandler(async (req, res, next) => {
     res.status(200).json({
       success: true,
       data: {
-        ...casee,
-        ...user
+        case: casee,
+        user: user
       },
     });
   });
