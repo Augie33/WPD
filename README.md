@@ -67,6 +67,7 @@ MAX_FILE_UPLOAD=1000000
 
 JWT_SECRET=myappcoooooooooooooooooooool
 # JWT_COOKIE_EXPIRE=30
+SENDGRIDAPIKEY=
 ```
 5- Run
 ```shell
