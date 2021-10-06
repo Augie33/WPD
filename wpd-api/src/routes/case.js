@@ -8,6 +8,7 @@ const {
   createCase,
   updateCase,
   deleteCase,
+  sendEmail,
 } = require('../controllers/case');
 
 const Case = require('../models/case');
@@ -26,5 +27,6 @@ router.post('/', createCase);
 router.get('/number/:caseNumber', getCaseByCaseNumber);
 router.put('/:id', updateCase);
 router.delete('/:id', deleteCase);
+router.post('/email', sendEmail);
 
 module.exports = router;

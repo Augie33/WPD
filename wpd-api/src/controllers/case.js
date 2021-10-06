@@ -2,6 +2,7 @@ const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/error-response');
 const Case = require('../models/case');
 const User = require('../models/user');
+const {sendCaseEmail} = require('../utils/send-email');
 
 // @desc      Get all cases
 // @route     GET /api/v1/cases
@@ -106,4 +107,20 @@ exports.deleteCase = asyncHandler(async (req, res, next) => {
     success: true,
     data: {},
   });
+});
+
+
+
+// @desc      Send Case email
+// @route     POST /api/v1/cases/email
+// @access    Private
+exports.sendEmail = asyncHandler(async (req, res, next) => {
+
+  await sendCaseEmail({
+    email: req.body.email,
+    subject: req.body.subject,
+    url: req.body.url
+  });
+
+  res.status(200).json();
 });
