@@ -13,11 +13,11 @@ const CaseSchema = new mongoose.Schema({
   },
   url: {
     type: String,
-    required: [true, 'Please add a url'],
+    default: '',
   },
   urlPDF: {
     type: String,
-    required: [true, 'Please add a pdf'],
+    default: '',
   },
 });
 
