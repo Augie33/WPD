@@ -67,6 +67,8 @@ MAX_FILE_UPLOAD=1000000
 
 JWT_SECRET=myappcoooooooooooooooooooool
 # JWT_COOKIE_EXPIRE=30
+
+SENDGRID_API_KEY=
 ```
 5- Run
 ```shell
