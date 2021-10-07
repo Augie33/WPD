@@ -74,7 +74,12 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: Card(
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.only(
+                                  left: 20,
+                                  right: 20,
+                                  top: 10,
+                                  bottom: 10,
+                                ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -271,17 +276,18 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                         )
                                       : Column(
                                           children: [
-                                            Container(
-                                              height: 600,
-                                              padding: const EdgeInsets.only(
-                                                left: 20,
-                                                right: 20,
-                                                top: 10,
-                                                bottom: 20,
+                                            if (!kIsWeb)
+                                              Container(
+                                                height: 600,
+                                                padding: const EdgeInsets.only(
+                                                  left: 20,
+                                                  right: 20,
+                                                  top: 10,
+                                                  bottom: 20,
+                                                ),
+                                                child: singalCaseViewModel
+                                                    .showPDF(),
                                               ),
-                                              child:
-                                                  singalCaseViewModel.showPDF(),
-                                            ),
                                             Container(
                                               padding: const EdgeInsets.only(
                                                 left: 20,
