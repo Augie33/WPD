@@ -6,11 +6,16 @@ import 'package:validators/validators.dart';
 import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/view_models/add_case_screen_viewmodel.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
-import 'package:wpd_app/view_models/signal_case_screen_viewmodel.dart';
 
 class AddCaseScreen extends HookWidget {
-  AddCaseScreen({Key? key}) : super(key: key);
+  AddCaseScreen({
+    this.caseId,
+    this.myCase,
+    Key? key,
+  }) : super(key: key);
 
+  final String? caseId;
+  final Case? myCase;
   final _key = GlobalKey<FormState>();
 
   String? _validateTitle(String? value) {
@@ -84,13 +89,13 @@ class AddCaseScreen extends HookWidget {
                 onPressed: () async {
                   await _submit(
                     context,
-                    const Case(
-                      id: 'asdas',
-                      title: 'asdas',
-                      description: 'asdas',
-                      url: 'asdas',
+                    Case(
+                      id: 'n/a',
+                      title: titleController.text,
+                      description: descriptionController.text,
+                      url: urlController.text,
                       urlPDF: 'asdas',
-                      caseNumber: 121,
+                      caseNumber: 0,
                     ),
                   );
                 },
@@ -103,12 +108,14 @@ class AddCaseScreen extends HookWidget {
                 children: [
                   AddTextField(
                     controller: titleController,
+                    initialValue: myCase?.title,
                     validator: _validateTitle,
                     hintText: 'Title',
                     icon: Icons.title,
                   ),
                   AddTextField(
                     controller: descriptionController,
+                    initialValue: myCase?.description,
                     validator: _validateDescription,
                     hintText: 'Description',
                     icon: Icons.description,
@@ -116,6 +123,7 @@ class AddCaseScreen extends HookWidget {
                   ),
                   AddTextField(
                     controller: urlController,
+                    initialValue: myCase?.url,
                     validator: _validateUrl,
                     hintText: 'URL',
                     icon: Icons.link,
@@ -142,6 +150,7 @@ class AddTextField extends StatelessWidget {
   const AddTextField({
     Key? key,
     required this.controller,
+    this.initialValue,
     required this.validator,
     required this.hintText,
     required this.icon,
@@ -149,6 +158,7 @@ class AddTextField extends StatelessWidget {
   }) : super(key: key);
 
   final TextEditingController controller;
+  final String? initialValue;
   final String? Function(String?)? validator;
   final String hintText;
   final IconData icon;
@@ -160,6 +170,7 @@ class AddTextField extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: TextFormField(
         controller: controller,
+        initialValue: initialValue,
         cursorColor: Theme.of(context).primaryColor,
         maxLines: maxLines,
         decoration: InputDecoration(

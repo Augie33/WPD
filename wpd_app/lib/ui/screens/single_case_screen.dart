@@ -260,11 +260,13 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                                 onTap: () async {
                                                   await canLaunch(myCase.urlPDF)
                                                       ? await launch(
-                                                          myCase.urlPDF)
+                                                          myCase.urlPDF,
+                                                        )
                                                       : BotToast.showText(
-                                                          text: 'Error');
+                                                          text: 'Error',
+                                                        );
                                                 },
-                                                child: Text(
+                                                child: SelectableText(
                                                   myCase.urlPDF,
                                                   style: Theme.of(context)
                                                       .textTheme
