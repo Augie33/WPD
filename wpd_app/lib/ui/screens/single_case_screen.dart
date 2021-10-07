@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -213,35 +214,38 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Card(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      padding: const EdgeInsets.only(
-                                        left: 20,
-                                        top: 10,
+                                child: InkWell(
+                                  onTap: () async {
+                                    await canLaunch(myCase.url)
+                                        ? await launch(myCase.url)
+                                        : BotToast.showText(text: 'Error');
+                                  },
+                                  customBorder: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(4.0)),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        padding: const EdgeInsets.only(
+                                          left: 20,
+                                          top: 10,
+                                        ),
+                                        child: Text(
+                                          'URL',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline3,
+                                        ),
                                       ),
-                                      child: Text(
-                                        'URL',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline3,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.only(
-                                        left: 20,
-                                        right: 20,
-                                        top: 10,
-                                        bottom: 15,
-                                      ),
-                                      child: GestureDetector(
-                                        onTap: () async {
-                                          await canLaunch(myCase.url)
-                                              ? await launch(myCase.url)
-                                              : BotToast.showText(
-                                                  text: 'Error');
-                                        },
+                                      Container(
+                                        padding: const EdgeInsets.only(
+                                          left: 20,
+                                          right: 20,
+                                          top: 10,
+                                          bottom: 15,
+                                        ),
                                         child: Text(
                                           myCase.url,
                                           style: Theme.of(context)
@@ -252,9 +256,9 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                                     .primaryColor,
                                               ),
                                         ),
-                                      ),
-                                    )
-                                  ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -309,7 +313,7 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                                   right: 20,
                                                   bottom: 15,
                                                 ),
-                                                child: GestureDetector(
+                                                child: ListTile(
                                                   onTap: () async {
                                                     await canLaunch(
                                                             myCase.urlPDF)
@@ -320,7 +324,12 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                                             text: 'Error',
                                                           );
                                                   },
-                                                  child: SelectableText(
+                                                  trailing: FaIcon(
+                                                    FontAwesomeIcons.expandAlt,
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                  ),
+                                                  title: Text(
                                                     myCase.urlPDF,
                                                     style: Theme.of(context)
                                                         .textTheme
