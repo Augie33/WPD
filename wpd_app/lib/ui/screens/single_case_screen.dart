@@ -73,6 +73,38 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: SelectableText(
+                                        'Case Number:   #${myCase.caseNumber}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: SelectableText(
+                                        'Case ID:   ${myCase.id}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
                               child: Column(
                                 children: [
                                   Container(
@@ -279,7 +311,7 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                               ),
                                             )
                                           ],
-                                        )
+                                        ),
                                 ],
                               ),
                             ),
@@ -352,31 +384,36 @@ class EmailScreen extends HookWidget {
 
     final emailController = useTextEditingController();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Send by Email'),
-      ),
-      body: Form(
-        key: _key,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              CustomFormField(
-                controller: emailController,
-                autofocus: true,
-                hintText: 'Email',
-                icon: Icons.email,
-                validator: _validateEmail,
-              ),
-              ElevatedButton.icon(
-                icon: const Icon(Icons.send),
-                label: const Text('Send'),
-                onPressed: () async {
-                  await _send(context, singalCaseViewModel, emailController);
-                },
-              )
-            ],
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Send by Email'),
+        ),
+        body: Form(
+          key: _key,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                CustomFormField(
+                  controller: emailController,
+                  autofocus: true,
+                  hintText: 'Email',
+                  icon: Icons.email,
+                  validator: _validateEmail,
+                ),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.send),
+                  label: const Text('Send'),
+                  onPressed: () async {
+                    await _send(context, singalCaseViewModel, emailController);
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),
