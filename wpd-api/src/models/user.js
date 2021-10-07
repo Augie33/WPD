@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
 
+//fields needed to create a new user profile
 const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
