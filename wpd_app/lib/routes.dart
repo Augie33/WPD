@@ -24,7 +24,7 @@ abstract class AppRoutes {
       '/profile': (_) => const MaterialPage(child: ProfileScreen()),
       '/more': (_) => const MaterialPage(child: MoreScreen()),
       '/login': (_) => MaterialPage(child: LoginScreen()),
-      '/home/add': (_) => const MaterialPage(child: AddCaseScreen()),
+      '/home/add': (_) => MaterialPage(child: AddCaseScreen()),
       '/home/search': (_) => const MaterialPage(child: SearchCasesScreen()),
       '/profile/edit': (_) => const MaterialPage(child: EditProfileScreen()),
       '/case/:id': (info) => MaterialPage(
