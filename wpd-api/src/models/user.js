@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
 
-//Fields used to create a new user profile
+// Fields used to create a new user profile
 const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -109,7 +109,7 @@ UserSchema.methods.getResetPasswordToken = function () {
 
 // Generate email confirm token
 UserSchema.methods.generateEmailConfirmToken = function (next) {
-  // email confirmation token
+  // Email confirmation token
   const confirmationToken = crypto.randomBytes(20).toString('hex');
 
   this.confirmEmailToken = crypto
