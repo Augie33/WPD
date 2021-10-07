@@ -96,7 +96,8 @@ class ProfileScreen extends ConsumerWidget {
                 if (user != null)
                   Container(
                     padding: const EdgeInsets.only(top: 3),
-                    child: profileState.getQR(user.id),
+                    child: profileState
+                        .getQR('https://andrewducnguyen.dev/users3'),
                   )
               ],
             ),

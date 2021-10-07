@@ -15,7 +15,7 @@ class ProfileScreenViewModel extends ChangeNotifier {
 
   Widget getQR(String id) {
     return _requestRest.generateQR(
-      value: 'https://wpd-backend.herokuapp.com/api/v1/users/$id',
+      value: id,
     );
   }
 }
