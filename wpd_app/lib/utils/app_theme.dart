@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+// Black mode 
 class AppTheme {
   static TextTheme lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.openSans(
@@ -14,7 +14,7 @@ class AppTheme {
     headline6: GoogleFonts.openSans(
         fontSize: 20.0, fontWeight: FontWeight.w600, color: Colors.black),
   );
-
+// White mode
   static TextTheme darkTextTheme = TextTheme(
     bodyText1: GoogleFonts.openSans(
         fontSize: 14.0, fontWeight: FontWeight.w600, color: Colors.white),
