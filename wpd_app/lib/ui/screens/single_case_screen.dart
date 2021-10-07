@@ -1,10 +1,14 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:validators/validators.dart';
 import 'package:wpd_app/ui/widgets/custom_button.dart';
+import 'package:wpd_app/ui/widgets/custom_form_field.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/signal_case_screen_viewmodel.dart';
 
@@ -96,7 +100,9 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                       CustomButton(
                                         icon: Icons.email,
                                         label: 'Email',
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Routemaster.of(context).push('email');
+                                        },
                                       ),
                                       CustomButton(
                                         icon: Icons.share,
@@ -300,6 +306,76 @@ class QRScreen extends ConsumerWidget {
       body: Center(
         child: Card(
           child: singalCaseViewModel.showQR(),
+        ),
+      ),
+    );
+  }
+}
+
+class EmailScreen extends HookWidget {
+  EmailScreen({Key? key}) : super(key: key);
+
+  final _key = GlobalKey<FormState>();
+
+  String? _validateEmail(String? value) {
+    if (value!.isEmpty) {
+      return 'Please, write your email';
+    } else if (!isEmail(value)) {
+      return 'Please, write valid email';
+    } else {
+      return null;
+    }
+  }
+
+  Future<void> _send(
+    BuildContext context,
+    SingalCaseScreenViewModel viewModel,
+    TextEditingController _emailController,
+  ) async {
+    if (_key.currentState?.validate() ?? false) {
+      print('send');
+
+      BotToast.showText(text: 'Email send to ${_emailController.text}');
+
+      Routemaster.of(context).pop();
+    } else {
+      debugPrint('Error :(');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final singalCaseViewModel =
+        useProvider(SingalCaseScreenViewModelProvider.provider);
+
+    final emailController = useTextEditingController();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Send by Email'),
+      ),
+      body: Form(
+        key: _key,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              CustomFormField(
+                controller: emailController,
+                autofocus: true,
+                hintText: 'Email',
+                icon: Icons.email,
+                validator: _validateEmail,
+              ),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.send),
+                label: const Text('Send'),
+                onPressed: () async {
+                  await _send(context, singalCaseViewModel, emailController);
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

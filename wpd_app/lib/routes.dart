@@ -31,6 +31,7 @@ abstract class AppRoutes {
             child: SingleCaseScreen(caseId: info.pathParameters['id']),
           ),
       '/case/:id/qr': (info) => const MaterialPage(child: QRScreen()),
+      '/case/:id/email': (info) => MaterialPage(child: EmailScreen()),
     },
     onUnknownRoute: (_) => const Redirect('/'),
   );
