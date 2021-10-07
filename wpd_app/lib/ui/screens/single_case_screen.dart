@@ -296,7 +296,7 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                             children: [
                                               if (!kIsWeb)
                                                 Container(
-                                                  height: 600,
+                                                  height: 570,
                                                   padding:
                                                       const EdgeInsets.only(
                                                     left: 20,
