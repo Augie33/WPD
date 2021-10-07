@@ -22,7 +22,7 @@ const CaseSchema = new mongoose.Schema({
   },
 });
 
-// Auto-increments the case number to keep track of the cases and make sure there are no duplicates
+// Auto-increment case number 
 CaseSchema.plugin(AutoIncrement, { inc_field: 'caseNumber' });
 
 module.exports = mongoose.model('Case', CaseSchema);
