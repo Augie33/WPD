@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
+import 'package:validators/validators.dart';
 import 'package:wpd_app/models/case/case.dart';
+import 'package:wpd_app/view_models/add_case_screen_viewmodel.dart';
+import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
+import 'package:wpd_app/view_models/signal_case_screen_viewmodel.dart';
 
 class AddCaseScreen extends HookWidget {
   AddCaseScreen({Key? key}) : super(key: key);
@@ -33,6 +38,8 @@ class AddCaseScreen extends HookWidget {
       return 'Please, write case URL';
     } else if (value.trim().isEmpty) {
       return 'Please, write case URL';
+    } else if (!isURL(value)) {
+      return 'Please, write valid URL';
     } else {
       return null;
     }
@@ -40,6 +47,14 @@ class AddCaseScreen extends HookWidget {
 
   Future<void> _submit(BuildContext context, Case newCase) async {
     if (_key.currentState?.validate() ?? false) {
+      await context
+          .read(AddCaseScreenViewModelProvider.provider)
+          .submitCase(newCase);
+
+      Routemaster.of(context).pop();
+      context
+          .read(HomeScreenViewModelProvider.provider)
+          .getCases(refresh: true);
     } else {
       debugPrint('Error :(');
     }
@@ -66,61 +81,56 @@ class AddCaseScreen extends HookWidget {
                   Icons.add_box_outlined,
                   size: 30,
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  await _submit(
+                    context,
+                    const Case(
+                      id: 'asdas',
+                      title: 'asdas',
+                      description: 'asdas',
+                      url: 'asdas',
+                      urlPDF: 'asdas',
+                      caseNumber: 121,
+                    ),
+                  );
+                },
               )
             ],
           ),
-          body: Center(
-            child: Column(
-              children: [
-                AddTextField(
-                  controller: titleController,
-                  validator: _validateTitle,
-                  hintText: 'Title',
-                  icon: Icons.title,
-                ),
-                AddTextField(
-                  controller: descriptionController,
-                  validator: _validateDescription,
-                  hintText: 'Description',
-                  icon: Icons.description,
-                  maxLines: 5,
-                ),
-                AddTextField(
-                  controller: urlController,
-                  validator: _validateUrl,
-                  hintText: 'URL',
-                  icon: Icons.link,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: ElevatedButton.icon(
-                    icon: const Icon(Icons.picture_as_pdf),
-                    label: const Text('Upload PDF'),
-                    onPressed: () {},
+          body: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  AddTextField(
+                    controller: titleController,
+                    validator: _validateTitle,
+                    hintText: 'Title',
+                    icon: Icons.title,
                   ),
-                ),
-              ],
+                  AddTextField(
+                    controller: descriptionController,
+                    validator: _validateDescription,
+                    hintText: 'Description',
+                    icon: Icons.description,
+                    maxLines: 5,
+                  ),
+                  AddTextField(
+                    controller: urlController,
+                    validator: _validateUrl,
+                    hintText: 'URL',
+                    icon: Icons.link,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.picture_as_pdf),
+                      label: const Text('Upload PDF'),
+                      onPressed: () {},
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            child: const Icon(
-              Icons.add,
-              size: 30,
-            ),
-            onPressed: () async {
-              _submit(
-                context,
-                const Case(
-                  id: 'asd',
-                  title: 'asd',
-                  description: 'asda',
-                  url: 'asdas',
-                  urlPDF: 'asda',
-                  caseNumber: 2312,
-                ),
-              );
-            },
           ),
         ),
       ),
