@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URL, {
   useUnifiedTopology: true,
 });
 
-// Read JSON files
+// Read JSON files for cases and users
 const cases = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/cases.json`, 'utf-8')
 );
@@ -54,6 +54,7 @@ const deleteData = async () => {
   }
 };
 
+//'-i' to import and '-d' to delete
 if (process.argv[2] === '-i') {
   importData();
 } else if (process.argv[2] === '-d') {
