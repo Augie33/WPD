@@ -72,7 +72,7 @@ class CreateAccountScreen extends HookWidget {
           actions: [
             IconButton(
               icon: const Icon(
-                Icons.add_box_outlined,
+                Icons.person_add,
                 size: 30,
               ),
               onPressed: () async {
