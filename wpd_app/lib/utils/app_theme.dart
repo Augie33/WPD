@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// light theme  
+
+// light theme
 class AppTheme {
   static TextTheme lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.openSans(
-        fontSize: 14.0, fontWeight: FontWeight.w700, color: Colors.black), // set font size color & thickness 
+        fontSize: 14.0, fontWeight: FontWeight.w700, color: Colors.black),
     headline1: GoogleFonts.openSans(
         fontSize: 28.0, fontWeight: FontWeight.bold, color: Colors.black),
     headline2: GoogleFonts.openSans(
@@ -14,10 +15,10 @@ class AppTheme {
     headline6: GoogleFonts.openSans(
         fontSize: 20.0, fontWeight: FontWeight.w600, color: Colors.black),
   );
-// Black theme 
+// Black theme
   static TextTheme darkTextTheme = TextTheme(
     bodyText1: GoogleFonts.openSans(
-        fontSize: 14.0, fontWeight: FontWeight.w600, color: Colors.white),    // set font size color & thickness 
+        fontSize: 14.0, fontWeight: FontWeight.w600, color: Colors.white),
     headline1: GoogleFonts.openSans(
         fontSize: 28.0, fontWeight: FontWeight.bold, color: Colors.white),
     headline2: GoogleFonts.openSans(
@@ -69,6 +70,7 @@ class AppTheme {
       ),
     );
   }
+
 // Dark mode
   static ThemeData dark() {
     return ThemeData(
@@ -103,9 +105,6 @@ class AppTheme {
         ),
         backgroundColor: const Color(0xff3A3A3A),
         textTheme: darkTextTheme,
-        // colorScheme: ColorScheme.fromSwatch().copyWith(
-        //   secondary: Colors.red[700],
-        // ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           foregroundColor: Colors.white,
           backgroundColor: Colors.yellow[700],
