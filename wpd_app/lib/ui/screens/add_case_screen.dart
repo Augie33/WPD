@@ -21,9 +21,9 @@ class AddCaseScreen extends HookWidget {
 
   String? _validateTitle(String? value) {
     if (value!.isEmpty) {
-      return 'Please, write case title';
+      return 'Please, type case title';
     } else if (value.trim().isEmpty) {
-      return 'Please, write case title';
+      return 'Please, type case title';
     } else {
       return null;
     }
@@ -31,9 +31,9 @@ class AddCaseScreen extends HookWidget {
 
   String? _validateDescription(String? value) {
     if (value!.isEmpty) {
-      return 'Please, write case description';
+      return 'Please, type case description';
     } else if (value.trim().isEmpty) {
-      return 'Please, write case description';
+      return 'Please, type case description';
     } else {
       return null;
     }
@@ -41,11 +41,11 @@ class AddCaseScreen extends HookWidget {
 
   String? _validateUrl(String? value) {
     if (value!.isEmpty) {
-      return 'Please, write case URL';
+      return 'Please, type case URL';
     } else if (value.trim().isEmpty) {
-      return 'Please, write case URL';
+      return 'Please, type case URL';
     } else if (!isURL(value)) {
-      return 'Please, write valid URL';
+      return 'Please, type valid URL';
     } else {
       return null;
     }

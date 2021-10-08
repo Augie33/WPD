@@ -14,9 +14,9 @@ class CreateAccountScreen extends HookWidget {
 
   String? _validateEmail(String? value) {
     if (value!.isEmpty) {
-      return 'Please, write your email';
+      return 'Please, type your email';
     } else if (!isEmail(value)) {
-      return 'Please, write valid email';
+      return 'Please, type valid email';
     } else {
       return null;
     }
@@ -32,7 +32,7 @@ class CreateAccountScreen extends HookWidget {
 
   String? _validateOtherFields(String label, String? value) {
     if (value!.isEmpty || value.trim().isEmpty) {
-      return 'Please, write $label';
+      return 'Please, type $label';
     } else {
       return null;
     }

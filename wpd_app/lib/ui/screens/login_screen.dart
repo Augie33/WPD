@@ -14,9 +14,9 @@ class LoginScreen extends HookWidget {
 
   String? _validateEmail(String? value) {
     if (value!.isEmpty) {
-      return 'Please, write your email';
+      return 'Please, type your email';
     } else if (!isEmail(value.trim())) {
-      return 'Please, write valid email';
+      return 'Please, type valid email';
     } else {
       return null;
     }
