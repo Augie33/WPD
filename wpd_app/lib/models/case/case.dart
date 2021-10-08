@@ -4,7 +4,7 @@ part 'case.freezed.dart';
 part 'case.g.dart';
 
 @freezed
-abstract class Case with _$Case {
+class Case with _$Case {
   const factory Case({
     @JsonKey(name: '_id') required String id,
     required String title,
