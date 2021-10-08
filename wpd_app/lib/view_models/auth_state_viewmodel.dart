@@ -51,7 +51,7 @@ class AuthStateViewModel extends ChangeNotifier {
       notifyListeners();
       var data = await _requestRest
           .executePost<Auth>('/auth/login', const AuthParser(), data: {
-        'email': email,
+        'email': email.trim(),
         'password': password,
       });
 

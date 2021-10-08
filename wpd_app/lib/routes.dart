@@ -34,7 +34,7 @@ abstract class AppRoutes {
       '/case/:id/qr': (info) => const MaterialPage(child: QRScreen()),
       '/case/:id/email': (info) => MaterialPage(child: EmailScreen()),
       '/more': (_) => const MaterialPage(child: MoreScreen()),
-      '/more/create': (_) => const MaterialPage(child: CreateAccountScreen()),
+      '/more/create': (_) => MaterialPage(child: CreateAccountScreen()),
       '/more/accounts': (_) => const MaterialPage(child: ShowAccountScreen()),
     },
     onUnknownRoute: (_) => const Redirect('/'),

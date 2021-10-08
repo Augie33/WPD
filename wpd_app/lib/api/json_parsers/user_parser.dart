@@ -8,6 +8,6 @@ class UserParser extends JsonParser<User> with ObjectDecoder<User> {
   @override
   Future<User> parseFromJson(String json) async {
     final decoded = decodeJsonObject(json);
-    return User.fromJson(decoded);
+    return User.fromJson(decoded['data']);
   }
 }

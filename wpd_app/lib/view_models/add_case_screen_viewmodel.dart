@@ -31,11 +31,11 @@ class AddCaseScreenViewModel extends ChangeNotifier {
         '/cases',
         const CaseParser(),
         data: {
-          "title": newCase.title,
-          "description": newCase.description,
-          "url": newCase.url,
-          "urlPDF":
-              "https://www.wichita.gov/WPD/Investigations/Documents/Theft%20Victims%20Packet%20PDF.pdf"
+          'title': newCase.title,
+          'description': newCase.description,
+          'url': newCase.url,
+          'urlPDF':
+              'https://www.wichita.gov/WPD/Investigations/Documents/Theft%20Victims%20Packet%20PDF.pdf'
         },
       );
 

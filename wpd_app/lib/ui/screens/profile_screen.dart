@@ -119,26 +119,24 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    print(width);
-
     return Container(
       alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.all(5),
       child: Row(
         children: [
           Text(
             '$label :   ',
-            style: Theme.of(context)
-                .textTheme
-                .headline6!
-                .copyWith(fontSize: width < 500 ? 16 : 20),
+            style:
+                Theme.of(context).textTheme.headline6!.copyWith(fontSize: 18),
           ),
-          SelectableText(
-            data,
-            style: Theme.of(context).textTheme.headline6!.copyWith(
-                  color: Colors.yellow[800],
-                  fontSize: width < 400 ? 16 : 20,
-                ),
+          Flexible(
+            child: SelectableText(
+              data,
+              style: Theme.of(context).textTheme.headline6!.copyWith(
+                    color: Colors.yellow[800],
+                    fontSize: 16,
+                  ),
+            ),
           ),
         ],
       ),

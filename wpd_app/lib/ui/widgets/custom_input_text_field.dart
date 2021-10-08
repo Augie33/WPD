@@ -9,6 +9,7 @@ class CustomInputTextField extends StatelessWidget {
     required this.hintText,
     required this.icon,
     this.maxLines = 1,
+    this.obscureText = false,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -17,14 +18,16 @@ class CustomInputTextField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final int maxLines;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(10),
       child: TextFormField(
         controller: controller,
         initialValue: initialValue,
+        obscureText: obscureText,
         cursorColor: Theme.of(context).primaryColor,
         maxLines: maxLines,
         decoration: InputDecoration(
