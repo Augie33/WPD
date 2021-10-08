@@ -400,8 +400,6 @@ class EmailScreen extends HookWidget {
     TextEditingController _emailController,
   ) async {
     if (_key.currentState?.validate() ?? false) {
-      print('send');
-
       BotToast.showText(text: 'Email send to ${_emailController.text}');
 
       Routemaster.of(context).pop();

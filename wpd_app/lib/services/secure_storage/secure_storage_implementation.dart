@@ -12,9 +12,8 @@ class SecureStorageImpl implements ScureStorageService {
       if (value == null) {
         return '';
       }
-    } catch (e) {
-      print(e);
-    }
+      // ignore: empty_catches
+    } catch (e) {}
 
     return value;
   }

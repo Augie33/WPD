@@ -48,8 +48,6 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
     } on DioError catch (e) {
       BotToast.showText(text: e.message);
 
-      print(e.message);
-
       _loading = false;
       notifyListeners();
     } catch (e) {
@@ -61,7 +59,6 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
 
   void toggleInclueInfo(bool value) {
     _inclueInfo = value;
-    print(_inclueInfo);
     notifyListeners();
   }
 

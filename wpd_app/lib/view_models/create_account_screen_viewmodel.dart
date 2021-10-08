@@ -50,8 +50,6 @@ class CreateAccountScreenViewModel extends ChangeNotifier {
         text: 'Created ${newUser.firstName} ${newUser.lastName}',
       );
 
-      print('Doooneee');
-
       _loading = false;
       BotToast.closeAllLoading();
     } on DioError catch (e) {

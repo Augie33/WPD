@@ -57,7 +57,6 @@ class _StartUpPageState extends State<StartUpPage> {
             if (snapshot.data != null) {
               appState.setUpWithToken(snapshot.data);
             }
-            print(snapshot.data);
             appState.splashing = false;
           });
         }

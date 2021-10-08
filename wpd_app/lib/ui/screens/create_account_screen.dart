@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/src/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:validators/validators.dart';
 import 'package:wpd_app/models/user/user.dart';
@@ -38,12 +38,14 @@ class CreateAccountScreen extends HookWidget {
     }
   }
 
-  Future<void> _create(BuildContext context,
-      {required User newUser, required password}) async {
+  Future<void> _create(
+    BuildContext context,
+    CreateAccountScreenViewModel viewModel, {
+    required User newUser,
+    required password,
+  }) async {
     if (_key.currentState?.validate() ?? false) {
-      await context
-          .read(CreateAccountScreenViewModelProvider.provider)
-          .createUser(newUser: newUser, password: password);
+      await viewModel.createUser(newUser: newUser, password: password);
 
       Routemaster.of(context).pop();
     } else {
@@ -53,6 +55,9 @@ class CreateAccountScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final createAccountScreenViewModel =
+        useProvider(CreateAccountScreenViewModelProvider.provider);
+
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final firstNameController = useTextEditingController();
@@ -78,6 +83,7 @@ class CreateAccountScreen extends HookWidget {
               onPressed: () async {
                 await _create(
                   context,
+                  createAccountScreenViewModel,
                   newUser: User(
                     id: '0',
                     firstName: firstNameController.text,
