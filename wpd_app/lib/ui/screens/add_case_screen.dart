@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:validators/validators.dart';
 import 'package:wpd_app/models/case/case.dart';
+import 'package:wpd_app/ui/widgets/custom_input_text_field.dart';
 import 'package:wpd_app/view_models/add_case_screen_viewmodel.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 
@@ -106,14 +107,14 @@ class AddCaseScreen extends HookWidget {
             child: Center(
               child: Column(
                 children: [
-                  AddTextField(
+                  CustomInputTextField(
                     controller: titleController,
                     initialValue: myCase?.title,
                     validator: _validateTitle,
                     hintText: 'Title',
                     icon: Icons.title,
                   ),
-                  AddTextField(
+                  CustomInputTextField(
                     controller: descriptionController,
                     initialValue: myCase?.description,
                     validator: _validateDescription,
@@ -121,7 +122,7 @@ class AddCaseScreen extends HookWidget {
                     icon: Icons.description,
                     maxLines: 5,
                   ),
-                  AddTextField(
+                  CustomInputTextField(
                     controller: urlController,
                     initialValue: myCase?.url,
                     validator: _validateUrl,
@@ -141,50 +142,6 @@ class AddCaseScreen extends HookWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class AddTextField extends StatelessWidget {
-  const AddTextField({
-    Key? key,
-    required this.controller,
-    this.initialValue,
-    required this.validator,
-    required this.hintText,
-    required this.icon,
-    this.maxLines = 1,
-  }) : super(key: key);
-
-  final TextEditingController controller;
-  final String? initialValue;
-  final String? Function(String?)? validator;
-  final String hintText;
-  final IconData icon;
-  final int maxLines;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: TextFormField(
-        controller: controller,
-        initialValue: initialValue,
-        cursorColor: Theme.of(context).primaryColor,
-        maxLines: maxLines,
-        decoration: InputDecoration(
-          icon: Icon(
-            icon,
-            color: Theme.of(context).primaryColor,
-          ),
-          hintText: hintText,
-          hintStyle: const TextStyle(fontSize: 18),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).primaryColor),
-          ),
-        ),
-        validator: validator,
       ),
     );
   }
