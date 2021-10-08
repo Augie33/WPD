@@ -7,7 +7,7 @@ class ShowAccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create a new account'),
+        title: const Text('Show all accounts'),
       ),
     );
   }
