@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 import 'package:wpd_app/view_models/profile_screen_viewmodel.dart';
 
