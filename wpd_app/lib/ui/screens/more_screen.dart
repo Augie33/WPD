@@ -88,15 +88,20 @@ class SettingTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListTile(
+      child: InkWell(
         onTap: onTap,
-        leading: Icon(
-          icon,
-          color: Theme.of(context).primaryColor,
+        customBorder: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
         ),
-        title: Text(
-          label,
-          style: Theme.of(context).textTheme.headline3,
+        child: ListTile(
+          leading: Icon(
+            icon,
+            color: Theme.of(context).primaryColor,
+          ),
+          title: Text(
+            label,
+            style: Theme.of(context).textTheme.headline3,
+          ),
         ),
       ),
     );
@@ -120,22 +125,27 @@ class SettingTileWithSubtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListTile(
+      child: InkWell(
         onTap: onTap,
-        leading: Icon(
-          icon,
-          color: Theme.of(context).primaryColor,
+        customBorder: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
         ),
-        title: Text(
-          label,
-          style: Theme.of(context).textTheme.headline3,
-        ),
-        trailing: Text(
-          subtitle,
-          style: Theme.of(context)
-              .textTheme
-              .headline3!
-              .copyWith(color: Colors.grey[400]),
+        child: ListTile(
+          leading: Icon(
+            icon,
+            color: Theme.of(context).primaryColor,
+          ),
+          title: Text(
+            label,
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          trailing: Text(
+            subtitle,
+            style: Theme.of(context)
+                .textTheme
+                .headline3!
+                .copyWith(color: Colors.grey[400]),
+          ),
         ),
       ),
     );
