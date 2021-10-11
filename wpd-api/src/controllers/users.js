@@ -25,11 +25,6 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   user.createdAt = undefined;
   user.__v = undefined;
 
-
-  if(req.user.role !== 'admin'){
-    user.role = undefined;
-  }
-
   res.status(200).json({
     success: true,
     data: user,
