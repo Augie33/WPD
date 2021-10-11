@@ -177,6 +177,7 @@ class CreateAccountScreen extends HookWidget {
                   hintText: 'Station phone',
                   icon: Icons.phone,
                 ),
+                const SizedBox(height: 30),
               ],
             ),
           ),

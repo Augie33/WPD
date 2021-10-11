@@ -26,10 +26,6 @@ class HomeScreenViewModel extends ChangeNotifier {
       notifyListeners();
     }
 
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
-
     var data = await _requestRest.executeGet<List<Case>>(
       '/cases?sort=title&limit=1000',
       const CaseListParser(),
