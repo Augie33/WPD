@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wpd_app/api/http_client.dart';
+import 'package:wpd_app/services/file_picker/file_picker_implementation.dart';
+import 'package:wpd_app/services/file_picker/file_picker_service.dart';
 import 'package:wpd_app/services/pdf/pdf_implementation.dart';
 import 'package:wpd_app/services/pdf/pdf_service.dart';
 import 'package:wpd_app/services/qr/qr_service.dart';
@@ -16,6 +18,9 @@ GetIt serviceLocator = GetIt.instance;
 
 void setupServiceLocator({required SharedPreferences sharedPreferences}) {
   // Services
+  serviceLocator.registerLazySingleton<FilePickerService>(
+    () => FilePickerImpl(),
+  );
 
   serviceLocator.registerLazySingleton<PDFService>(
     () => PDFImpl(),

@@ -68,6 +68,8 @@ class AddCaseScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final addCaseViewmodel =
+        useProvider(AddCaseScreenViewModelProvider.provider);
     final titleController = useTextEditingController();
     final descriptionController = useTextEditingController();
     final urlController = useTextEditingController();
@@ -134,8 +136,16 @@ class AddCaseScreen extends HookWidget {
                     child: ElevatedButton.icon(
                       icon: const Icon(Icons.picture_as_pdf),
                       label: const Text('Upload PDF'),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await addCaseViewmodel.pickPDF();
+                      },
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(addCaseViewmodel.file != null
+                        ? '${addCaseViewmodel.file}'
+                        : ''),
                   ),
                 ],
               ),
