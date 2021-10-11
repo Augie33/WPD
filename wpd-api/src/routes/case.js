@@ -6,6 +6,7 @@ const {
   getCaseByCaseNumber,
   getCaseAndPoliceInfo,
   createCase,
+  casePDFUpload,
   updateCase,
   deleteCase,
   sendEmail,
@@ -24,6 +25,7 @@ router.use(protect);
 
 router.get('/', advancedResults(Case), getCases);
 router.post('/', createCase);
+router.put('/:id/pdf', casePDFUpload);
 router.get('/number/:caseNumber', getCaseByCaseNumber);
 router.put('/:id', updateCase);
 router.delete('/:id', deleteCase);
