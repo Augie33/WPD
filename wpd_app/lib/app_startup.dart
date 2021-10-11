@@ -11,9 +11,7 @@ abstract class AppStartup {
   static Future<User?> setup() async {
     final _requestRest = serviceLocator<RequestREST>();
 
-    _requestRest.setUpErrorInterceptor();
-
-    if (kReleaseMode) {
+    if (!kReleaseMode) {
       _requestRest.setUpLogger();
     }
 

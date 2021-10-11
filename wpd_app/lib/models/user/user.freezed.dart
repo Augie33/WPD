@@ -30,7 +30,7 @@ class _$UserTearOff {
       required String phoneNumber,
       required String department,
       required String stationPhoneNumber,
-      required String role}) {
+      String role = 'police'}) {
     return _User(
       id: id,
       firstName: firstName,
@@ -238,7 +238,7 @@ class _$_User implements _User {
       required this.phoneNumber,
       required this.department,
       required this.stationPhoneNumber,
-      required this.role});
+      this.role = 'police'});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -259,6 +259,7 @@ class _$_User implements _User {
   final String department;
   @override
   final String stationPhoneNumber;
+  @JsonKey(defaultValue: 'police')
   @override
   final String role;
 
@@ -330,7 +331,7 @@ abstract class _User implements User {
       required String phoneNumber,
       required String department,
       required String stationPhoneNumber,
-      required String role}) = _$_User;
+      String role}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 

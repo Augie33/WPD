@@ -14,7 +14,7 @@ class User with _$User {
     required String phoneNumber,
     required String department,
     required String stationPhoneNumber,
-    required String role,
+    @Default('police') String role,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

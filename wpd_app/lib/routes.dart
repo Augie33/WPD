@@ -11,6 +11,7 @@ import 'package:wpd_app/ui/screens/more_screen.dart';
 import 'package:wpd_app/ui/screens/profile_screen.dart';
 import 'package:wpd_app/ui/screens/search_screen.dart';
 import 'package:wpd_app/ui/screens/show_accounts_screen.dart';
+import 'package:wpd_app/ui/screens/single_account_screen.dart';
 import 'package:wpd_app/ui/screens/single_case_screen.dart';
 import 'package:wpd_app/ui/widgets/bottom_nav.dart';
 
@@ -36,6 +37,9 @@ abstract class AppRoutes {
       '/more': (_) => const MaterialPage(child: MoreScreen()),
       '/more/create': (_) => MaterialPage(child: CreateAccountScreen()),
       '/more/accounts': (_) => const MaterialPage(child: ShowAccountScreen()),
+      '/more/accounts/:id': (info) => MaterialPage(
+            child: SingleAccountScreen(userId: info.pathParameters['id']),
+          ),
     },
     onUnknownRoute: (_) => const Redirect('/'),
   );

@@ -15,7 +15,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       phoneNumber: json['phoneNumber'] as String,
       department: json['department'] as String,
       stationPhoneNumber: json['stationPhoneNumber'] as String,
-      role: json['role'] as String,
+      role: json['role'] as String? ?? 'police',
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{

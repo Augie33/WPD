@@ -24,17 +24,13 @@ class RequestREST {
   );
 
   void setUpLogger() {
-    // _client.interceptors.add(PrettyDioLogger());
-
     _client.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,
         requestBody: true,
         responseBody: true,
         responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 90,
+        compact: false,
       ),
     );
   }
@@ -90,6 +86,12 @@ class RequestREST {
       data: data,
     );
 
+    return parser.parseFromJson(response.data!);
+  }
+
+  Future<T> executeDelete<T>(String endpoint, JsonParser<T> parser,
+      {Map<String, Object> data = const {}}) async {
+    final response = await _client.delete<String>(endpoint);
     return parser.parseFromJson(response.data!);
   }
 }
