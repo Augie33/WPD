@@ -53,7 +53,7 @@ dependencies:
   path_provider: ^2.0.5
   cached_network_image: ^3.1.0
   flutter_secure_storage: ^4.2.1
-  dio: ^4.0.0
+  dio_http: ^5.0.4
   shimmer: ^2.0.0
   pretty_dio_logger: ^1.1.1
   pretty_qr_code: ^2.0.2
