@@ -83,6 +83,12 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
 
   Future<void> shareCase() async {
     // TODO: ADD URL (include your info or not)
-    await _shareService.shareURL(url: 'https://www.google.com');
+
+    if (_inclueInfo) {
+      await _shareService.shareURL(
+          url: 'https://andrewducnguyen.dev/user_case');
+    } else {
+      await _shareService.shareURL(url: 'https://andrewducnguyen.dev/cases2');
+    }
   }
 }
