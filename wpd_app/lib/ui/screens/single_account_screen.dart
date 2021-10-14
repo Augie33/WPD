@@ -27,35 +27,40 @@ class _SingleAccountScreenState extends State<SingleAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () async {
-              await context
-                  .read(SingalAccountScreenViewModelProvider.provider)
-                  .removeAccount(userId: widget.userId);
-              Routemaster.of(context).pop();
-              context
-                  .read(ShowAccountsScreenViewModelProvider.provider)
-                  .getUsers(refresh: true);
-            },
-            color: Colors.redAccent,
-            icon: const Icon(Icons.delete),
+    return Consumer(
+      builder: (context, watch, child) {
+        final singalAccountViewModel =
+            watch(SingalAccountScreenViewModelProvider.provider);
+        final user = singalAccountViewModel.user;
+        return Scaffold(
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                onPressed: user?.role == 'admin'
+                    ? null
+                    : () async {
+                        if (user?.role != 'admin') {
+                          await context
+                              .read(
+                                  SingalAccountScreenViewModelProvider.provider)
+                              .removeAccount(userId: widget.userId);
+                          Routemaster.of(context).pop();
+                          context
+                              .read(
+                                  ShowAccountsScreenViewModelProvider.provider)
+                              .getUsers(refresh: true);
+                        }
+                      },
+                color: Colors.redAccent,
+                icon: const Icon(Icons.delete),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.edit),
+              ),
+            ],
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.edit),
-          ),
-        ],
-      ),
-      body: Consumer(
-        builder: (context, watch, child) {
-          final singalAccountViewModel =
-              watch(SingalAccountScreenViewModelProvider.provider);
-          final user = singalAccountViewModel.user;
-
-          return singalAccountViewModel.isLoading
+          body: singalAccountViewModel.isLoading
               ? const Center(
                   child: AppLoader(),
                 )
@@ -128,9 +133,9 @@ class _SingleAccountScreenState extends State<SingleAccountScreen> {
                       ],
                     ),
                   ),
-                );
-        },
-      ),
+                ),
+        );
+      },
     );
   }
 }
