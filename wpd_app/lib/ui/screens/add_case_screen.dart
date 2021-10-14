@@ -73,6 +73,7 @@ class AddCaseScreen extends HookWidget {
     final titleController = useTextEditingController();
     final descriptionController = useTextEditingController();
     final urlController = useTextEditingController();
+    final urlPdfController = useTextEditingController();
 
     return GestureDetector(
       onTap: () {
@@ -97,7 +98,7 @@ class AddCaseScreen extends HookWidget {
                       title: titleController.text,
                       description: descriptionController.text,
                       url: urlController.text,
-                      urlPDF: 'asdas',
+                      urlPDF: urlPdfController.text,
                       caseNumber: 0,
                     ),
                   );
@@ -131,22 +132,52 @@ class AddCaseScreen extends HookWidget {
                     hintText: 'URL',
                     icon: Icons.link,
                   ),
+                  if (!addCaseViewmodel.uploadFromDevice)
+                    CustomInputTextField(
+                      controller: urlPdfController,
+                      initialValue: myCase?.urlPDF,
+                      validator: _validateUrl,
+                      hintText: 'PDF URL',
+                      icon: Icons.picture_as_pdf,
+                    ),
                   Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: ElevatedButton.icon(
-                      icon: const Icon(Icons.picture_as_pdf),
-                      label: const Text('Upload PDF'),
-                      onPressed: () async {
-                        await addCaseViewmodel.pickPDF();
+                    padding: const EdgeInsets.all(8.0),
+                    child: SwitchListTile(
+                      title: Text(
+                        'Upload from device',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(color: Colors.grey[400]),
+                      ),
+                      activeColor: Theme.of(context).primaryColor,
+                      value: addCaseViewmodel.uploadFromDevice,
+                      onChanged: (value) {
+                        addCaseViewmodel.uploadFromDevice = value;
                       },
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(addCaseViewmodel.file != null
-                        ? '${addCaseViewmodel.file}'
-                        : ''),
-                  ),
+                  if (addCaseViewmodel.uploadFromDevice)
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: ElevatedButton.icon(
+                            icon: const Icon(Icons.picture_as_pdf),
+                            label: const Text('Upload PDF'),
+                            onPressed: () async {
+                              await addCaseViewmodel.pickPDF();
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(addCaseViewmodel.file != null
+                              ? addCaseViewmodel.file.toString()
+                              : ''),
+                        ),
+                      ],
+                    ),
                 ],
               ),
             ),

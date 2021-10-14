@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "361025312684",
+    "project_id": "wpd-app-95390",
+    "storage_bucket": "wpd-app-95390.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361025312684:android:b069cd648dafc5099a0c09",
+        "android_client_info": {
+          "package_name": "com.example.wpd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "361025312684-3krtk9lnlom5ehagg24ooh14n9t6tr0s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoSyP5QdOlv4FaPIl4T_BG3HhlzIWIIs4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "361025312684-3krtk9lnlom5ehagg24ooh14n9t6tr0s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "361025312684-kgdpam839a1cbanjoiiq9hqs3itcc5af.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.wpd"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

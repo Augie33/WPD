@@ -22,21 +22,22 @@ class AddCaseScreenViewModel extends ChangeNotifier {
   final _filePickerService = serviceLocator<FilePickerService>();
 
   bool _loading = false;
-  bool get isLoading => _loading;
+  bool _uploadFromDevice = false;
   File? _file;
+
+  bool get isLoading => _loading;
+  bool get uploadFromDevice => _uploadFromDevice;
   File? get file => _file;
+
+  set uploadFromDevice(value) {
+    _uploadFromDevice = value;
+    notifyListeners();
+  }
 
   Future<void> pickPDF() async {
     final file = await _filePickerService.pickPdfFile();
 
     _file = file;
-
-    if (_file != null) {
-      await _requestRest.uploadFile(
-        '/cases/615d241925f8394b4b0dfcab/pdf',
-        file: _file!,
-      );
-    }
 
     notifyListeners();
   }
@@ -48,6 +49,8 @@ class AddCaseScreenViewModel extends ChangeNotifier {
         toastBuilder: (_) => const AppLoader(),
       );
 
+      final urlPdf = uploadFromDevice ? '' : newCase.urlPDF;
+
       await _requestRest.executePost<Case>(
         '/cases',
         const CaseParser(),
@@ -55,10 +58,16 @@ class AddCaseScreenViewModel extends ChangeNotifier {
           'title': newCase.title,
           'description': newCase.description,
           'url': newCase.url,
-          'urlPDF':
-              'https://www.wichita.gov/WPD/Investigations/Documents/Theft%20Victims%20Packet%20PDF.pdf'
+          'urlPDF': urlPdf,
         },
       );
+
+      // if (_file != null) {
+      //   await _requestRest.uploadFile(
+      //     '/cases/${myCase.id}/pdf',
+      //     file: _file!,
+      //   );
+      // }
 
       BotToast.showText(text: 'Added ${newCase.title} case');
 
