@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "public",
+    "site": "wpd-app-95390",
     "ignore": [
       "firebase.json",
       "**/.*",
