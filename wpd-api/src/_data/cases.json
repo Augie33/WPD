@@ -2,6 +2,7 @@
     {
       "_id": "5d713995b721c3bb38c1f5d0",
       "title": "Strangulation",
+      "category": "61720fe206dcbe2f02088ec6",
       "description": "The Wichita Police Department recognizes non-fatal strangulation is one of the most lethal forms of domestic violence. Strangulation is a high-risk indicator for future serious assaults and homicide.",
       "url": "https://www.wichita.gov/WPD/DVS/Pages/default.aspx",
       "urlPDF":"https://www.wichita.gov/WPD/DVS/Documents/Facts%20Victims%20of%20Strangulation%20(Choking)%20Need%20to%20Know.pdf"
@@ -9,6 +10,7 @@
     {
       "_id": "5d713a66ec8f2b88b8f830b8",
       "title": "Auto Theft",
+      "category": "61720fe206dcbe2f02088ec6",
       "description": "The Auto Theft Section consists of four detectives that are supervised by a Lieutenant. This section is responsible for the investigation of all automobile thefts in the City of Wichita.",
       "url": "https://www.wichita.gov/WPD/Investigations/Pages/AutoTheft.aspx",
       "urlPDF":"https://www.wichita.gov/WPD/Investigations/Documents/Theft%20Victims%20Packet%20PDF.pdf"
@@ -16,6 +18,7 @@
     {
       "_id": "5d725a037b292f5f8ceff787",
       "title": "Burglary",
+      "category": "61720fdf2ab80b90c6a94be5",
       "description": "The Burglary Section consists of eight Detectives that are supervised by one Lieutenant. This section is responsible for the investigation of all burglaries, both residence and non-residence, and all vandalisms (except vandalisms to automobiles) that occur in the City of Wichita.",
       "url": "https://www.wichita.gov/WPD/Investigations/Pages/Burglary.aspx",
       "urlPDF":"https://www.wichita.gov/WPD/Investigations/Documents/Theft%20Victims%20Packet%20PDF.pdf"
@@ -23,6 +26,7 @@
     {
       "_id": "615d240c02bc810b87359bec",
       "title": "Homicide",
+      "category": "61720fdbd7e3ab86dbcb876c",
       "description": "The Homicide Section has one Lieutenant who supervises detectives which are responsible for the investigation of all death cases, excluding traffic fatalities. Homicide detectives also investigate missing persons, bomb reports, and disorderly conduct complaints.",
       "url": "https://www.wichita.gov/WPD/Investigations/Pages/Homicide.aspx",
       "urlPDF":""
@@ -30,6 +34,7 @@
     {
       "_id": "615d241925f8394b4b0dfcab",
       "title": "Robbery",
+      "category": "61720fdf2ab80b90c6a94be5",
       "description": "The Robbery Section consists of five detectives and is supervised by a lieutenant. The section is responsible for the investigation of all robberies, larceny from persons and simple assaults involving juveniles, occurring in the City of Wichita.",
       "url": "https://www.wichita.gov/WPD/Investigations/Pages/Homicide.aspx",
       "urlPDF":""
@@ -37,6 +42,7 @@
     {
       "_id": "615d2421d603692983fb8180",
       "title": "Gang Unit/Felony Assault",
+      "category": "61720fe206dcbe2f02088ec6",
       "description": "The Gang Unit/Felony Assault section consists of eleven Detectives and one Sergeant that are supervised by one Lieutenant. The section is responsible for the investigation of all Aggravated Assault/Battery cases and Weapons Violations that occur in the City of Wichita.",
       "url": "https://www.wichita.gov/WPD/Investigations/Pages/GangUnit.aspx",
       "urlPDF":""
@@ -44,6 +50,7 @@
     {
       "_id": "615d242d3e73c41933f48d49",
       "title": "Exploited and Missing Children",
+      "category": "61720fdbd7e3ab86dbcb876c",
       "description": "The mission of the Exploited and Missing Child Unit is to investigate allegations of child abuse and neglect, child exploitation, and reports of missing or abducted children. Investigators strive to identify offenders and present evidence for the prosecution of violators while minimizing trauma to the child victims. E.M.C.U. staff also strives to provide services and make effective resource referrals to victims and their families. E.M.C.U. is a cooperative, joint investigative unit staffed with Sedgwick County Sheriff personnel, Wichita Police Department personnel, and Kansas Department of Children and Families personnel. The Forensic Computer Crimes Unit and the Kansas Internet Crimes Against Children Investigators work within the E.M.C.U. structure.",
       "url": "https://www.wichita.gov/WPD/Investigations/Pages/EMCU.aspx",
       "urlPDF":""
@@ -51,6 +58,7 @@
     {
       "_id": "615d25c4f7b3bd17d0da3944",
       "title": "Sex Crimes",
+      "category": "61720fdbd7e3ab86dbcb876c",
       "description": "The Sex Crimes/Domestic Violence Unit consists of twelve Detectives, one Sergeant, and one Lieutenant.",
       "url": "https://www.wichita.gov/WPD/Investigations/Pages/SexCrimes.aspx",
       "urlPDF":""
@@ -58,6 +66,7 @@
     {
       "_id": "615d25cdb1d4b4360d0782d8",
       "title": "Domestic Violence",
+      "category": "61720fe206dcbe2f02088ec6",
       "description": "The Wichita Police Department (WPD) responded to your location because of a reported domestic disturbance and we are taking a new approach. Everyone has disagreements, but not ones so intense that the police are called for help. What happened is not okay.",
       "url": "https://www.wichita.gov/WPD/Investigations/Pages/DomesticViolence.aspx",
       "urlPDF":""
