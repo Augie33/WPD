@@ -9,10 +9,18 @@ const {
 } = require('../controllers/category');
 
 const Category = require('../models/category');
+
+// Include other resource routers
+const caseRouter = require('./case');
+
+
 const router = express.Router();
 
 
 const { protect, authorize } = require('../middleware/auth');
+
+// Re-route into other resource routers
+router.use('/:category/cases', caseRouter);
 
 router.use(protect);
 
