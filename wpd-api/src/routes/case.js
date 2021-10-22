@@ -19,11 +19,15 @@ const router = express.Router();
 const { protect, authorize } = require('../middleware/auth');
 
 router.get('/:id', getCase);
-router.get('/:caseId/:userId',getCaseAndPoliceInfo);
+router.get('/:caseId/:userId', getCaseAndPoliceInfo);
 
 router.use(protect);
 
-router.get('/', advancedResults(Case), getCases);
+router.get('/', advancedResults(Case, {
+  path: 'category',
+  select: 'title'
+}
+), getCases);
 router.post('/', createCase);
 router.put('/:id/pdf', casePDFUpload);
 router.get('/number/:caseNumber', getCaseByCaseNumber);

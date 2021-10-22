@@ -3,37 +3,48 @@ const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/error-response');
 const Case = require('../models/case');
 const User = require('../models/user');
+const Category = require('../models/category')
+
 const { sendCaseEmail } = require('../utils/send-email');
 
 // @desc      Get all cases
 // @route     GET /api/v1/cases
+// @route     GET /api/v1/category/:category/cases
 // @access    Private
 exports.getCases = asyncHandler(async (req, res, next) => {
-  res.status(200).json(res.advancedResults);
+  if (req.params.category) {
+
+    const cases = await Case.find({ category: req.params.category });
+
+    return res.status(200).json({
+      success: true,
+      count: cases.length,
+      data: cases
+    });
+
+  } else {
+    res.status(200).json(res.advancedResults);
+  }
 });
 
 // @desc      Get single case
 // @route     GET /api/v1/cases/:id
 // @access    public
 exports.getCase = asyncHandler(async (req, res, next) => {
-  let casee = await Case.findById(req.params.id);
+  let casee = await Case.findById(req.params.id).populate({
+    path: 'category',
+    select: 'title'
+  });
 
 
   if (!casee) {
     return next(new ErrorResponse('Please provide correct Case ID', 404));
   }
 
-  let category = await casee.populate('category')['title']
-
-  if (!category) {
-    category = 'N/A';
-  }
 
   res.status(200).json({
     success: true,
-    data: {
-      ...casee['_doc'], 'category': category,
-    },
+    data: casee,
   });
 });
 
