@@ -95,8 +95,8 @@ class ProfileScreen extends ConsumerWidget {
                 if (user != null)
                   Container(
                     padding: const EdgeInsets.only(top: 3),
-                    child: profileState
-                        .getQR('https://andrewducnguyen.dev/users3'),
+                    child: profileState.getQR(
+                        'https://wichitapd.herokuapp.com/view/user/${user.id}'),
                   )
               ],
             ),

@@ -84,6 +84,8 @@ class SingalAccountScreenViewModel extends ChangeNotifier {
     // TODO: ADD URL (include your info or not)
 
     return _qrService.generateQR(
-        value: 'https://andrewducnguyen.dev/cases2', size: 200);
+      value: 'https://wichitapd.herokuapp.com/view/user/${_user?.id}',
+      size: 200,
+    );
   }
 }

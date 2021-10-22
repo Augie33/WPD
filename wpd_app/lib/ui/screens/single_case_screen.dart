@@ -11,6 +11,7 @@ import 'package:validators/validators.dart';
 import 'package:wpd_app/ui/widgets/custom_button.dart';
 import 'package:wpd_app/ui/widgets/custom_form_field.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
+import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 import 'package:wpd_app/view_models/signal_case_screen_viewmodel.dart';
 
 class SingleCaseScreen extends StatefulWidget {
@@ -39,6 +40,8 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
         final singalCaseViewModel =
             watch(SingalCaseScreenViewModelProvider.provider);
         final myCase = singalCaseViewModel.myCase;
+
+        final authViewModel = watch(AuthStateViewModelProvider.provider);
 
         return singalCaseViewModel.isLoading
             ? const Center(
@@ -153,8 +156,9 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                           icon: Icons.share,
                                           label: 'Share',
                                           onPressed: () async {
-                                            await singalCaseViewModel
-                                                .shareCase();
+                                            await singalCaseViewModel.shareCase(
+                                              userId: authViewModel.myUser!.id,
+                                            );
                                           },
                                         ),
                                       ],
@@ -366,13 +370,16 @@ class QRScreen extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     final singalCaseViewModel =
         watch(SingalCaseScreenViewModelProvider.provider);
+
+    final authViewModel = watch(AuthStateViewModelProvider.provider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('QR'),
       ),
       body: Center(
         child: Card(
-          child: singalCaseViewModel.showQR(),
+          child: singalCaseViewModel.showQR(userId: authViewModel.myUser!.id),
         ),
       ),
     );

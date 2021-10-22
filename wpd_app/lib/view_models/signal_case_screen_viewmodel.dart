@@ -70,25 +70,35 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
     return _pdfService.showPDF(_case!.urlPDF);
   }
 
-  Widget showQR() {
+  Widget showQR({required String userId}) {
     // TODO: ADD URL (include your info or not)
     if (_inclueInfo) {
+      // return _qrService.generateQR(
+      //     value: 'https://andrewducnguyen.dev/user_case', size: 300);
+
       return _qrService.generateQR(
-          value: 'https://andrewducnguyen.dev/user_case', size: 300);
+        value:
+            'https://wichitapd.herokuapp.com/view/user-case/${_case?.id}/$userId',
+        size: 300,
+      );
     } else {
       return _qrService.generateQR(
-          value: 'https://andrewducnguyen.dev/cases2', size: 300);
+        value: 'https://wichitapd.herokuapp.com/view/case/${_case?.id}',
+        size: 300,
+      );
     }
   }
 
-  Future<void> shareCase() async {
+  Future<void> shareCase({required String userId}) async {
     // TODO: ADD URL (include your info or not)
 
     if (_inclueInfo) {
       await _shareService.shareURL(
-          url: 'https://andrewducnguyen.dev/user_case');
+          url:
+              'https://wichitapd.herokuapp.com/view/user-case/${_case?.id}/$userId');
     } else {
-      await _shareService.shareURL(url: 'https://andrewducnguyen.dev/cases2');
+      await _shareService.shareURL(
+          url: 'https://wichitapd.herokuapp.com/view/case/${_case?.id}');
     }
   }
 }
