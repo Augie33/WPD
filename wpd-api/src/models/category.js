@@ -10,4 +10,13 @@ const CategorySchema = new mongoose.Schema({
 
 });
 
+
+// Reverse populate with virtuals
+CategorySchema.virtual('cases', {
+    ref: 'Case',
+    localField: '_id',
+    foreignField: 'category',
+    justOne: false
+});
+
 module.exports = mongoose.model('Category', CategorySchema);

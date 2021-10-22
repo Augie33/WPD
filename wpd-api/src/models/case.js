@@ -25,7 +25,6 @@ const CaseSchema = new mongoose.Schema({
     ref: 'Category',
     required: [true, 'Please choose a category'],
   }
-
 });
 
 // Auto-increment case number 

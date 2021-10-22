@@ -16,15 +16,24 @@ exports.getCases = asyncHandler(async (req, res, next) => {
 // @route     GET /api/v1/cases/:id
 // @access    public
 exports.getCase = asyncHandler(async (req, res, next) => {
-  const casee = await Case.findById(req.params.id);
+  let casee = await Case.findById(req.params.id);
+
 
   if (!casee) {
     return next(new ErrorResponse('Please provide correct Case ID', 404));
   }
 
+  let category = await casee.populate('category')['title']
+
+  if (!category) {
+    category = 'N/A';
+  }
+
   res.status(200).json({
     success: true,
-    data: casee,
+    data: {
+      ...casee['_doc'], 'category': category,
+    },
   });
 });
 
