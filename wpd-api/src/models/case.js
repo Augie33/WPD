@@ -22,12 +22,13 @@ const CaseSchema = new mongoose.Schema({
   },
   category: {
     type: mongoose.Schema.ObjectId,
+    default: '61720fe206dcbe2f02088ec6',
     ref: 'Category',
-    required: [true, 'Please choose a category'],
-  }
+    // required: [true, 'Please choose a category'],
+  },
 });
 
-// Auto-increment case number 
+// Auto-increment case number
 CaseSchema.plugin(AutoIncrement, { inc_field: 'caseNumber' });
 
 module.exports = mongoose.model('Case', CaseSchema);
