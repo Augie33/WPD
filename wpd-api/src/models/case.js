@@ -20,6 +20,12 @@ const CaseSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  category: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Category',
+    required: [true, 'Please choose a category'],
+  }
+
 });
 
 // Auto-increment case number 

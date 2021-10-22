@@ -18,7 +18,7 @@ connectDB();
 const auth = require('./routes/auth');
 const users = require('./routes/user');
 const cases = require('./routes/case');
-
+const category = require('./routes/category');
 
 const app = express();
 
@@ -46,6 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/users', users);
 app.use('/api/v1/cases', cases);
+app.use('/api/v1/category', category);
 
 app.use(errorHandler);
 
