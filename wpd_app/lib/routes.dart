@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/app_startup.dart';
 import 'package:wpd_app/ui/screens/add_case_screen.dart';
+import 'package:wpd_app/ui/screens/add_edit_category_screen.dart';
 import 'package:wpd_app/ui/screens/create_account_screen.dart';
 import 'package:wpd_app/ui/screens/edit_profile_screen.dart';
 import 'package:wpd_app/ui/screens/favorite_screen.dart';
@@ -40,6 +41,8 @@ abstract class AppRoutes {
       '/more/accounts/:id': (info) => MaterialPage(
             child: SingleAccountScreen(userId: info.pathParameters['id']),
           ),
+      '/more/category': (_) =>
+          const MaterialPage(child: AddEditCategoryScreen()),
     },
     onUnknownRoute: (_) => const Redirect('/'),
   );

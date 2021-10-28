@@ -49,6 +49,13 @@ class MoreScreen extends HookWidget {
                     Routemaster.of(context).push('accounts');
                   },
                 ),
+                SettingTile(
+                  label: 'Add / Edit category',
+                  icon: Icons.list,
+                  onTap: () {
+                    Routemaster.of(context).push('category');
+                  },
+                ),
                 const SizedBox(height: 30),
               ],
             ),

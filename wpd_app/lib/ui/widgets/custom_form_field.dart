@@ -6,7 +6,7 @@ class CustomFormField extends StatelessWidget {
     required this.controller,
     this.validator,
     required this.hintText,
-    required this.icon,
+    this.icon,
     this.textInputType = TextInputType.text,
     this.obscureText = false,
     this.autofocus = false,
@@ -15,7 +15,7 @@ class CustomFormField extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final String hintText;
-  final IconData icon;
+  final IconData? icon;
   final TextInputType textInputType;
   final bool obscureText;
   final bool autofocus;
@@ -37,10 +37,12 @@ class CustomFormField extends StatelessWidget {
         cursorColor: Theme.of(context).primaryColor,
         maxLines: 1,
         decoration: InputDecoration(
-          icon: Icon(
-            icon,
-            color: Theme.of(context).primaryColor,
-          ),
+          icon: icon == null
+              ? null
+              : Icon(
+                  icon,
+                  color: Theme.of(context).primaryColor,
+                ),
           focusedBorder: InputBorder.none,
           hintText: hintText,
           hintStyle: const TextStyle(fontSize: 18),
