@@ -3,9 +3,9 @@ const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/error-response');
 const Case = require('../models/case');
 const User = require('../models/user');
-const Category = require('../models/category')
+const Category = require('../models/category');
 
-const { sendCaseEmail } = require('../utils/send-email');
+// const { sendCaseEmail } = require('../utils/send-email');
 
 // @desc      Get all cases
 // @route     GET /api/v1/cases
@@ -13,15 +13,13 @@ const { sendCaseEmail } = require('../utils/send-email');
 // @access    Private
 exports.getCases = asyncHandler(async (req, res, next) => {
   if (req.params.category) {
-
     const cases = await Case.find({ category: req.params.category });
 
     return res.status(200).json({
       success: true,
       count: cases.length,
-      data: cases
+      data: cases,
     });
-
   } else {
     res.status(200).json(res.advancedResults);
   }
@@ -33,14 +31,12 @@ exports.getCases = asyncHandler(async (req, res, next) => {
 exports.getCase = asyncHandler(async (req, res, next) => {
   let casee = await Case.findById(req.params.id).populate({
     path: 'category',
-    select: 'title'
+    select: 'title',
   });
-
 
   if (!casee) {
     return next(new ErrorResponse('Please provide correct Case ID', 404));
   }
-
 
   res.status(200).json({
     success: true,
@@ -116,37 +112,33 @@ exports.casePDFUpload = asyncHandler(async (req, res, next) => {
   }
 
   if (!req.files) {
-    return next(
-      new ErrorResponse(`Please, upload a file`, 400)
-    );
+    return next(new ErrorResponse(`Please, upload a file`, 400));
   }
-
 
   const file = req.files.file;
 
   // Make sure the file is a PDF
   if (file.mimetype !== 'application/pdf') {
-    return next(
-      new ErrorResponse(`Please, upload a PDF file`, 400)
-    );
+    return next(new ErrorResponse(`Please, upload a PDF file`, 400));
   }
 
   // Check file size
   if (file.size > process.env.MAX_FILE_UPLOAD) {
     return next(
-      new ErrorResponse(`Please, upload a PDF file less than ${process.env.MAX_FILE_UPLOAD}`, 400)
+      new ErrorResponse(
+        `Please, upload a PDF file less than ${process.env.MAX_FILE_UPLOAD}`,
+        400
+      )
     );
   }
 
   // Create custom file name
   file.name = `WPD_${casee._id}${path.parse(file.name).ext}`;
 
-  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
     if (err) {
       console.error(err);
-      return next(
-        new ErrorResponse(`Problem with file upload`, 500)
-      );
+      return next(new ErrorResponse(`Problem with file upload`, 500));
     }
 
     await Case.findByIdAndUpdate(req.params.id, {
@@ -157,12 +149,8 @@ exports.casePDFUpload = asyncHandler(async (req, res, next) => {
       success: true,
       data: file.name,
     });
-
   });
-
 });
-
-
 
 // @desc      Update case
 // @route     PUT /api/v1/cases/:id
@@ -203,6 +191,3 @@ exports.sendEmail = asyncHandler(async (req, res, next) => {
 
   res.status(200).json();
 });
-
-
-
