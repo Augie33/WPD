@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,15 +20,18 @@ Future<void> main() async {
 
   Routemaster.setPathUrlStrategy();
 
-  runApp(
-    DevicePreview(
-      // enabled: !kReleaseMode,
-      enabled: false,
-      builder: (context) => const ProviderScope(
-        child: MyApp(),
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(
+      DevicePreview(
+        // enabled: !kReleaseMode,
+        enabled: false,
+        builder: (context) => const ProviderScope(
+          child: MyApp(),
+        ),
       ),
-    ),
-  );
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {

@@ -434,23 +434,26 @@ class EmailScreen extends HookWidget {
           key: _key,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                CustomFormField(
-                  controller: emailController,
-                  autofocus: true,
-                  hintText: 'Email',
-                  icon: Icons.email,
-                  validator: _validateEmail,
-                ),
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.send),
-                  label: const Text('Send'),
-                  onPressed: () async {
-                    await _send(context, singalCaseViewModel, emailController);
-                  },
-                )
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomFormField(
+                    controller: emailController,
+                    autofocus: true,
+                    hintText: 'Email',
+                    icon: Icons.email,
+                    validator: _validateEmail,
+                  ),
+                  ElevatedButton.icon(
+                    icon: const Icon(Icons.send),
+                    label: const Text('Send'),
+                    onPressed: () async {
+                      await _send(
+                          context, singalCaseViewModel, emailController);
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),
