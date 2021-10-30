@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/models/custom_category/custom_category.dart';
 import 'package:wpd_app/ui/widgets/category_tile.dart';
 import 'package:wpd_app/ui/widgets/custom_form_field.dart';
@@ -10,7 +11,8 @@ import 'package:wpd_app/view_models/add_edit_category_viewmodel.dart';
 class AddEditCategoryScreen extends HookWidget {
   const AddEditCategoryScreen({Key? key}) : super(key: key);
 
-  void showAddEditTextField(BuildContext context,
+  void showAddEditTextField(
+      BuildContext context, AddEditCategoryViewModel categoryViewModel,
       {required TextEditingController titleController,
       CustomCategory? category}) {
     showDialog(
@@ -26,12 +28,40 @@ class AddEditCategoryScreen extends HookWidget {
               Container(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (category != null) {
+                      final newCategory = CustomCategory(
+                          id: category.id, title: titleController.text);
+
+                      await categoryViewModel.createEditCategory(newCategory,
+                          isEdit: true);
+
+                      titleController.clear();
+
+                      Navigator.of(context).pop();
+
+                      categoryViewModel.getCategories(refresh: true);
+
+                      return;
+                    }
+
+                    final newCategory =
+                        CustomCategory(id: '0', title: titleController.text);
+
+                    Navigator.of(context).pop();
+
+                    titleController.clear();
+
+                    await categoryViewModel.createEditCategory(newCategory);
+
+                    categoryViewModel.getCategories(refresh: true);
+                  },
                   style: TextButton.styleFrom(
                     primary: Theme.of(context).primaryColor,
                     textStyle: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  child: const Text('Add'),
+                  child:
+                      category != null ? const Text('Edit') : const Text('Add'),
                 ),
               )
             ],
@@ -62,7 +92,9 @@ class AddEditCategoryScreen extends HookWidget {
               iconSize: 32,
               icon: const Icon(Icons.playlist_add),
               onPressed: () {
-                showAddEditTextField(context, titleController: titleController);
+                titleController.clear();
+                showAddEditTextField(context, categoryViewModel,
+                    titleController: titleController);
               },
             ),
           ],
@@ -79,7 +111,9 @@ class AddEditCategoryScreen extends HookWidget {
                   return CategoryTile(
                     category: category,
                     onPressed: () {
-                      showAddEditTextField(context,
+                      titleController.text = category.title;
+
+                      showAddEditTextField(context, categoryViewModel,
                           titleController: titleController, category: category);
                     },
                   );

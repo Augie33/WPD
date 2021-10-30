@@ -93,6 +93,18 @@ class RequestREST {
     return parser.parseFromJson(response.data!);
   }
 
+  Future<T> executePut<T>(String endpoint, JsonParser<T> parser,
+      {Map<String, Object> data = const {}}) async {
+    // final formData = FormData.fromMap(data);
+
+    final response = await _client.put<String>(
+      endpoint,
+      data: data,
+    );
+
+    return parser.parseFromJson(response.data!);
+  }
+
   Future<T> executeDelete<T>(String endpoint, JsonParser<T> parser,
       {Map<String, Object> data = const {}}) async {
     final response = await _client.delete<String>(endpoint);
