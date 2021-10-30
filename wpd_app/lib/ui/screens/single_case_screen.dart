@@ -94,6 +94,16 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                       Container(
                                         alignment: Alignment.centerLeft,
                                         child: SelectableText(
+                                          'Category:   ${myCase.category.title}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: SelectableText(
                                           'Case Number:   #${myCase.caseNumber}',
                                           style: Theme.of(context)
                                               .textTheme
