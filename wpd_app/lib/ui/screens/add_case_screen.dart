@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:validators/validators.dart';
 import 'package:wpd_app/models/case/case.dart';
-import 'package:wpd_app/models/custom_category/custom_category.dart';
 import 'package:wpd_app/ui/widgets/custom_input_text_field.dart';
 import 'package:wpd_app/view_models/add_case_screen_viewmodel.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
@@ -151,15 +150,14 @@ class AddCaseScreen extends HookWidget {
                             addCaseViewmodel.selectedCateogry?.title ??
                                 'Please, choose category',
                             style: addCaseViewmodel.selectedCateogry != null
-                                ? TextStyle(
-                                    color: Colors.grey[400],
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  )
-                                : TextStyle(
-                                    color: Colors.grey[400],
-                                    fontSize: 16,
-                                  ),
+                                ? Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(fontWeight: FontWeight.bold)
+                                : Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(color: Colors.grey[500]),
                           ),
                         ],
                       ),
