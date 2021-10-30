@@ -34,6 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Home'),
+          leading: IconButton(
+            onPressed: () {},
+            iconSize: 32,
+            tooltip: 'History',
+            color: Theme.of(context).primaryColor,
+            icon: const Icon(Icons.history),
+          ),
           actions: [
             IconButton(
               icon: const Icon(Icons.add),
