@@ -16,8 +16,8 @@ class RequestREST {
   /// HTTP dio client
   static final _client = Dio(
     BaseOptions(
-      baseUrl: 'https://wpd-backend.herokuapp.com/api/v1/',
-      // baseUrl: 'http://10.0.2.2:3000/api/v1/',
+      // baseUrl: 'https://wpd-backend.herokuapp.com/api/v1/',
+      baseUrl: 'http://10.0.2.2:3000/api/v1/',
       // baseUrl: 'http://localhost:3000/api/v1/',
       connectTimeout: 3000, // 3 seconds
       receiveTimeout: 3000, // 3 seconds
@@ -78,6 +78,7 @@ class RequestREST {
   Future<T> executeGet<T>(String endpoint, JsonParser<T> parser,
       {Map<String, Object> data = const {}}) async {
     final response = await _client.get<String>(endpoint);
+
     return parser.parseFromJson(response.data!);
   }
 

@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/case_parser.dart';
 import 'package:wpd_app/models/case/case.dart';
+import 'package:wpd_app/models/custom_category/custom_category.dart';
 import 'package:wpd_app/services/file_picker/file_picker_service.dart';
 import 'package:wpd_app/services/service_locator.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
@@ -24,14 +25,25 @@ class AddCaseScreenViewModel extends ChangeNotifier {
   bool _loading = false;
   bool _uploadFromDevice = false;
   File? _file;
+  CustomCategory? _selectedCateogry;
 
   bool get isLoading => _loading;
   bool get uploadFromDevice => _uploadFromDevice;
+  CustomCategory? get selectedCateogry => _selectedCateogry;
   File? get file => _file;
 
   set uploadFromDevice(value) {
     _uploadFromDevice = value;
     notifyListeners();
+  }
+
+  void selectedCategory(CustomCategory? category,
+      {bool notifyListener = true}) {
+    _selectedCateogry = category;
+
+    if (notifyListener) {
+      notifyListeners();
+    }
   }
 
   Future<void> pickPDF() async {
@@ -42,7 +54,7 @@ class AddCaseScreenViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> submitCase(Case newCase) async {
+  Future<Case?> submitCase(Case newCase) async {
     try {
       _loading = true;
       BotToast.showCustomLoading(
@@ -51,7 +63,7 @@ class AddCaseScreenViewModel extends ChangeNotifier {
 
       final urlPdf = uploadFromDevice ? '' : newCase.urlPDF;
 
-      await _requestRest.executePost<Case>(
+      final data = await _requestRest.executePost<Case>(
         '/cases',
         const CaseParser(),
         data: {
@@ -59,20 +71,23 @@ class AddCaseScreenViewModel extends ChangeNotifier {
           'description': newCase.description,
           'url': newCase.url,
           'urlPDF': urlPdf,
+          'category': newCase.category.id,
         },
       );
 
-      // if (_file != null) {
-      //   await _requestRest.uploadFile(
-      //     '/cases/${myCase.id}/pdf',
-      //     file: _file!,
-      //   );
-      // }
+      if (_file != null) {
+        await _requestRest.uploadFile(
+          '/cases/${data.id}/pdf',
+          file: _file!,
+        );
+      }
 
       BotToast.showText(text: 'Added ${newCase.title} case');
 
       _loading = false;
       BotToast.closeAllLoading();
+
+      return data;
     } on DioError catch (e) {
       BotToast.showText(text: e.message);
 

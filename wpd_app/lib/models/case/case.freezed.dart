@@ -27,7 +27,8 @@ class _$CaseTearOff {
       required String description,
       required String url,
       required String urlPDF,
-      required int caseNumber}) {
+      required int caseNumber,
+      required CustomCategory category}) {
     return _Case(
       id: id,
       title: title,
@@ -35,6 +36,7 @@ class _$CaseTearOff {
       url: url,
       urlPDF: urlPDF,
       caseNumber: caseNumber,
+      category: category,
     );
   }
 
@@ -55,6 +57,7 @@ mixin _$Case {
   String get url => throw _privateConstructorUsedError;
   String get urlPDF => throw _privateConstructorUsedError;
   int get caseNumber => throw _privateConstructorUsedError;
+  CustomCategory get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -71,7 +74,10 @@ abstract class $CaseCopyWith<$Res> {
       String description,
       String url,
       String urlPDF,
-      int caseNumber});
+      int caseNumber,
+      CustomCategory category});
+
+  $CustomCategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -90,6 +96,7 @@ class _$CaseCopyWithImpl<$Res> implements $CaseCopyWith<$Res> {
     Object? url = freezed,
     Object? urlPDF = freezed,
     Object? caseNumber = freezed,
+    Object? category = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -116,7 +123,18 @@ class _$CaseCopyWithImpl<$Res> implements $CaseCopyWith<$Res> {
           ? _value.caseNumber
           : caseNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CustomCategory,
     ));
+  }
+
+  @override
+  $CustomCategoryCopyWith<$Res> get category {
+    return $CustomCategoryCopyWith<$Res>(_value.category, (value) {
+      return _then(_value.copyWith(category: value));
+    });
   }
 }
 
@@ -131,7 +149,11 @@ abstract class _$CaseCopyWith<$Res> implements $CaseCopyWith<$Res> {
       String description,
       String url,
       String urlPDF,
-      int caseNumber});
+      int caseNumber,
+      CustomCategory category});
+
+  @override
+  $CustomCategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -151,6 +173,7 @@ class __$CaseCopyWithImpl<$Res> extends _$CaseCopyWithImpl<$Res>
     Object? url = freezed,
     Object? urlPDF = freezed,
     Object? caseNumber = freezed,
+    Object? category = freezed,
   }) {
     return _then(_Case(
       id: id == freezed
@@ -177,12 +200,17 @@ class __$CaseCopyWithImpl<$Res> extends _$CaseCopyWithImpl<$Res>
           ? _value.caseNumber
           : caseNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as CustomCategory,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_Case implements _Case {
   const _$_Case(
       {@JsonKey(name: '_id') required this.id,
@@ -190,7 +218,8 @@ class _$_Case implements _Case {
       required this.description,
       required this.url,
       required this.urlPDF,
-      required this.caseNumber});
+      required this.caseNumber,
+      required this.category});
 
   factory _$_Case.fromJson(Map<String, dynamic> json) => _$$_CaseFromJson(json);
 
@@ -207,10 +236,12 @@ class _$_Case implements _Case {
   final String urlPDF;
   @override
   final int caseNumber;
+  @override
+  final CustomCategory category;
 
   @override
   String toString() {
-    return 'Case(id: $id, title: $title, description: $description, url: $url, urlPDF: $urlPDF, caseNumber: $caseNumber)';
+    return 'Case(id: $id, title: $title, description: $description, url: $url, urlPDF: $urlPDF, caseNumber: $caseNumber, category: $category)';
   }
 
   @override
@@ -230,7 +261,10 @@ class _$_Case implements _Case {
                 const DeepCollectionEquality().equals(other.urlPDF, urlPDF)) &&
             (identical(other.caseNumber, caseNumber) ||
                 const DeepCollectionEquality()
-                    .equals(other.caseNumber, caseNumber)));
+                    .equals(other.caseNumber, caseNumber)) &&
+            (identical(other.category, category) ||
+                const DeepCollectionEquality()
+                    .equals(other.category, category)));
   }
 
   @override
@@ -241,7 +275,8 @@ class _$_Case implements _Case {
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(url) ^
       const DeepCollectionEquality().hash(urlPDF) ^
-      const DeepCollectionEquality().hash(caseNumber);
+      const DeepCollectionEquality().hash(caseNumber) ^
+      const DeepCollectionEquality().hash(category);
 
   @JsonKey(ignore: true)
   @override
@@ -261,7 +296,8 @@ abstract class _Case implements Case {
       required String description,
       required String url,
       required String urlPDF,
-      required int caseNumber}) = _$_Case;
+      required int caseNumber,
+      required CustomCategory category}) = _$_Case;
 
   factory _Case.fromJson(Map<String, dynamic> json) = _$_Case.fromJson;
 
@@ -278,6 +314,8 @@ abstract class _Case implements Case {
   String get urlPDF => throw _privateConstructorUsedError;
   @override
   int get caseNumber => throw _privateConstructorUsedError;
+  @override
+  CustomCategory get category => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CaseCopyWith<_Case> get copyWith => throw _privateConstructorUsedError;

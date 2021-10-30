@@ -13,6 +13,8 @@ _$_Case _$$_CaseFromJson(Map<String, dynamic> json) => _$_Case(
       url: json['url'] as String,
       urlPDF: json['urlPDF'] as String,
       caseNumber: json['caseNumber'] as int,
+      category:
+          CustomCategory.fromJson(json['category'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_CaseToJson(_$_Case instance) => <String, dynamic>{
@@ -22,4 +24,5 @@ Map<String, dynamic> _$$_CaseToJson(_$_Case instance) => <String, dynamic>{
       'url': instance.url,
       'urlPDF': instance.urlPDF,
       'caseNumber': instance.caseNumber,
+      'category': instance.category.toJson(),
     };

@@ -34,7 +34,7 @@ class HomeScreenViewModel extends ChangeNotifier {
       }
 
       var data = await _requestRest.executeGet<List<CustomCategory>>(
-        '/category?sort=-title&limit=1000',
+        '/category?sort=title&limit=1000',
         const CategoryListParser(),
       );
 
@@ -63,7 +63,7 @@ class HomeScreenViewModel extends ChangeNotifier {
       }
 
       var data = await _requestRest.executeGet<List<Case>>(
-        '/category/$categoryId/cases?sort=title&limit=1000',
+        '/category/$categoryId/cases',
         const CaseListParser(),
       );
 

@@ -1,12 +1,15 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:validators/validators.dart';
 import 'package:wpd_app/models/case/case.dart';
+import 'package:wpd_app/models/custom_category/custom_category.dart';
 import 'package:wpd_app/ui/widgets/custom_input_text_field.dart';
 import 'package:wpd_app/view_models/add_case_screen_viewmodel.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AddCaseScreen extends HookWidget {
   AddCaseScreen({
@@ -18,6 +21,7 @@ class AddCaseScreen extends HookWidget {
   final String? caseId;
   final Case? myCase;
   final _key = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   String? _validateTitle(String? value) {
     if (value!.isEmpty) {
@@ -72,6 +76,11 @@ class AddCaseScreen extends HookWidget {
     final urlController = useTextEditingController();
     final urlPdfController = useTextEditingController();
 
+    // initState
+    useEffect(() {
+      addCaseViewmodel.selectedCategory(null, notifyListener: false);
+    }, []);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -79,6 +88,7 @@ class AddCaseScreen extends HookWidget {
       child: Form(
         key: _key,
         child: Scaffold(
+          key: scaffoldKey,
           appBar: AppBar(
             title: const Text('Add Case'),
             actions: [
@@ -88,7 +98,12 @@ class AddCaseScreen extends HookWidget {
                   size: 30,
                 ),
                 onPressed: () async {
-                  await _submit(
+                  if (addCaseViewmodel.selectedCateogry == null) {
+                    BotToast.showText(text: 'Please, choose a category');
+                    return;
+                  }
+
+                  final newCase = await _submit(
                     context,
                     Case(
                       id: 'n/a',
@@ -97,8 +112,12 @@ class AddCaseScreen extends HookWidget {
                       url: urlController.text,
                       urlPDF: urlPdfController.text,
                       caseNumber: 0,
+                      category: addCaseViewmodel.selectedCateogry!,
                     ),
                   );
+
+                  // Routemaster.of(context).push(
+                  //     '/category/${newCase}/cases?sort=title&limit=1000');
                 },
               )
             ],
@@ -122,10 +141,38 @@ class AddCaseScreen extends HookWidget {
                     icon: Icons.description,
                     maxLines: 5,
                   ),
+                  InkWell(
+                    onTap: () {
+                      showBarModalBottomSheet(
+                        context: context,
+                        builder: (context) => const CategoryOptions(),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.list,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          const SizedBox(width: 15),
+                          Text(
+                            addCaseViewmodel.selectedCateogry?.title ??
+                                'Please, choose category',
+                            style: TextStyle(
+                              color: Colors.grey[400],
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   CustomInputTextField(
                     controller: urlController,
                     initialValue: myCase?.url,
-                    validator: _validateUrl,
+                    validator: null,
                     hintText: 'URL',
                     icon: Icons.link,
                   ),
@@ -133,7 +180,7 @@ class AddCaseScreen extends HookWidget {
                     CustomInputTextField(
                       controller: urlPdfController,
                       initialValue: myCase?.urlPDF,
-                      validator: _validateUrl,
+                      validator: null,
                       hintText: 'PDF URL',
                       icon: Icons.picture_as_pdf,
                     ),
@@ -181,6 +228,43 @@ class AddCaseScreen extends HookWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CategoryOptions extends HookWidget {
+  const CategoryOptions({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final homeViewModel = useProvider(HomeScreenViewModelProvider.provider);
+    final addCaseScreenViewModel =
+        useProvider(AddCaseScreenViewModelProvider.provider);
+    final categories = homeViewModel.categories;
+    final selectedCategory = addCaseScreenViewModel.selectedCateogry;
+
+    return ListView.builder(
+      itemCount: categories.length,
+      itemBuilder: (BuildContext context, int index) {
+        final category = categories[index];
+
+        return ListTile(
+          onTap: () {
+            addCaseScreenViewModel.selectedCategory(category);
+            Navigator.pop(context);
+          },
+          title: Text(
+            category.title,
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          trailing: selectedCategory == category
+              ? Icon(
+                  Icons.radio_button_checked,
+                  color: Theme.of(context).primaryColor,
+                )
+              : const Icon(Icons.radio_button_unchecked),
+        );
+      },
     );
   }
 }
