@@ -58,9 +58,6 @@ class AddCaseScreen extends HookWidget {
           .submitCase(newCase);
 
       Routemaster.of(context).pop();
-      context
-          .read(HomeScreenViewModelProvider.provider)
-          .getCases(refresh: true);
     } else {
       debugPrint('Error :(');
     }

@@ -14,6 +14,7 @@ import 'package:wpd_app/ui/screens/search_screen.dart';
 import 'package:wpd_app/ui/screens/show_accounts_screen.dart';
 import 'package:wpd_app/ui/screens/single_account_screen.dart';
 import 'package:wpd_app/ui/screens/single_case_screen.dart';
+import 'package:wpd_app/ui/screens/single_category_screen.dart';
 import 'package:wpd_app/ui/widgets/bottom_nav.dart';
 
 abstract class AppRoutes {
@@ -25,6 +26,9 @@ abstract class AppRoutes {
           ),
       '/login': (_) => MaterialPage(child: LoginScreen()),
       '/home': (_) => const MaterialPage(child: HomeScreen()),
+      '/home/:id/cases': (info) => MaterialPage(
+            child: SingleCategoryScreen(categoryId: info.pathParameters['id']),
+          ),
       '/favorite': (_) => const MaterialPage(child: FavoriteScreen()),
       '/home/add': (_) => MaterialPage(child: AddCaseScreen()),
       '/home/search': (_) => const MaterialPage(child: SearchCasesScreen()),

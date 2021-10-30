@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:wpd_app/ui/widgets/case_tile.dart';
+import 'package:wpd_app/ui/widgets/category_tile.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 
@@ -18,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    context.read(HomeScreenViewModelProvider.provider).getCases();
+    context.read(HomeScreenViewModelProvider.provider).getCategories();
   }
 
   @override
@@ -27,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       color: Theme.of(context).primaryColor,
       onRefresh: () => context
           .read(HomeScreenViewModelProvider.provider)
-          .getCases(refresh: true),
+          .getCategories(refresh: true),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Home'),
@@ -53,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return const ShimmerLoader();
                     },
                   )
-                : homeViewModel.myCases.isEmpty
+                : homeViewModel.categories.isEmpty
                     ? Center(
                         child: Text(
                           'Empty...',
@@ -61,11 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       )
                     : ListView.builder(
-                        itemCount: homeViewModel.myCases.length,
+                        itemCount: homeViewModel.categories.length,
                         itemBuilder: (context, index) {
-                          final myCase = homeViewModel.myCases[index];
+                          final category = homeViewModel.categories[index];
 
-                          return CaseTile(myCase: myCase);
+                          return CategoryTile(category: category);
                         },
                       );
           },

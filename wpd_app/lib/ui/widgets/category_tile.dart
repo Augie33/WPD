@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/models/custom_category/custom_category.dart';
+import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 
-class CategoryTile extends StatelessWidget {
+class CategoryTile extends HookWidget {
   const CategoryTile({
     Key? key,
     required this.category,
@@ -14,6 +17,8 @@ class CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeViewModel = useProvider(HomeScreenViewModelProvider.provider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 3),
       child: Card(
@@ -23,7 +28,8 @@ class CategoryTile extends StatelessWidget {
                   onPressed!();
                 }
               : () {
-                  Routemaster.of(context).push('/category/${category.id}');
+                  homeViewModel.selectedCateogry = category;
+                  Routemaster.of(context).push('${category.id}/cases');
                 },
           customBorder: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(4.0)),
