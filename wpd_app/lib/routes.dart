@@ -14,7 +14,6 @@ import 'package:wpd_app/ui/screens/search_screen.dart';
 import 'package:wpd_app/ui/screens/show_accounts_screen.dart';
 import 'package:wpd_app/ui/screens/single_account_screen.dart';
 import 'package:wpd_app/ui/screens/single_case_screen.dart';
-import 'package:wpd_app/ui/screens/single_category_screen.dart';
 import 'package:wpd_app/ui/widgets/bottom_nav.dart';
 
 abstract class AppRoutes {
