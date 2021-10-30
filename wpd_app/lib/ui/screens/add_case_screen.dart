@@ -57,11 +57,11 @@ class AddCaseScreen extends HookWidget {
 
   Future<void> _submit(BuildContext context, Case newCase) async {
     if (_key.currentState?.validate() ?? false) {
-      await context
+      final myCase = await context
           .read(AddCaseScreenViewModelProvider.provider)
           .submitCase(newCase);
-
       Routemaster.of(context).pop();
+      Routemaster.of(context).push('/case/${myCase!.id}');
     } else {
       debugPrint('Error :(');
     }
@@ -115,9 +115,6 @@ class AddCaseScreen extends HookWidget {
                       category: addCaseViewmodel.selectedCateogry!,
                     ),
                   );
-
-                  // Routemaster.of(context).push(
-                  //     '/category/${newCase}/cases?sort=title&limit=1000');
                 },
               )
             ],
@@ -133,14 +130,7 @@ class AddCaseScreen extends HookWidget {
                     hintText: 'Title',
                     icon: Icons.title,
                   ),
-                  CustomInputTextField(
-                    controller: descriptionController,
-                    initialValue: myCase?.description,
-                    validator: _validateDescription,
-                    hintText: 'Description',
-                    icon: Icons.description,
-                    maxLines: 5,
-                  ),
+                  const SizedBox(height: 5),
                   InkWell(
                     onTap: () {
                       showBarModalBottomSheet(
@@ -160,14 +150,29 @@ class AddCaseScreen extends HookWidget {
                           Text(
                             addCaseViewmodel.selectedCateogry?.title ??
                                 'Please, choose category',
-                            style: TextStyle(
-                              color: Colors.grey[400],
-                              fontSize: 16,
-                            ),
+                            style: addCaseViewmodel.selectedCateogry != null
+                                ? TextStyle(
+                                    color: Colors.grey[400],
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  )
+                                : TextStyle(
+                                    color: Colors.grey[400],
+                                    fontSize: 16,
+                                  ),
                           ),
                         ],
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 5),
+                  CustomInputTextField(
+                    controller: descriptionController,
+                    initialValue: myCase?.description,
+                    validator: _validateDescription,
+                    hintText: 'Description',
+                    icon: Icons.description,
+                    maxLines: 5,
                   ),
                   CustomInputTextField(
                     controller: urlController,
