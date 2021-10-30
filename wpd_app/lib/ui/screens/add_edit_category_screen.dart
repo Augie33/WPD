@@ -25,44 +25,95 @@ class AddEditCategoryScreen extends HookWidget {
                 hintText: '',
                 autofocus: true,
               ),
-              Container(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () async {
-                    if (category != null) {
-                      final newCategory = CustomCategory(
-                          id: category.id, title: titleController.text);
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (category != null)
+                    TextButton(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Are you sure?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    style: TextButton.styleFrom(
+                                      primary: Theme.of(context).primaryColor,
+                                      textStyle: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    child: const Text('NO'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () async {
+                                      await categoryViewModel
+                                          .deleteCategory(category);
 
-                      await categoryViewModel.createEditCategory(newCategory,
-                          isEdit: true);
+                                      Navigator.of(context).pop();
 
-                      titleController.clear();
+                                      categoryViewModel.getCategories(
+                                          refresh: true);
+                                    },
+                                    style: TextButton.styleFrom(
+                                      primary: Colors.red,
+                                      textStyle: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    child: const Text('YES'),
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      style: TextButton.styleFrom(
+                        primary: Colors.red,
+                        textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      child: const Text('Delete'),
+                    ),
+                  TextButton(
+                    onPressed: () async {
+                      if (category != null) {
+                        final newCategory = CustomCategory(
+                            id: category.id, title: titleController.text);
+
+                        await categoryViewModel.createEditCategory(newCategory,
+                            isEdit: true);
+
+                        titleController.clear();
+
+                        Navigator.of(context).pop();
+
+                        categoryViewModel.getCategories(refresh: true);
+
+                        return;
+                      }
+
+                      final newCategory =
+                          CustomCategory(id: '0', title: titleController.text);
 
                       Navigator.of(context).pop();
 
+                      titleController.clear();
+
+                      await categoryViewModel.createEditCategory(newCategory);
+
                       categoryViewModel.getCategories(refresh: true);
-
-                      return;
-                    }
-
-                    final newCategory =
-                        CustomCategory(id: '0', title: titleController.text);
-
-                    Navigator.of(context).pop();
-
-                    titleController.clear();
-
-                    await categoryViewModel.createEditCategory(newCategory);
-
-                    categoryViewModel.getCategories(refresh: true);
-                  },
-                  style: TextButton.styleFrom(
-                    primary: Theme.of(context).primaryColor,
-                    textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                    },
+                    style: TextButton.styleFrom(
+                      primary: Theme.of(context).primaryColor,
+                      textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    child: category != null
+                        ? const Text('Edit')
+                        : const Text('Add'),
                   ),
-                  child:
-                      category != null ? const Text('Edit') : const Text('Add'),
-                ),
+                ],
               )
             ],
             title: const Text('Add Category'),

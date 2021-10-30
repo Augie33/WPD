@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/category_list_parser.dart';
 import 'package:wpd_app/api/json_parsers/category_parser.dart';
+import 'package:wpd_app/api/json_parsers/void_parser.dart';
 import 'package:wpd_app/models/custom_category/custom_category.dart';
 import 'package:wpd_app/services/service_locator.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
@@ -32,7 +33,7 @@ class AddEditCategoryViewModel extends ChangeNotifier {
       }
 
       var data = await _requestRest.executeGet<List<CustomCategory>>(
-        '/category?sort=title&limit=1000',
+        '/category?sort=-title&limit=1000',
         const CategoryListParser(),
       );
 
@@ -58,26 +59,58 @@ class AddEditCategoryViewModel extends ChangeNotifier {
       toastBuilder: (_) => const AppLoader(),
     );
 
-    if (isEdit) {
-      await _requestRest.executePut<CustomCategory>(
-        '/category/${category.id}',
+    try {
+      if (isEdit) {
+        await _requestRest.executePut<CustomCategory>(
+          '/category/${category.id}',
+          const CategoryParser(),
+          data: {'title': category.title},
+        );
+
+        BotToast.showText(text: 'Edited the ${category.title}');
+        BotToast.closeAllLoading();
+
+        return;
+      }
+
+      await _requestRest.executePost<CustomCategory>(
+        '/category',
         const CategoryParser(),
         data: {'title': category.title},
       );
 
-      BotToast.showText(text: 'Edited the ${category.title}');
+      BotToast.showText(text: 'Added the ${category.title}');
       BotToast.closeAllLoading();
+    } on DioError catch (e) {
+      BotToast.showText(text: e.message);
 
-      return;
+      _loading = false;
+      notifyListeners();
+    } catch (e) {
+      BotToast.showText(text: 'Error');
+      _loading = false;
+      notifyListeners();
     }
+  }
 
-    await _requestRest.executePost<CustomCategory>(
-      '/category',
-      const CategoryParser(),
-      data: {'title': category.title},
-    );
+  Future<void> deleteCategory(CustomCategory category) async {
+    try {
+      await _requestRest.executeDelete<void>(
+        '/category/${category.id}',
+        const VoidParser(),
+      );
 
-    BotToast.showText(text: 'Added the ${category.title}');
-    BotToast.closeAllLoading();
+      BotToast.showText(text: 'Deleted the ${category.title}');
+      BotToast.closeAllLoading();
+    } on DioError catch (e) {
+      BotToast.showText(text: e.message);
+
+      _loading = false;
+      notifyListeners();
+    } catch (e) {
+      BotToast.showText(text: 'Error');
+      _loading = false;
+      notifyListeners();
+    }
   }
 }
