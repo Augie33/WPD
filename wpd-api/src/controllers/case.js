@@ -13,7 +13,7 @@ const Category = require('../models/category');
 // @access    Private
 exports.getCases = asyncHandler(async (req, res, next) => {
   if (req.params.category) {
-    const cases = await Case.find({ category: req.params.category });
+    const cases = await Case.find({ category: req.params.category }).populate('category').sort({ 'title': 1 }).exec();
 
     return res.status(200).json({
       success: true,
@@ -91,7 +91,9 @@ exports.getCaseAndPoliceInfo = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v1/cases
 // @access    Private
 exports.createCase = asyncHandler(async (req, res, next) => {
-  const casee = await Case.create(req.body);
+  let casee = await Case.create(req.body);
+
+  casee = await Case.findById(casee._id).populate('category');
 
   res.status(201).json({
     success: true,

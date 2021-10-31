@@ -22,7 +22,7 @@ const CaseSchema = new mongoose.Schema({
   },
   category: {
     type: mongoose.Schema.ObjectId,
-    default: '61720fe206dcbe2f02088ec6',
+    required: [true, 'Please add a category'],
     ref: 'Category',
     // required: [true, 'Please choose a category'],
   },
