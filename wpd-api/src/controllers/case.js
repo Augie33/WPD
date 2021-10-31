@@ -144,7 +144,7 @@ exports.casePDFUpload = asyncHandler(async (req, res, next) => {
     }
 
     await Case.findByIdAndUpdate(req.params.id, {
-      urlPDF: `https://wpd-backend.herokuapp.com/api/v1/documents/${file.name}`,
+      urlPDF: `https://wpd-xpzie.ondigitalocean.app/api/v1/documents/${file.name}`,
     });
 
     res.status(200).json({
