@@ -12,6 +12,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.4.7",
     "advanced-results": "^1.0.4",
+    "aws-sdk": "^2.1018.0",
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.2",
     "colors": "^1.4.0",
@@ -28,6 +29,8 @@
     "mongoose": "^5.13.9",
     "mongoose-sequence": "^5.3.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "multer-s3": "^2.10.0",
     "sharp": "^0.29.1",
     "slugify": "^1.6.0",
     "validator": "^13.6.0",

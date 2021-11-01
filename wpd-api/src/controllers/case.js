@@ -4,6 +4,11 @@ const ErrorResponse = require('../utils/error-response');
 const Case = require('../models/case');
 const User = require('../models/user');
 const Category = require('../models/category');
+const AWS = require('aws-sdk');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+
+
 
 // const { sendCaseEmail } = require('../utils/send-email');
 
@@ -101,58 +106,7 @@ exports.createCase = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc      Upload PDF for Case
-// @route     PUT /api/v1/cases/:id/pdf
-// @access    Private
-exports.casePDFUpload = asyncHandler(async (req, res, next) => {
-  const casee = await Case.findById(req.params.id);
 
-  if (!casee) {
-    return next(
-      new ErrorResponse(`Case not found with id of ${req.params.id}`, 404)
-    );
-  }
-
-  if (!req.files) {
-    return next(new ErrorResponse(`Please, upload a file`, 400));
-  }
-
-  const file = req.files.file;
-
-  // Make sure the file is a PDF
-  if (file.mimetype !== 'application/pdf') {
-    return next(new ErrorResponse(`Please, upload a PDF file`, 400));
-  }
-
-  // Check file size
-  if (file.size > process.env.MAX_FILE_UPLOAD) {
-    return next(
-      new ErrorResponse(
-        `Please, upload a PDF file less than ${process.env.MAX_FILE_UPLOAD}`,
-        400
-      )
-    );
-  }
-
-  // Create custom file name
-  file.name = `WPD_${casee._id}${path.parse(file.name).ext}`;
-
-  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
-    if (err) {
-      console.error(err);
-      return next(new ErrorResponse(`Problem with file upload`, 500));
-    }
-
-    await Case.findByIdAndUpdate(req.params.id, {
-      urlPDF: `https://wpd-xpzie.ondigitalocean.app/api/v1/documents/${file.name}`,
-    });
-
-    res.status(200).json({
-      success: true,
-      data: file.name,
-    });
-  });
-});
 
 // @desc      Update case
 // @route     PUT /api/v1/cases/:id
@@ -193,3 +147,92 @@ exports.sendEmail = asyncHandler(async (req, res, next) => {
 
   res.status(200).json();
 });
+
+
+
+
+/* Uploading */
+const spacesEndpoint = new AWS.Endpoint(process.env.DO_SPACES_ENDPOINT);
+const s3 = new AWS.S3({ endpoint: spacesEndpoint, accessKeyId: process.env.DO_SPACES_KEY, secretAccessKey: process.env.DO_SPACES_SECRET });
+
+// Change bucket property to your Space name
+// CREATE MULTER FUNCTION FOR UPLOAD
+const upload = multer({
+  // CREATE MULTER-S3 FUNCTION FOR STORAGE
+  storage: multerS3({
+    s3: s3,
+    acl: 'public-read',
+    // bucket - WE CAN PASS SUB FOLDER NAME ALSO LIKE 'bucket-name/sub-folder1'
+    bucket: process.env.DO_SPACES_NAME,
+    // META DATA FOR PUTTING FIELD NAME
+    metadata: function (req, file, cb) {
+
+      cb(null, { fieldName: `WPD_${req.customName}` });
+    },
+    // SET / MODIFY ORIGINAL FILE NAME
+    key: function (req, file, cb) {
+      cb(null, `WPD_${req.customName}.pdf`); //set unique file name if you wise using Date.toISOString()
+    }
+  }),
+  // SET DEFAULT FILE SIZE UPLOAD LIMIT
+  limits: { fileSize: 1024 * 1024 * 100 }, // 1000MB
+  // FILTER OPTIONS LIKE VALIDATING FILE EXTENSION
+  fileFilter: function (req, file, cb) {
+    const filetypes = /pdf/;
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = filetypes.test(file.mimetype);
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb("Error: Allow images only of extensions PDF !");
+    }
+  },
+}).single('file');
+
+
+// @desc      Upload PDF for Case
+// @route     PUT /api/v1/cases/:id/pdf
+// @access    Private
+exports.casePDFUpload = asyncHandler(async (req, res, next) => {
+
+  const casee = await Case.findById(req.params.id);
+
+
+  if (!casee) {
+    return next(
+      new ErrorResponse(`Case not found with id of ${req.params.id}`, 404)
+    );
+  }
+
+  // Create custom file name
+  req.customName = casee._id;
+
+
+  upload(req, res, async function (error) {
+    if (error) {
+      return next(
+        new ErrorResponse(`Please, upload a PDF file`, 400)
+      );
+    }
+
+    // Edit the Case urlPDF field
+    await Case.findByIdAndUpdate(casee._id, { 'urlPDF': req.file.location });
+
+
+    res.status(201).json({
+      success: true,
+      data: {
+        "originalname": req.file.originalname,
+        "fileName": req.file.key,
+        "urlPDF": req.file.location,
+        "mimetype": req.file.mimetype,
+      },
+    });
+  });
+});
+
+
+
+
+
+
