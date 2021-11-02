@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +17,7 @@ abstract class AppStartup {
     }
 
     // Checking the auth
-    if (!kIsWeb) {
+    if (Platform.isIOS || Platform.isAndroid) {
       final user = await _requestRest.checkToken();
       return user;
     }

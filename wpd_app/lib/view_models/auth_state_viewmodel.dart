@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -64,7 +66,7 @@ class AuthStateViewModel extends ChangeNotifier {
       _myUser = data.user;
 
       // save the token inside scure storage if the user use mobile (iOS/Android)
-      if (!kIsWeb) {
+      if (Platform.isIOS || Platform.isAndroid) {
         await _scureStorageService.setToken(data.token);
       }
 
@@ -106,7 +108,7 @@ class AuthStateViewModel extends ChangeNotifier {
         const VoidParser(),
       );
 
-      if (!kIsWeb) {
+      if (Platform.isIOS || Platform.isAndroid) {
         await _scureStorageService.deleteToken();
       }
       // nav
@@ -117,6 +119,14 @@ class AuthStateViewModel extends ChangeNotifier {
       notifyListeners();
       BotToast.closeAllLoading();
     } catch (e) {
+      if (Platform.isIOS || Platform.isAndroid) {
+        await _scureStorageService.deleteToken();
+      }
+      // nav
+      _loggedIn = false;
+      _loading = false;
+      _myUser = null;
+
       BotToast.showText(text: 'Error');
       BotToast.closeAllLoading();
       _loading = false;

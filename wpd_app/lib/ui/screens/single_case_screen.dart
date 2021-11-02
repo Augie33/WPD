@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -308,7 +310,8 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
                                           )
                                         : Column(
                                             children: [
-                                              if (!kIsWeb)
+                                              if (Platform.isIOS ||
+                                                  Platform.isAndroid)
                                                 Container(
                                                   height: 570,
                                                   padding:
