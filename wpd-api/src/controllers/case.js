@@ -164,6 +164,8 @@ const upload = multer({
     acl: 'public-read',
     // bucket - WE CAN PASS SUB FOLDER NAME ALSO LIKE 'bucket-name/sub-folder1'
     bucket: process.env.DO_SPACES_NAME,
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    contentDisposition: 'inline',
     // META DATA FOR PUTTING FIELD NAME
     metadata: function (req, file, cb) {
 
@@ -222,6 +224,7 @@ exports.casePDFUpload = asyncHandler(async (req, res, next) => {
     res.status(201).json({
       success: true,
       data: {
+        "id": casee._id,
         "originalname": req.file.originalname,
         "fileName": req.file.key,
         "urlPDF": req.file.location,

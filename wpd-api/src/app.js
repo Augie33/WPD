@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === 'development') {
 // app.use(fileupload());
 
 // Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // Mount routers
 app.use('/api/v1/auth', auth);
