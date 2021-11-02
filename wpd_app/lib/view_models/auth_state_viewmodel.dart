@@ -127,7 +127,6 @@ class AuthStateViewModel extends ChangeNotifier {
       _loading = false;
       _myUser = null;
 
-      BotToast.showText(text: 'Error');
       BotToast.closeAllLoading();
       _loading = false;
       notifyListeners();
