@@ -20,7 +20,7 @@ class AddCaseScreen extends HookWidget {
   final String? caseId;
   final Case? myCase;
   final _key = GlobalKey<FormState>();
-  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   String? _validateTitle(String? value) {
     if (value!.isEmpty) {
@@ -42,24 +42,26 @@ class AddCaseScreen extends HookWidget {
     }
   }
 
-  String? _validateUrl(String? value) {
-    if (value!.isEmpty) {
-      return 'Please, type case URL';
-    } else if (value.trim().isEmpty) {
-      return 'Please, type case URL';
-    } else if (!isURL(value)) {
-      return 'Please, type valid URL';
-    } else {
-      return null;
-    }
-  }
+  // String? _validateUrl(String? value) {
+  //   if (value!.isEmpty) {
+  //     return 'Please, type case URL';
+  //   } else if (value.trim().isEmpty) {
+  //     return 'Please, type case URL';
+  //   } else if (!isURL(value)) {
+  //     return 'Please, type valid URL';
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   Future<void> _submit(BuildContext context, Case newCase) async {
     if (_key.currentState?.validate() ?? false) {
       final myCase = await context
           .read(AddCaseScreenViewModelProvider.provider)
           .submitCase(newCase);
+
       Routemaster.of(context).pop();
+
       Routemaster.of(context).push('/case/${myCase!.id}');
     } else {
       debugPrint('Error :(');
@@ -77,6 +79,7 @@ class AddCaseScreen extends HookWidget {
 
     // initState
     useEffect(() {
+      addCaseViewmodel.file = null;
       addCaseViewmodel.selectedCategory(null, notifyListener: false);
     }, []);
 
@@ -102,7 +105,7 @@ class AddCaseScreen extends HookWidget {
                     return;
                   }
 
-                  final newCase = await _submit(
+                  await _submit(
                     context,
                     Case(
                       id: 'n/a',

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:wpd_app/models/user/user.dart';
@@ -19,6 +18,7 @@ class RequestREST {
       // baseUrl: 'https://wpd-backend.herokuapp.com/api/v1/',
       baseUrl: 'http://10.0.2.2:3000/api/v1/',
       // baseUrl: 'http://localhost:3000/api/v1/',
+      // baseUrl: 'https://wpd-xpzie.ondigitalocean.app/api/v1/',
       connectTimeout: 3000, // 3 seconds
       receiveTimeout: 3000, // 3 seconds
       // headers: <String, String>{
@@ -112,30 +112,21 @@ class RequestREST {
     return parser.parseFromJson(response.data!);
   }
 
-  Future<void> uploadFile(String endpoint, {required File file}) async {
-    FormData formData;
+  Future<T> uploadFile<T>(String endpoint, JsonParser<T> parser,
+      {required File file}) async {
+    FormData formData = FormData.fromMap({
+      'file': await MultipartFile.fromFile(
+        file.path,
+        filename: 'doc.pdf',
+        contentType: MediaType('application', 'pdf'),
+      ),
+    });
 
-    if (kIsWeb) {
-      formData = FormData.fromMap({
-        'file': MultipartFile.fromBytes(
-          await file.readAsBytes(),
-          filename: 'doc.pdf',
-          contentType: MediaType('application', 'pdf'),
-        ),
-      });
-    } else {
-      formData = FormData.fromMap({
-        'file': await MultipartFile.fromFile(
-          file.path,
-          filename: 'doc.pdf',
-          contentType: MediaType('application', 'pdf'),
-        ),
-      });
-    }
-
-    await _client.put(
+    final response = await _client.put<String>(
       endpoint,
       data: formData,
     );
+
+    return parser.parseFromJson(response.data!);
   }
 }

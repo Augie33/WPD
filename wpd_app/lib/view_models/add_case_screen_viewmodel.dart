@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/case_parser.dart';
+import 'package:wpd_app/api/json_parsers/pdf_case_parser.dart';
 import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/models/custom_category/custom_category.dart';
 import 'package:wpd_app/services/file_picker/file_picker_service.dart';
@@ -23,7 +24,7 @@ class AddCaseScreenViewModel extends ChangeNotifier {
   final _filePickerService = serviceLocator<FilePickerService>();
 
   bool _loading = false;
-  bool _uploadFromDevice = false;
+  bool _uploadFromDevice = true;
   File? _file;
   CustomCategory? _selectedCateogry;
 
@@ -36,6 +37,8 @@ class AddCaseScreenViewModel extends ChangeNotifier {
     _uploadFromDevice = value;
     notifyListeners();
   }
+
+  set file(value) => _file = value;
 
   void selectedCategory(CustomCategory? category,
       {bool notifyListener = true}) {
@@ -78,6 +81,7 @@ class AddCaseScreenViewModel extends ChangeNotifier {
       if (_file != null) {
         await _requestRest.uploadFile(
           '/cases/${data.id}/pdf',
+          const PDFCaseParser(),
           file: _file!,
         );
       }

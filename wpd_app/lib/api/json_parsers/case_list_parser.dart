@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:wpd_app/api/json_parsers/json_parsers.dart';
 import 'package:wpd_app/models/case/case.dart';
 
