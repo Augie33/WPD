@@ -9,7 +9,7 @@ import 'package:wpd_app/services/service_locator.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 
 abstract class CreateAccountScreenViewModelProvider {
-  static final provider = ChangeNotifierProvider(
+  static final provider = ChangeNotifierProvider.autoDispose(
     (ref) => CreateAccountScreenViewModel(),
   );
 }
