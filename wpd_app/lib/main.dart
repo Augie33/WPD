@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
-        final appState = watch(AuthStateViewModelProvider.provider);
+      builder: (context, ref, child) {
+        final appState = ref.watch(AuthStateViewModelProvider.provider);
         final botToastBuilder = BotToastInit();
 
         return MaterialApp.router(

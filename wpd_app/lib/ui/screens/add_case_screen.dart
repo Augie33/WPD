@@ -10,7 +10,7 @@ import 'package:wpd_app/view_models/add_case_screen_viewmodel.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class AddCaseScreen extends HookWidget {
+class AddCaseScreen extends HookConsumerWidget {
   AddCaseScreen({
     this.caseId,
     this.myCase,
@@ -54,24 +54,24 @@ class AddCaseScreen extends HookWidget {
   //   }
   // }
 
-  Future<void> _submit(BuildContext context, Case newCase) async {
+  Future<void> _submit(BuildContext context,
+      AddCaseScreenViewModel caseScreenViewModel, Case newCase) async {
     if (_key.currentState?.validate() ?? false) {
-      final myCase = await context
-          .read(AddCaseScreenViewModelProvider.provider)
-          .submitCase(newCase);
+      final myCase = await caseScreenViewModel.submitCase(newCase);
 
       Routemaster.of(context).pop();
 
-      Routemaster.of(context).push('/case/${myCase!.id}');
+      if (myCase != null) {
+        Routemaster.of(context).push('/case/${myCase.id}');
+      }
     } else {
       debugPrint('Error :(');
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    final addCaseViewmodel =
-        useProvider(AddCaseScreenViewModelProvider.provider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final addCaseViewmodel = ref.watch(AddCaseScreenViewModelProvider.provider);
     final titleController = useTextEditingController();
     final descriptionController = useTextEditingController();
     final urlController = useTextEditingController();
@@ -107,6 +107,7 @@ class AddCaseScreen extends HookWidget {
 
                   await _submit(
                     context,
+                    addCaseViewmodel,
                     Case(
                       id: 'n/a',
                       title: titleController.text,
@@ -238,14 +239,14 @@ class AddCaseScreen extends HookWidget {
   }
 }
 
-class CategoryOptions extends HookWidget {
+class CategoryOptions extends HookConsumerWidget {
   const CategoryOptions({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final homeViewModel = useProvider(HomeScreenViewModelProvider.provider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final homeViewModel = ref.watch(HomeScreenViewModelProvider.provider);
     final addCaseScreenViewModel =
-        useProvider(AddCaseScreenViewModelProvider.provider);
+        ref.watch(AddCaseScreenViewModelProvider.provider);
     final categories = homeViewModel.categories;
     final selectedCategory = addCaseScreenViewModel.selectedCateogry;
 

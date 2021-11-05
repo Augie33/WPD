@@ -5,19 +5,20 @@ import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/show_accounts_screen_viewmodel.dart';
 
-class ShowAccountScreen extends StatefulWidget {
+class ShowAccountScreen extends ConsumerStatefulWidget {
   const ShowAccountScreen({Key? key}) : super(key: key);
 
   @override
-  State<ShowAccountScreen> createState() => _ShowAccountScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _ShowAccountScreenState();
 }
 
-class _ShowAccountScreenState extends State<ShowAccountScreen> {
+class _ShowAccountScreenState extends ConsumerState<ShowAccountScreen> {
   @override
   void initState() {
     super.initState();
 
-    context.read(ShowAccountsScreenViewModelProvider.provider).getUsers();
+    ref.read(ShowAccountsScreenViewModelProvider.provider).getUsers();
   }
 
   @override
@@ -27,9 +28,9 @@ class _ShowAccountScreenState extends State<ShowAccountScreen> {
         title: const Text('Show all accounts'),
       ),
       body: Consumer(
-        builder: (context, watch, child) {
+        builder: (context, ref, child) {
           final showAccountsViewModel =
-              watch(ShowAccountsScreenViewModelProvider.provider);
+              ref.watch(ShowAccountsScreenViewModelProvider.provider);
 
           return showAccountsViewModel.isLoading
               ? ListView.builder(

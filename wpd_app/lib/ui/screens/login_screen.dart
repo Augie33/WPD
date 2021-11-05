@@ -90,9 +90,9 @@ class LoginScreen extends HookWidget {
                     ),
                     const SizedBox(height: 30),
                     Consumer(
-                      builder: (context, watch, child) {
+                      builder: (context, ref, child) {
                         final viewModel =
-                            watch(AuthStateViewModelProvider.provider);
+                            ref.watch(AuthStateViewModelProvider.provider);
 
                         return viewModel.isLoading
                             ? const AppLoader()

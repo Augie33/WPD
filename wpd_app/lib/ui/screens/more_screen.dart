@@ -5,12 +5,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 
-class MoreScreen extends HookWidget {
+class MoreScreen extends HookConsumerWidget {
   const MoreScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final authStateViewModel = useProvider(AuthStateViewModelProvider.provider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authStateViewModel = ref.watch(AuthStateViewModelProvider.provider);
 
     return Scaffold(
       appBar: AppBar(

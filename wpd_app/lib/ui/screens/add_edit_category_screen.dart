@@ -7,7 +7,7 @@ import 'package:wpd_app/ui/widgets/custom_form_field.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/add_edit_category_viewmodel.dart';
 
-class AddEditCategoryScreen extends HookWidget {
+class AddEditCategoryScreen extends HookConsumerWidget {
   const AddEditCategoryScreen({Key? key}) : super(key: key);
 
   void showAddEditTextField(
@@ -121,10 +121,10 @@ class AddEditCategoryScreen extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final titleController = useTextEditingController();
     final categoryViewModel =
-        useProvider(AddEditCategoryViewModelProvider.provider);
+        ref.watch(AddEditCategoryViewModelProvider.provider);
 
     // initState
     useEffect(() {

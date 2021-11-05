@@ -26,14 +26,14 @@ abstract class AppStartup {
   }
 }
 
-class StartUpPage extends StatefulWidget {
+class StartUpPage extends ConsumerStatefulWidget {
   const StartUpPage({Key? key}) : super(key: key);
 
   @override
   _StartUpPageState createState() => _StartUpPageState();
 }
 
-class _StartUpPageState extends State<StartUpPage> {
+class _StartUpPageState extends ConsumerState<StartUpPage> {
   late Future<User?> startUpFuture;
 
   @override
@@ -50,7 +50,7 @@ class _StartUpPageState extends State<StartUpPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           WidgetsBinding.instance?.addPostFrameCallback((_) {
-            final appState = context.read(AuthStateViewModelProvider.provider);
+            final appState = ref.read(AuthStateViewModelProvider.provider);
 
             // Checking the auth screen
             if (snapshot.data != null) {

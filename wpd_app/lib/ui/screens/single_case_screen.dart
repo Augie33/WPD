@@ -16,21 +16,22 @@ import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 import 'package:wpd_app/view_models/signal_case_screen_viewmodel.dart';
 
-class SingleCaseScreen extends StatefulWidget {
+class SingleCaseScreen extends ConsumerStatefulWidget {
   const SingleCaseScreen({Key? key, required this.caseId}) : super(key: key);
 
   final String? caseId;
 
   @override
-  State<SingleCaseScreen> createState() => _SingleCaseScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _SingleCaseScreenState();
 }
 
-class _SingleCaseScreenState extends State<SingleCaseScreen> {
+class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
   @override
   void initState() {
     super.initState();
 
-    context
+    ref
         .read(SingalCaseScreenViewModelProvider.provider)
         .fetchCase(caseId: widget.caseId);
   }
@@ -38,12 +39,12 @@ class _SingleCaseScreenState extends State<SingleCaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         final singalCaseViewModel =
-            watch(SingalCaseScreenViewModelProvider.provider);
+            ref.watch(SingalCaseScreenViewModelProvider.provider);
         final myCase = singalCaseViewModel.myCase;
 
-        final authViewModel = watch(AuthStateViewModelProvider.provider);
+        final authViewModel = ref.watch(AuthStateViewModelProvider.provider);
 
         return singalCaseViewModel.isLoading
             ? const Center(
@@ -380,11 +381,11 @@ class QRScreen extends ConsumerWidget {
   const QRScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final singalCaseViewModel =
-        watch(SingalCaseScreenViewModelProvider.provider);
+        ref.watch(SingalCaseScreenViewModelProvider.provider);
 
-    final authViewModel = watch(AuthStateViewModelProvider.provider);
+    final authViewModel = ref.watch(AuthStateViewModelProvider.provider);
 
     return Scaffold(
       appBar: AppBar(
@@ -399,7 +400,7 @@ class QRScreen extends ConsumerWidget {
   }
 }
 
-class EmailScreen extends HookWidget {
+class EmailScreen extends HookConsumerWidget {
   EmailScreen({Key? key}) : super(key: key);
 
   final _key = GlobalKey<FormState>();
@@ -429,9 +430,9 @@ class EmailScreen extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final singalCaseViewModel =
-        useProvider(SingalCaseScreenViewModelProvider.provider);
+        ref.watch(SingalCaseScreenViewModelProvider.provider);
 
     final emailController = useTextEditingController();
 

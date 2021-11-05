@@ -5,7 +5,7 @@ import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/models/custom_category/custom_category.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 
-class CategoryTile extends HookWidget {
+class CategoryTile extends HookConsumerWidget {
   const CategoryTile({
     Key? key,
     required this.category,
@@ -16,8 +16,8 @@ class CategoryTile extends HookWidget {
   final Function? onPressed;
 
   @override
-  Widget build(BuildContext context) {
-    final homeViewModel = useProvider(HomeScreenViewModelProvider.provider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final homeViewModel = ref.watch(HomeScreenViewModelProvider.provider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 3),

@@ -4,21 +4,21 @@ import 'package:wpd_app/ui/widgets/case_tile.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/search_cases_screen_viewmodel.dart';
 
-class SearchCasesScreen extends StatefulWidget {
+class SearchCasesScreen extends ConsumerStatefulWidget {
   const SearchCasesScreen({Key? key}) : super(key: key);
 
   @override
   _SearchCasesScreenState createState() => _SearchCasesScreenState();
 }
 
-class _SearchCasesScreenState extends State<SearchCasesScreen> {
+class _SearchCasesScreenState extends ConsumerState<SearchCasesScreen> {
   final searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    context.read(SearchScreenViewModelProvider.provider).myCases = [];
+    ref.read(SearchScreenViewModelProvider.provider).myCases = [];
   }
 
   @override
@@ -28,7 +28,7 @@ class _SearchCasesScreenState extends State<SearchCasesScreen> {
   }
 
   void search() {
-    context
+    ref
         .read(SearchScreenViewModelProvider.provider)
         .searchCases(searchController.text);
   }
@@ -38,8 +38,9 @@ class _SearchCasesScreenState extends State<SearchCasesScreen> {
     return GestureDetector(onTap: () {
       FocusScope.of(context).unfocus();
     }, child: Consumer(
-      builder: (context, watch, child) {
-        final searchViewModel = watch(SearchScreenViewModelProvider.provider);
+      builder: (context, ref, child) {
+        final searchViewModel =
+            ref.watch(SearchScreenViewModelProvider.provider);
 
         return Scaffold(
           appBar: AppBar(

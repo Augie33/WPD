@@ -7,9 +7,9 @@ class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, watch) {
-    final appState = watch(AuthStateViewModelProvider.provider);
-    final profileState = watch(ProfileScreenViewModelProvider.provider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appState = ref.watch(AuthStateViewModelProvider.provider);
+    final profileState = ref.watch(ProfileScreenViewModelProvider.provider);
     final user = appState.myUser;
     return GestureDetector(
       onTap: () {
@@ -25,9 +25,7 @@ class ProfileScreen extends ConsumerWidget {
               iconSize: 28,
               tooltip: 'Logout',
               onPressed: () async {
-                await context
-                    .read(AuthStateViewModelProvider.provider)
-                    .logout();
+                await appState.logout();
               },
             )
           ],

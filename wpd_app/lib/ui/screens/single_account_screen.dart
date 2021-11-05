@@ -6,7 +6,7 @@ import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/show_accounts_screen_viewmodel.dart';
 import 'package:wpd_app/view_models/singal_account_viewmodel.dart';
 
-class SingleAccountScreen extends StatefulWidget {
+class SingleAccountScreen extends ConsumerStatefulWidget {
   const SingleAccountScreen({Key? key, required this.userId}) : super(key: key);
 
   final String? userId;
@@ -15,12 +15,12 @@ class SingleAccountScreen extends StatefulWidget {
   _SingleAccountScreenState createState() => _SingleAccountScreenState();
 }
 
-class _SingleAccountScreenState extends State<SingleAccountScreen> {
+class _SingleAccountScreenState extends ConsumerState<SingleAccountScreen> {
   @override
   void initState() {
     super.initState();
 
-    context
+    ref
         .read(SingalAccountScreenViewModelProvider.provider)
         .fetchUser(userId: widget.userId);
   }
@@ -28,9 +28,9 @@ class _SingleAccountScreenState extends State<SingleAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         final singalAccountViewModel =
-            watch(SingalAccountScreenViewModelProvider.provider);
+            ref.watch(SingalAccountScreenViewModelProvider.provider);
         final user = singalAccountViewModel.user;
         return Scaffold(
           appBar: AppBar(
@@ -40,12 +40,11 @@ class _SingleAccountScreenState extends State<SingleAccountScreen> {
                     ? null
                     : () async {
                         if (user?.role != 'admin') {
-                          await context
-                              .read(
-                                  SingalAccountScreenViewModelProvider.provider)
-                              .removeAccount(userId: widget.userId);
+                          singalAccountViewModel.removeAccount(
+                              userId: widget.userId);
+
                           Routemaster.of(context).pop();
-                          context
+                          ref
                               .read(
                                   ShowAccountsScreenViewModelProvider.provider)
                               .getUsers(refresh: true);

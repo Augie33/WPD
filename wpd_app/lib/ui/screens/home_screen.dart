@@ -9,26 +9,26 @@ import 'package:wpd_app/ui/widgets/category_tile.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
 
-    context.read(HomeScreenViewModelProvider.provider).getCategories();
+    ref.read(HomeScreenViewModelProvider.provider).getCategories();
   }
 
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       color: Theme.of(context).primaryColor,
-      onRefresh: () => context
+      onRefresh: () => ref
           .read(HomeScreenViewModelProvider.provider)
           .getCategories(refresh: true),
       child: Scaffold(
@@ -53,8 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         body: Consumer(
-          builder: (context, watch, child) {
-            final homeViewModel = watch(HomeScreenViewModelProvider.provider);
+          builder: (context, ref, child) {
+            final homeViewModel =
+                ref.watch(HomeScreenViewModelProvider.provider);
 
             return homeViewModel.isLoading
                 ? ListView.builder(
@@ -94,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class SingleCategoryScreen extends HookWidget {
+class SingleCategoryScreen extends HookConsumerWidget {
   const SingleCategoryScreen({
     Key? key,
     required this.categoryId,
@@ -103,8 +104,8 @@ class SingleCategoryScreen extends HookWidget {
   final String? categoryId;
 
   @override
-  Widget build(BuildContext context) {
-    final homeViewModel = useProvider(HomeScreenViewModelProvider.provider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final homeViewModel = ref.watch(HomeScreenViewModelProvider.provider);
 
     // initState
     useEffect(() {
@@ -113,7 +114,7 @@ class SingleCategoryScreen extends HookWidget {
 
     return RefreshIndicator(
       color: Theme.of(context).primaryColor,
-      onRefresh: () => context
+      onRefresh: () => ref
           .read(HomeScreenViewModelProvider.provider)
           .getCases(refresh: true, categoryId: categoryId!),
       child: Scaffold(

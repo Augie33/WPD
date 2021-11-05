@@ -7,7 +7,7 @@ import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/ui/widgets/custom_input_text_field.dart';
 import 'package:wpd_app/view_models/create_account_screen_viewmodel.dart';
 
-class CreateAccountScreen extends HookWidget {
+class CreateAccountScreen extends HookConsumerWidget {
   CreateAccountScreen({Key? key}) : super(key: key);
 
   final _key = GlobalKey<FormState>();
@@ -54,9 +54,9 @@ class CreateAccountScreen extends HookWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final createAccountScreenViewModel =
-        useProvider(CreateAccountScreenViewModelProvider.provider);
+        ref.watch(CreateAccountScreenViewModelProvider.provider);
 
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
