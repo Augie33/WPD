@@ -29,10 +29,10 @@ router.get('/', advancedResults(Case, {
   select: 'title'
 }
 ), getCases);
-router.post('/', createCase);
-router.put('/:id/pdf', casePDFUpload);
-router.put('/:id', updateCase);
-router.delete('/:id', deleteCase);
+router.post('/', authorize('admin', 'regular'), createCase);
+router.put('/:id/pdf', authorize('admin', 'regular'), casePDFUpload);
+router.put('/:id', authorize('admin', 'regular'), updateCase);
+router.delete('/:id', authorize('admin', 'regular'), deleteCase);
 router.post('/email', sendEmail);
 
 
