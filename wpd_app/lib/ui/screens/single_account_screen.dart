@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/ui/screens/profile_screen.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/show_accounts_screen_viewmodel.dart';
@@ -36,10 +37,10 @@ class _SingleAccountScreenState extends ConsumerState<SingleAccountScreen> {
           appBar: AppBar(
             actions: [
               IconButton(
-                onPressed: user?.role == 'admin'
+                onPressed: user?.role == Roles.admin
                     ? null
                     : () async {
-                        if (user?.role != 'admin') {
+                        if (user?.role != Roles.admin) {
                           singalAccountViewModel.removeAccount(
                               userId: widget.userId);
 

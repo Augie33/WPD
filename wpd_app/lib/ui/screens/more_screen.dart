@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 
 class MoreScreen extends HookConsumerWidget {
@@ -19,7 +20,7 @@ class MoreScreen extends HookConsumerWidget {
       body: ListView(
         children: [
           if (authStateViewModel.myUser != null &&
-              authStateViewModel.myUser!.role == 'admin')
+              authStateViewModel.myUser!.role == Roles.admin)
             Column(
               children: [
                 Padding(
