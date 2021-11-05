@@ -19,6 +19,14 @@ class CreateAccountScreenViewModel extends ChangeNotifier {
 
   bool _loading = false;
   bool get isLoading => _loading;
+  String _newRole = Roles.regular;
+
+  String get newRole => _newRole;
+
+  void setNewRole(String role) {
+    _newRole = role;
+    notifyListeners();
+  }
 
   Future<void> createUser({
     required User newUser,
@@ -42,7 +50,7 @@ class CreateAccountScreenViewModel extends ChangeNotifier {
           'department': newUser.department,
           'phoneNumber': newUser.phoneNumber,
           'stationPhoneNumber': newUser.stationPhoneNumber,
-          'role': newUser.role,
+          'role': _newRole,
         },
       );
 

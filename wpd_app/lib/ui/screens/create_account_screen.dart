@@ -93,7 +93,7 @@ class CreateAccountScreen extends HookConsumerWidget {
                     phoneNumber: phoneNumberController.text,
                     department: departmentController.text,
                     stationPhoneNumber: stationPhoneNumberController.text,
-                    role: 'police',
+                    role: Roles.regular,
                   ),
                   password: passwordController.text,
                 );
@@ -106,6 +106,8 @@ class CreateAccountScreen extends HookConsumerWidget {
             key: _key,
             child: Column(
               children: [
+                const SizedBox(height: 15),
+                const RoleOptions(),
                 CustomInputTextField(
                   controller: emailController,
                   validator: _validateEmail,
@@ -183,6 +185,50 @@ class CreateAccountScreen extends HookConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class RoleOptions extends ConsumerWidget {
+  const RoleOptions({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final createAccountViewModel =
+        ref.watch(CreateAccountScreenViewModelProvider.provider);
+
+    return Wrap(
+      spacing: 15,
+      runSpacing: 15,
+      children: [
+        ChoiceChip(
+          label: const Text('Regular'),
+          labelStyle: Theme.of(context).textTheme.headline3,
+          selectedColor: Theme.of(context).primaryColor.withOpacity(0.7),
+          selected: createAccountViewModel.newRole == Roles.regular,
+          onSelected: (_) {
+            createAccountViewModel.setNewRole(Roles.regular);
+          },
+        ),
+        ChoiceChip(
+          label: const Text('Viewer'),
+          labelStyle: Theme.of(context).textTheme.headline3,
+          selectedColor: Theme.of(context).primaryColor.withOpacity(0.7),
+          selected: createAccountViewModel.newRole == Roles.viewer,
+          onSelected: (_) {
+            createAccountViewModel.setNewRole(Roles.viewer);
+          },
+        ),
+        ChoiceChip(
+          label: const Text('Admin'),
+          labelStyle: Theme.of(context).textTheme.headline3,
+          selectedColor: Theme.of(context).primaryColor.withOpacity(0.7),
+          selected: createAccountViewModel.newRole == Roles.admin,
+          onSelected: (_) {
+            createAccountViewModel.setNewRole(Roles.admin);
+          },
+        ),
+      ],
     );
   }
 }
