@@ -3,10 +3,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:wpd_app/models/user/user.dart';
 
 import 'package:wpd_app/ui/widgets/case_tile.dart';
 import 'package:wpd_app/ui/widgets/category_tile.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
+import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -26,6 +28,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final role = ref.watch(AuthStateViewModelProvider.provider).myUser?.role;
     return RefreshIndicator(
       color: Theme.of(context).primaryColor,
       onRefresh: () => ref
@@ -42,14 +45,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             icon: const Icon(Icons.history),
           ),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.add),
-              iconSize: 32,
-              tooltip: 'Add Case',
-              onPressed: () {
-                Routemaster.of(context).push('add');
-              },
-            )
+            if (role == Roles.admin || role == Roles.regular)
+              IconButton(
+                icon: const Icon(Icons.add),
+                iconSize: 32,
+                tooltip: 'Add Case',
+                onPressed: () {
+                  Routemaster.of(context).push('add');
+                },
+              )
           ],
         ),
         body: Consumer(
