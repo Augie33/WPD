@@ -51,6 +51,12 @@ exports.updateCategory = asyncHandler(async (req, res, next) => {
         runValidators: true,
     });
 
+    if (!category) {
+        return next(
+            new ErrorResponse('Please provide correct Category ID', 404)
+        );
+    }
+
     res.status(200).json({
         success: true,
         data: category,

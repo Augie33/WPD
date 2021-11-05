@@ -53,7 +53,8 @@ exports.getCase = asyncHandler(async (req, res, next) => {
 // @route     GET /api/v1/cases/number/:caseNumber
 // @access    Private
 exports.getCaseByCaseNumber = asyncHandler(async (req, res, next) => {
-  const casee = await Case.findOne({ caseNumber: req.params.caseNumber });
+
+  const casee = await Case.findOne({ caseNumber: parseInt(req.params.caseNumber) });
 
   if (!casee) {
     return next(new ErrorResponse('Please provide correct Case ID', 404));
@@ -112,10 +113,18 @@ exports.createCase = asyncHandler(async (req, res, next) => {
 // @route     PUT /api/v1/cases/:id
 // @access    Private
 exports.updateCase = asyncHandler(async (req, res, next) => {
+
+
   const casee = await Case.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
+
+  if (!casee) {
+    return next(
+      new ErrorResponse('Please provide correct Case ID', 404)
+    );
+  }
 
   res.status(200).json({
     success: true,
@@ -168,7 +177,6 @@ const upload = multer({
     contentDisposition: 'inline',
     // META DATA FOR PUTTING FIELD NAME
     metadata: function (req, file, cb) {
-
       cb(null, { fieldName: `WPD_${req.customName}` });
     },
     // SET / MODIFY ORIGINAL FILE NAME

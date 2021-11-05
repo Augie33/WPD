@@ -18,7 +18,7 @@ const Case = require('../models/case');
 const router = express.Router({ mergeParams: true });
 
 const { protect, authorize } = require('../middleware/auth');
-
+router.get('/number/:caseNumber', getCaseByCaseNumber);
 router.get('/:id', getCase);
 router.get('/:caseId/:userId', getCaseAndPoliceInfo);
 
@@ -31,9 +31,10 @@ router.get('/', advancedResults(Case, {
 ), getCases);
 router.post('/', createCase);
 router.put('/:id/pdf', casePDFUpload);
-router.get('/number/:caseNumber', getCaseByCaseNumber);
 router.put('/:id', updateCase);
 router.delete('/:id', deleteCase);
 router.post('/email', sendEmail);
+
+
 
 module.exports = router;

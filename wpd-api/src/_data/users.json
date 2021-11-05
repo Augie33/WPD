@@ -20,7 +20,7 @@
       "phoneNumber": "3123126992",
       "stationPhoneNumber": "3163442222",
       "department": "DV",
-      "role": "police",
+      "role": "regular",
       "password": "1234567"
     },
     {
@@ -32,7 +32,7 @@
       "phoneNumber": "3163326992",
       "stationPhoneNumber": "3163442222",
       "department": "Burglary",
-      "role": "police",
+      "role": "regular",
       "password": "1234567"
     }
   ]

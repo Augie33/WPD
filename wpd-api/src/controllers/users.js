@@ -54,6 +54,14 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
     runValidators: true,
   });
 
+
+
+  if (!user) {
+    return next(
+      new ErrorResponse('Please provide correct User ID', 404)
+    );
+  }
+
   res.status(200).json({
     success: true,
     data: user,
