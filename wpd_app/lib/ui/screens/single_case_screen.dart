@@ -350,16 +350,18 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                                                     color: Theme.of(context)
                                                         .primaryColor,
                                                   ),
-                                                  title: Text(
-                                                    myCase.urlPDF,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText1!
-                                                        .copyWith(
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .primaryColor,
-                                                        ),
+                                                  title: Center(
+                                                    child: Text(
+                                                      myCase.urlPDF,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1!
+                                                          .copyWith(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                               )
