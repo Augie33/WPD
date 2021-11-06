@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:validators/validators.dart';
 import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/ui/widgets/custom_input_text_field.dart';
 import 'package:wpd_app/view_models/add_case_screen_viewmodel.dart';
@@ -76,11 +75,17 @@ class AddCaseScreen extends HookConsumerWidget {
     final descriptionController = useTextEditingController();
     final urlController = useTextEditingController();
     final urlPdfController = useTextEditingController();
+    final FocusNode _focusNode = FocusNode();
 
     // initState
     useEffect(() {
       addCaseViewmodel.file = null;
       addCaseViewmodel.selectedCategory(null, notifyListener: false);
+
+      // dispose
+      return () {
+        _focusNode.dispose();
+      };
     }, []);
 
     return GestureDetector(
@@ -223,9 +228,7 @@ class AddCaseScreen extends HookConsumerWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(20.0),
-                          child: Text(addCaseViewmodel.file != null
-                              ? addCaseViewmodel.file.toString()
-                              : ''),
+                          child: Text(addCaseViewmodel.getFilePath() ?? ''),
                         ),
                       ],
                     ),

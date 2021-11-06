@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
@@ -25,13 +26,13 @@ class AddCaseScreenViewModel extends ChangeNotifier {
 
   bool _loading = false;
   bool _uploadFromDevice = true;
-  File? _file;
+  XFile? _file;
   CustomCategory? _selectedCateogry;
 
   bool get isLoading => _loading;
   bool get uploadFromDevice => _uploadFromDevice;
   CustomCategory? get selectedCateogry => _selectedCateogry;
-  File? get file => _file;
+  XFile? get file => _file;
 
   set uploadFromDevice(value) {
     _uploadFromDevice = value;
@@ -55,6 +56,16 @@ class AddCaseScreenViewModel extends ChangeNotifier {
     _file = file;
 
     notifyListeners();
+  }
+
+  String? getFilePath() {
+    var path = _file?.path.toString().split('/').last;
+
+    if (Platform.isWindows) {
+      path = _file?.path.toString().split('\\').last;
+    }
+
+    return path;
   }
 
   Future<Case?> submitCase(Case newCase) async {

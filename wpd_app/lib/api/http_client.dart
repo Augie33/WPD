@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:cross_file/cross_file.dart';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -19,8 +18,8 @@ class RequestREST {
       // baseUrl: 'http://10.0.2.2:3000/api/v1/',
       baseUrl: 'http://localhost:3000/api/v1/',
       // baseUrl: 'https://wpd-xpzie.ondigitalocean.app/api/v1/',
-      connectTimeout: 3000, // 3 seconds
-      receiveTimeout: 3000, // 3 seconds
+      connectTimeout: 10000, // 10 seconds
+      receiveTimeout: 10000, // 10 seconds
       // headers: <String, String>{
       //   "token": '',
       // },
@@ -113,7 +112,7 @@ class RequestREST {
   }
 
   Future<T> uploadFile<T>(String endpoint, JsonParser<T> parser,
-      {required File file}) async {
+      {required XFile file}) async {
     FormData formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(
         file.path,
