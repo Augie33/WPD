@@ -35,4 +35,16 @@
       "role": "regular",
       "password": "1234567"
     }
+    {
+      "_id": "618981c8b897e26c08ac14d0",
+      "firstName": "Viewer",
+      "lastName": "User",
+      "rank": "rank3",    
+      "email": "v@gmail.com",
+      "phoneNumber": "3163366942",
+      "stationPhoneNumber": "3163452222",
+      "department": "Burglary",
+      "role": "viewer",
+      "password": "1234567"
+    }
   ]
