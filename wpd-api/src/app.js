@@ -18,6 +18,7 @@ const auth = require('./routes/auth');
 const users = require('./routes/user');
 const cases = require('./routes/case');
 const category = require('./routes/category');
+const cart = require('./routes/cart');
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.use('/api/v1/auth', auth);
 app.use('/api/v1/users', users);
 app.use('/api/v1/cases', cases);
 app.use('/api/v1/category', category);
+app.use('/api/v1/cart', cart);
 
 app.use(errorHandler);
 

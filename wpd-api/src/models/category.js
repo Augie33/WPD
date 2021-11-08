@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Fields used for each case
+// Fields used for each Category
 const CategorySchema = new mongoose.Schema({
     title: {
         type: String,
