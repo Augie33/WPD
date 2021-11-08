@@ -11,7 +11,9 @@ dotenv.config({ path: './config/config.env' });
 // Load models
 const Category = require('./models/category')
 const Case = require('./models/case');
-const User = require('./models/User');
+const User = require('./models/user');
+const Cart = require('./models/cart');
+
 
 // Connect to DB
 mongoose.connect(process.env.MONGODB_URL, {
@@ -34,12 +36,17 @@ const users = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8')
 );
 
+const carts = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/carts.json`, 'utf-8')
+);
+
 // Import into DB
 const importData = async () => {
   try {
     await Category.create(categories);
     await Case.create(cases);
     await User.create(users);
+    await Cart.create(carts);
     console.log('Data Imported...'.green.inverse);
     process.exit();
   } catch (err) {
@@ -53,6 +60,7 @@ const deleteData = async () => {
     await Category.deleteMany();
     await Case.deleteMany();
     await User.deleteMany();
+    await Cart.deleteMany();
 
     console.log('Data Destroyed...'.red.inverse);
     process.exit();
