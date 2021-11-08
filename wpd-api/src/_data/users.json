@@ -34,7 +34,7 @@
       "department": "Burglary",
       "role": "regular",
       "password": "1234567"
-    }
+    },
     {
       "_id": "618981c8b897e26c08ac14d0",
       "firstName": "Viewer",
