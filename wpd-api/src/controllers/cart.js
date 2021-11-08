@@ -1,6 +1,7 @@
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/error-response');
 const Cart = require('../models/cart');
+const User = require('../models/user');
 
 
 
@@ -26,6 +27,39 @@ exports.getCart = asyncHandler(async (req, res, next) => {
         data: cart,
     });
 });
+
+// @desc      Get Cart with Police info
+// @route     GET /api/v1/cart/:cartId/:userId
+// @access    Private
+exports.getCartAndPoliceInfo = asyncHandler(async (req, res, next) => {
+    const cart = await Cart.findById(req.params.cartId);
+
+    const user = await User.findById(req.params.userId);
+
+    if (!cart || !user) {
+        return next(
+            new ErrorResponse('Please provide correct Case ID & User ID', 404)
+        );
+    }
+
+    user.role = undefined;
+    user.__v = undefined;
+    cart.__v = undefined;
+
+    res.status(200).json({
+        success: true,
+        data: {
+            cart,
+            user
+        },
+    });
+});
+
+
+
+
+
+
 
 // @desc      Create cart
 // @route     POST /api/v1/cart
