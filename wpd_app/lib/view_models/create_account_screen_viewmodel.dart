@@ -28,7 +28,7 @@ class CreateAccountScreenViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> createUser({
+  Future<bool> createUser({
     required User newUser,
     required String password,
   }) async {
@@ -60,15 +60,20 @@ class CreateAccountScreenViewModel extends ChangeNotifier {
 
       _loading = false;
       BotToast.closeAllLoading();
+      return true;
     } on DioError catch (e) {
       BotToast.showText(text: e.message);
 
       _loading = false;
       notifyListeners();
+      BotToast.closeAllLoading();
+      return false;
     } catch (e) {
       BotToast.showText(text: 'Error');
       _loading = false;
       notifyListeners();
+      BotToast.closeAllLoading();
+      return false;
     }
   }
 }

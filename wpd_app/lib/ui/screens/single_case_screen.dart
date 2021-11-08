@@ -13,6 +13,7 @@ import 'package:validators/validators.dart';
 import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/ui/widgets/custom_button.dart';
 import 'package:wpd_app/ui/widgets/custom_form_field.dart';
+import 'package:wpd_app/ui/widgets/floating_buttons.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 import 'package:wpd_app/view_models/signal_case_screen_viewmodel.dart';
@@ -68,18 +69,6 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                     child: Scaffold(
                       appBar: AppBar(
                         title: Text(myCase.title),
-                        actions: [
-                          if (authViewModel.myUser?.role == Roles.admin ||
-                              authViewModel.myUser?.role == Roles.regular)
-                            IconButton(
-                              icon: const Icon(Icons.edit),
-                              onPressed: () {},
-                            ),
-                          IconButton(
-                            icon: const Icon(Icons.star_border),
-                            onPressed: () {},
-                          )
-                        ],
                       ),
                       body: SingleChildScrollView(
                         child: Column(
@@ -375,6 +364,7 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                           ],
                         ),
                       ),
+                      floatingActionButton: const FloatingButtons(),
                     ),
                   );
       },

@@ -45,9 +45,12 @@ class CreateAccountScreen extends HookConsumerWidget {
     required password,
   }) async {
     if (_key.currentState?.validate() ?? false) {
-      await viewModel.createUser(newUser: newUser, password: password);
+      final success =
+          await viewModel.createUser(newUser: newUser, password: password);
 
-      Routemaster.of(context).pop();
+      if (success) {
+        Routemaster.of(context).pop();
+      }
     } else {
       debugPrint('Error :(');
     }
