@@ -1,14 +1,17 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/models/user/user.dart';
+import 'package:wpd_app/ui/widgets/cart_floating_button.dart';
 
 import 'package:wpd_app/ui/widgets/case_tile.dart';
 import 'package:wpd_app/ui/widgets/category_tile.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
+import 'package:wpd_app/view_models/cart_viewmode.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -85,14 +88,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       );
           },
         ),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(
-            Icons.search,
-            size: 30,
-          ),
-          onPressed: () {
-            Routemaster.of(context).push('search');
-          },
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const CartFloatingButton(),
+            Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: FloatingActionButton(
+                child: const Icon(
+                  Icons.search,
+                  size: 30,
+                ),
+                heroTag: 'search',
+                onPressed: () {
+                  Routemaster.of(context).push('search');
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -149,6 +162,7 @@ class SingleCategoryScreen extends HookConsumerWidget {
                     separatorBuilder: (BuildContext context, int index) =>
                         const SizedBox(height: 3),
                   ),
+        floatingActionButton: const CartFloatingButton(),
       ),
     );
   }
