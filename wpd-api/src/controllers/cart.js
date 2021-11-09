@@ -9,10 +9,7 @@ const User = require('../models/user');
 // @route     GET /api/v1/cart/:id
 // @access    Public
 exports.getCart = asyncHandler(async (req, res, next) => {
-    const cart = await Cart.findById(req.params.id).populate({
-        path: 'cases',
-        select: 'title',
-    });
+    const cart = await Cart.findById(req.params.id).populate('cases');
 
     if (!cart) {
         return next(
