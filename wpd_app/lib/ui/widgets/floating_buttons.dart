@@ -40,7 +40,10 @@ class FloatingButtons extends ConsumerWidget {
               final cartViewModel = ref.watch(CartViewModelProvider.provider);
               return Badge(
                 showBadge: !cartViewModel.isMyCartEmpty(),
-                badgeContent: Text(cartViewModel.myCart.length.toString()),
+                badgeContent: Text(
+                  cartViewModel.myCart.length.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
                 child: const Icon(Icons.shopping_cart_outlined),
               );
             },

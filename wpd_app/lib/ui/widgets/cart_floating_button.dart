@@ -17,7 +17,10 @@ class CartFloatingButton extends ConsumerWidget {
             child: FloatingActionButton(
               heroTag: 'cart',
               child: Badge(
-                badgeContent: Text(cartViewModel.myCart.length.toString()),
+                badgeContent: Text(
+                  cartViewModel.myCart.length.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
                 child: const Icon(
                   Icons.add_shopping_cart,
                   size: 30,
