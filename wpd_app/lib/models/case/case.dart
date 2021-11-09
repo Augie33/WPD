@@ -10,11 +10,11 @@ class Case with _$Case {
   const factory Case({
     @JsonKey(name: '_id') required String id,
     required String title,
+    required int caseNumber,
+    required CustomCategory category,
     required String description,
     required String url,
     required String urlPDF,
-    required int caseNumber,
-    required CustomCategory category,
   }) = _Case;
 
   factory Case.fromJson(Map<String, dynamic> json) => _$CaseFromJson(json);
