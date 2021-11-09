@@ -1,6 +1,8 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:wpd_app/ui/screens/my_cart_screen.dart';
 import 'package:wpd_app/view_models/cart_viewmode.dart';
 
 class CartFloatingButton extends ConsumerWidget {
@@ -26,7 +28,12 @@ class CartFloatingButton extends ConsumerWidget {
                   size: 30,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                showBarModalBottomSheet(
+                  context: context,
+                  builder: (context) => const MyCartScreen(),
+                );
+              },
             ),
           );
   }
