@@ -36,6 +36,11 @@ class MyCartScreen extends StatelessWidget {
             label: 'QR Code',
             onTap: () {/* Do someting */},
           ),
+          SpeedDialChild(
+            child: const Icon(Icons.refresh),
+            label: 'Reset My Cart',
+            onTap: () {/* Do someting */},
+          ),
         ],
       ),
     );
