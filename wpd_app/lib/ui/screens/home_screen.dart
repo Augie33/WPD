@@ -139,13 +139,15 @@ class SingleCategoryScreen extends HookConsumerWidget {
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   )
-                : ListView.builder(
+                : ListView.separated(
                     itemCount: homeViewModel.myCases.length,
                     itemBuilder: (context, index) {
                       final myCase = homeViewModel.myCases[index];
 
                       return CaseTile(myCase: myCase);
                     },
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const SizedBox(height: 3),
                   ),
       ),
     );

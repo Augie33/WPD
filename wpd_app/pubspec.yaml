@@ -62,6 +62,7 @@ dependencies:
   file_picker: ^4.2.0
   modal_bottom_sheet: ^2.0.0
   cross_file: ^0.3.2
+  flutter_slidable: ^1.0.0-dev.9
   flutter_speed_dial: ^4.6.6
   badges: ^2.0.1
 
