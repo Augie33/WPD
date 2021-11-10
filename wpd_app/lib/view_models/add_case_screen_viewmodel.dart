@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 import 'package:wpd_app/api/http_client.dart';
@@ -96,7 +97,7 @@ class AddCaseScreenViewModel extends ChangeNotifier {
           file: _file!,
         );
       }
-
+      HapticFeedback.heavyImpact();
       BotToast.showText(text: 'Added ${newCase.title} case');
 
       _loading = false;

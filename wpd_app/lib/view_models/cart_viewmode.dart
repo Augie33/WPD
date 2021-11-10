@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/models/custom_category/custom_category.dart';
@@ -28,17 +29,20 @@ class CartViewModel extends ChangeNotifier {
     }
 
     _myCart.add(newCase);
+    HapticFeedback.heavyImpact();
     notifyListeners();
   }
 
   void removeCase(int index) {
     _myCart.removeAt(index);
     notifyListeners();
+    HapticFeedback.heavyImpact();
   }
 
   void resetMyCart() {
     _myCart = [];
     notifyListeners();
+    HapticFeedback.heavyImpact();
     BotToast.showText(text: 'Reseted your Cart');
   }
 }

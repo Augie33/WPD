@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -146,6 +147,7 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                                           icon: Icons.qr_code_2,
                                           label: 'QR',
                                           onPressed: () {
+                                            HapticFeedback.heavyImpact();
                                             Routemaster.of(context).push('qr');
                                           },
                                         ),
@@ -161,6 +163,7 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                                           icon: Icons.share,
                                           label: 'Share',
                                           onPressed: () async {
+                                            HapticFeedback.heavyImpact();
                                             await singalCaseViewModel.shareCase(
                                               userId: authViewModel.myUser!.id,
                                             );
@@ -416,6 +419,7 @@ class EmailScreen extends HookConsumerWidget {
     TextEditingController _emailController,
   ) async {
     if (_key.currentState?.validate() ?? false) {
+      HapticFeedback.heavyImpact();
       BotToast.showText(text: 'Email send to ${_emailController.text}');
 
       Routemaster.of(context).pop();

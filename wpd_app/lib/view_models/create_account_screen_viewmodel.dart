@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/user_parser.dart';
@@ -53,7 +54,7 @@ class CreateAccountScreenViewModel extends ChangeNotifier {
           'role': _newRole,
         },
       );
-
+      HapticFeedback.heavyImpact();
       BotToast.showText(
         text: 'Created ${newUser.firstName} ${newUser.lastName}',
       );

@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/user_parser.dart';
@@ -61,7 +62,7 @@ class SingalAccountScreenViewModel extends ChangeNotifier {
         '/users/$userId',
         const VoidParser(),
       );
-
+      HapticFeedback.heavyImpact();
       BotToast.showText(
         text: 'Deleted ${_user?.firstName} ${_user?.lastName}',
       );
