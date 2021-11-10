@@ -1,7 +1,7 @@
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/error-response');
-const Cart = require('../models/cart');
-const User = require('../models/user');
+const Cart = require('../models/Cart');
+const User = require('../models/User');
 
 
 

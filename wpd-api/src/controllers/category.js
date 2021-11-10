@@ -1,6 +1,6 @@
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/error-response');
-const Category = require('../models/category');
+const Category = require('../models/Category');
 
 
 

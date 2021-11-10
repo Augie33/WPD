@@ -1,6 +1,6 @@
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/error-response');
-const User = require('../models/user');
+const User = require('../models/User');
 
 // @desc      Get all users
 // @route     GET /api/v1/users

@@ -8,7 +8,7 @@ const {
     deleteCategory,
 } = require('../controllers/category');
 
-const Category = require('../models/category');
+const Category = require('../models/Category');
 
 // Include other resource routers
 const caseRouter = require('./case');

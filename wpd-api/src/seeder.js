@@ -9,10 +9,10 @@ console.log(__dirname);
 dotenv.config({ path: './config/config.env' });
 
 // Load models
-const Category = require('./models/category')
-const Case = require('./models/case');
-const User = require('./models/user');
-const Cart = require('./models/cart');
+const Category = require('./models/Category')
+const Case = require('./models/Case');
+const User = require('./models/User');
+const Cart = require('./models/Cart');
 
 
 // Connect to DB

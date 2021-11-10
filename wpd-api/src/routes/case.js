@@ -12,7 +12,7 @@ const {
   sendEmail,
 } = require('../controllers/case');
 
-const Case = require('../models/case');
+const Case = require('../models/Case');
 
 
 const router = express.Router({ mergeParams: true });
