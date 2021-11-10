@@ -19,6 +19,7 @@ const users = require('./routes/user');
 const cases = require('./routes/case');
 const category = require('./routes/category');
 const cart = require('./routes/cart');
+const favorite = require('./routes/favorite');
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/api/v1/users', users);
 app.use('/api/v1/cases', cases);
 app.use('/api/v1/category', category);
 app.use('/api/v1/cart', cart);
+app.use('/api/v1/favorite', favorite);
 
 app.use(errorHandler);
 
