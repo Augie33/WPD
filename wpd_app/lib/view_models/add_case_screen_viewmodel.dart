@@ -97,7 +97,7 @@ class AddCaseScreenViewModel extends ChangeNotifier {
           file: _file!,
         );
       }
-      HapticFeedback.heavyImpact();
+      HapticFeedback.lightImpact();
       BotToast.showText(text: 'Added ${newCase.title} case');
 
       _loading = false;

@@ -147,7 +147,7 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                                           icon: Icons.qr_code_2,
                                           label: 'QR',
                                           onPressed: () {
-                                            HapticFeedback.heavyImpact();
+                                            HapticFeedback.lightImpact();
                                             Routemaster.of(context).push('qr');
                                           },
                                         ),
@@ -163,7 +163,7 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                                           icon: Icons.share,
                                           label: 'Share',
                                           onPressed: () async {
-                                            HapticFeedback.heavyImpact();
+                                            HapticFeedback.lightImpact();
                                             await singalCaseViewModel.shareCase(
                                               userId: authViewModel.myUser!.id,
                                             );
@@ -419,7 +419,7 @@ class EmailScreen extends HookConsumerWidget {
     TextEditingController _emailController,
   ) async {
     if (_key.currentState?.validate() ?? false) {
-      HapticFeedback.heavyImpact();
+      HapticFeedback.lightImpact();
       BotToast.showText(text: 'Email send to ${_emailController.text}');
 
       Routemaster.of(context).pop();

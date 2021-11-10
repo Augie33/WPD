@@ -62,7 +62,7 @@ class SingalAccountScreenViewModel extends ChangeNotifier {
         '/users/$userId',
         const VoidParser(),
       );
-      HapticFeedback.heavyImpact();
+      HapticFeedback.lightImpact();
       BotToast.showText(
         text: 'Deleted ${_user?.firstName} ${_user?.lastName}',
       );

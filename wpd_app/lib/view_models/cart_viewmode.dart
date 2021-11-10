@@ -29,20 +29,20 @@ class CartViewModel extends ChangeNotifier {
     }
 
     _myCart.add(newCase);
-    HapticFeedback.heavyImpact();
+    HapticFeedback.lightImpact();
     notifyListeners();
   }
 
   void removeCase(int index) {
     _myCart.removeAt(index);
     notifyListeners();
-    HapticFeedback.heavyImpact();
+    HapticFeedback.lightImpact();
   }
 
   void resetMyCart() {
     _myCart = [];
     notifyListeners();
-    HapticFeedback.heavyImpact();
+    HapticFeedback.lightImpact();
     BotToast.showText(text: 'Reseted your Cart');
   }
 }
