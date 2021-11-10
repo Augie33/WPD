@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio_http/dio_http.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/favorite_parser.dart';
@@ -55,7 +56,10 @@ class FavoriteViewModel extends ChangeNotifier {
         '/favorite/$caseId',
         const FavoriteParser(),
       );
+      HapticFeedback.lightImpact();
+      BotToast.showText(text: 'Favorite case');
       _loading = false;
+
       notifyListeners();
     } on DioError catch (e) {
       BotToast.showText(text: e.message);
@@ -77,6 +81,8 @@ class FavoriteViewModel extends ChangeNotifier {
         '/favorite/$caseId',
         const FavoriteParser(),
       );
+      HapticFeedback.lightImpact();
+      BotToast.showText(text: 'Unfavorite case');
       _loading = false;
       notifyListeners();
     } on DioError catch (e) {
