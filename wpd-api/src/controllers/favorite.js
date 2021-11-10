@@ -34,7 +34,12 @@ exports.favoriteCase = asyncHandler(async (req, res, next) => {
     const update = { $addToSet: { cases: req.params.caseId } };
     const opts = { new: true };
 
-    favorite = await Favorite.findByIdAndUpdate(req.user._id, update, opts).populate('cases');
+    favorite = await Favorite.findByIdAndUpdate(req.user._id, update, opts).populate({
+        path: 'cases',
+        populate: {
+            path: 'category'
+        }
+    });
 
 
     res.status(201).json({
@@ -63,7 +68,12 @@ exports.unFavoriteCase = asyncHandler(async (req, res, next) => {
     const update = { $pull: { cases: req.params.caseId } };
     const opts = { new: true };
 
-    favorite = await Favorite.findByIdAndUpdate(req.user._id, update, opts).populate('cases');
+    favorite = await Favorite.findByIdAndUpdate(req.user._id, update, opts).populate({
+        path: 'cases',
+        populate: {
+            path: 'category'
+        }
+    });
 
 
     res.status(201).json({
@@ -85,10 +95,15 @@ exports.getCases = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse('Invalid credentials', 401));
     }
 
-    let favorite = await Favorite.findById(req.user._id).populate('cases');;
+    let favorite = await Favorite.findById(req.user._id).populate({
+        path: 'cases',
+        populate: {
+            path: 'category'
+        }
+    });;
 
     if (!favorite) {
-        favorite = await Favorite.create({ _id: req.user._id }).populate('cases');;
+        favorite = await Favorite.create({ _id: req.user._id });
     }
 
 
