@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/models/case/case.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:wpd_app/view_models/cart_viewmode.dart';
 
-class CaseTile extends StatelessWidget {
+class CaseTile extends ConsumerWidget {
   const CaseTile({
     Key? key,
     required this.myCase,
+    this.enabledSlidable = true,
   }) : super(key: key);
 
   final Case myCase;
+  final bool enabledSlidable;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 3),
       child: Slidable(
+        enabled: enabledSlidable,
         key: ValueKey(myCase.id),
         endActionPane: ActionPane(
           motion: const DrawerMotion(),
@@ -25,7 +30,9 @@ class CaseTile extends StatelessWidget {
               label: 'Add to Cart',
               backgroundColor: Theme.of(context).primaryColor,
               icon: Icons.add_shopping_cart,
-              onPressed: (context) {},
+              onPressed: (context) {
+                ref.read(CartViewModelProvider.provider).addCase(myCase);
+              },
             ),
           ],
         ),

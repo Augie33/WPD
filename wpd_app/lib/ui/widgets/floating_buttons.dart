@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/ui/screens/my_cart_screen.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 import 'package:wpd_app/view_models/cart_viewmode.dart';
+import 'package:wpd_app/view_models/signal_case_screen_viewmodel.dart';
 
 class FloatingButtons extends ConsumerWidget {
   const FloatingButtons({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class FloatingButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authViewModel = ref.watch(AuthStateViewModelProvider.provider);
+    final cartViewModel = ref.watch(CartViewModelProvider.provider);
 
     return SpeedDial(
       icon: Icons.list,
@@ -22,7 +25,13 @@ class FloatingButtons extends ConsumerWidget {
         SpeedDialChild(
           child: const Icon(Icons.add_shopping_cart_sharp),
           label: 'Add Case',
-          onTap: () {/* Do someting */},
+          onTap: () {
+            final singalCaseViewModel =
+                ref.read(SingalCaseScreenViewModelProvider.provider);
+
+            final myCase = singalCaseViewModel.myCase;
+            cartViewModel.addCase(myCase!);
+          },
         ),
         SpeedDialChild(
           child: const Icon(Icons.star_border),

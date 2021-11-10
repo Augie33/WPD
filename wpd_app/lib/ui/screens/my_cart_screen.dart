@@ -1,11 +1,17 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:wpd_app/ui/widgets/case_tile.dart';
+import 'package:wpd_app/view_models/cart_viewmode.dart';
 
-class MyCartScreen extends StatelessWidget {
+class MyCartScreen extends ConsumerWidget {
   const MyCartScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartViewModel = ref.watch(CartViewModelProvider.provider);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -16,6 +22,33 @@ class MyCartScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
+      ),
+      body: ListView.separated(
+        itemCount: cartViewModel.myCart.length,
+        itemBuilder: (BuildContext context, int index) {
+          final oneCase = cartViewModel.myCart[index];
+
+          return Dismissible(
+            key: ValueKey(oneCase.id),
+            onDismissed: (_) {
+              cartViewModel.removeCase(index);
+              BotToast.showText(text: 'Removed ${oneCase.title}');
+            },
+            direction: DismissDirection.endToStart,
+            background: Container(
+              color: Colors.red,
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.all(15),
+              child: const Icon(Icons.delete),
+            ),
+            child: CaseTile(
+              myCase: oneCase,
+              enabledSlidable: false,
+            ),
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) =>
+            const SizedBox(height: 3),
       ),
       floatingActionButton: SpeedDial(
         icon: Icons.list,
@@ -39,7 +72,10 @@ class MyCartScreen extends StatelessWidget {
           SpeedDialChild(
             child: const Icon(Icons.refresh),
             label: 'Reset My Cart',
-            onTap: () {/* Do someting */},
+            onTap: () {
+              cartViewModel.resetMyCart();
+              Navigator.pop(context);
+            },
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/models/case/case.dart';
@@ -8,17 +9,7 @@ abstract class CartViewModelProvider {
 }
 
 class CartViewModel extends ChangeNotifier {
-  List<Case> _myCart = [
-    const Case(
-      id: '23123',
-      title: 'Test',
-      caseNumber: 12312,
-      category: CustomCategory(id: 'asdasd', title: 'customCat'),
-      description: 'asdasdas',
-      url: 'dsfsdf.g',
-      urlPDF: 'google.com',
-    ),
-  ];
+  List<Case> _myCart = [];
 
   List<Case> get myCart => _myCart;
 
@@ -31,6 +22,11 @@ class CartViewModel extends ChangeNotifier {
   }
 
   void addCase(Case newCase) {
+    if (_myCart.contains(newCase)) {
+      BotToast.showText(text: 'You already added ${newCase.title}');
+      return;
+    }
+
     _myCart.add(newCase);
     notifyListeners();
   }
@@ -43,5 +39,6 @@ class CartViewModel extends ChangeNotifier {
   void resetMyCart() {
     _myCart = [];
     notifyListeners();
+    BotToast.showText(text: 'Reseted your Cart');
   }
 }
