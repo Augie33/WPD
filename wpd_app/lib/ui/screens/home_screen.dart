@@ -11,7 +11,6 @@ import 'package:wpd_app/ui/widgets/case_tile.dart';
 import 'package:wpd_app/ui/widgets/category_tile.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
-import 'package:wpd_app/view_models/cart_viewmode.dart';
 import 'package:wpd_app/view_models/favorite_viewmodel.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 

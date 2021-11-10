@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/models/custom_category/custom_category.dart';
@@ -45,7 +44,7 @@ class CategoryTile extends HookConsumerWidget {
                     .copyWith(fontSize: 24),
               ),
               trailing: Icon(
-                onPressed != null ? Icons.edit : Icons.arrow_forward_ios,
+                onPressed != null ? Icons.edit : Icons.format_list_bulleted,
                 color: Theme.of(context).primaryColor,
               ),
             ),
