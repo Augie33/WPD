@@ -12,6 +12,7 @@ import 'package:wpd_app/ui/widgets/category_tile.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 import 'package:wpd_app/view_models/cart_viewmode.dart';
+import 'package:wpd_app/view_models/favorite_viewmodel.dart';
 import 'package:wpd_app/view_models/home_screen_viewmodel.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -27,6 +28,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
 
     ref.read(HomeScreenViewModelProvider.provider).getCategories();
+    ref.read(FavoriteViewModelProvider.provider).getFavorite();
   }
 
   @override

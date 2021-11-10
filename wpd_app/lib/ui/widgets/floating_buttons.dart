@@ -8,6 +8,7 @@ import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/ui/screens/my_cart_screen.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 import 'package:wpd_app/view_models/cart_viewmode.dart';
+import 'package:wpd_app/view_models/favorite_viewmodel.dart';
 import 'package:wpd_app/view_models/signal_case_screen_viewmodel.dart';
 
 class FloatingButtons extends ConsumerWidget {
@@ -17,6 +18,8 @@ class FloatingButtons extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authViewModel = ref.watch(AuthStateViewModelProvider.provider);
     final cartViewModel = ref.watch(CartViewModelProvider.provider);
+    final favoriteViewModel = ref.watch(FavoriteViewModelProvider.provider);
+    final myCase = ref.read(SingalCaseScreenViewModelProvider.provider).myCase;
 
     return SpeedDial(
       icon: Icons.list,
@@ -26,18 +29,32 @@ class FloatingButtons extends ConsumerWidget {
           child: const Icon(Icons.add_shopping_cart_sharp),
           label: 'Add Case',
           onTap: () {
-            final singalCaseViewModel =
-                ref.read(SingalCaseScreenViewModelProvider.provider);
-
-            final myCase = singalCaseViewModel.myCase;
-            cartViewModel.addCase(myCase!);
+            if (myCase != null) {
+              cartViewModel.addCase(myCase);
+            }
           },
         ),
-        SpeedDialChild(
-          child: const Icon(Icons.star_border),
-          label: 'Favorite Case',
-          onTap: () {/* Do someting */},
-        ),
+        if (myCase != null)
+          SpeedDialChild(
+            child: Icon(
+              favoriteViewModel.checkCase(myCase)
+                  ? Icons.star
+                  : Icons.star_border,
+              color: favoriteViewModel.checkCase(myCase)
+                  ? Theme.of(context).primaryColor
+                  : null,
+            ),
+            label: favoriteViewModel.checkCase(myCase)
+                ? 'Unfavorite Case'
+                : 'Favorite Case',
+            onTap: () async {
+              if (favoriteViewModel.checkCase(myCase)) {
+                await favoriteViewModel.unFavoriteCase(myCase.id);
+              } else {
+                await favoriteViewModel.favoriteCase(myCase.id);
+              }
+            },
+          ),
         if (authViewModel.myUser?.role == Roles.admin ||
             authViewModel.myUser?.role == Roles.regular)
           SpeedDialChild(

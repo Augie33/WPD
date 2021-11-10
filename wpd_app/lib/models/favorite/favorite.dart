@@ -9,7 +9,7 @@ class Favorite with _$Favorite {
   @JsonSerializable(explicitToJson: true)
   const factory Favorite({
     @JsonKey(name: '_id') required String id,
-    required List<Case> data,
+    required List<Case> cases,
   }) = _Favorite;
 
   factory Favorite.fromJson(Map<String, dynamic> json) =>

@@ -22,10 +22,10 @@ class _$FavoriteTearOff {
   const _$FavoriteTearOff();
 
   _Favorite call(
-      {@JsonKey(name: '_id') required String id, required List<Case> data}) {
+      {@JsonKey(name: '_id') required String id, required List<Case> cases}) {
     return _Favorite(
       id: id,
-      data: data,
+      cases: cases,
     );
   }
 
@@ -41,7 +41,7 @@ const $Favorite = _$FavoriteTearOff();
 mixin _$Favorite {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  List<Case> get data => throw _privateConstructorUsedError;
+  List<Case> get cases => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +53,7 @@ mixin _$Favorite {
 abstract class $FavoriteCopyWith<$Res> {
   factory $FavoriteCopyWith(Favorite value, $Res Function(Favorite) then) =
       _$FavoriteCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: '_id') String id, List<Case> data});
+  $Res call({@JsonKey(name: '_id') String id, List<Case> cases});
 }
 
 /// @nodoc
@@ -67,16 +67,16 @@ class _$FavoriteCopyWithImpl<$Res> implements $FavoriteCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? data = freezed,
+    Object? cases = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      data: data == freezed
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
+      cases: cases == freezed
+          ? _value.cases
+          : cases // ignore: cast_nullable_to_non_nullable
               as List<Case>,
     ));
   }
@@ -87,7 +87,7 @@ abstract class _$FavoriteCopyWith<$Res> implements $FavoriteCopyWith<$Res> {
   factory _$FavoriteCopyWith(_Favorite value, $Res Function(_Favorite) then) =
       __$FavoriteCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: '_id') String id, List<Case> data});
+  $Res call({@JsonKey(name: '_id') String id, List<Case> cases});
 }
 
 /// @nodoc
@@ -102,16 +102,16 @@ class __$FavoriteCopyWithImpl<$Res> extends _$FavoriteCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? data = freezed,
+    Object? cases = freezed,
   }) {
     return _then(_Favorite(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      data: data == freezed
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
+      cases: cases == freezed
+          ? _value.cases
+          : cases // ignore: cast_nullable_to_non_nullable
               as List<Case>,
     ));
   }
@@ -122,7 +122,7 @@ class __$FavoriteCopyWithImpl<$Res> extends _$FavoriteCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_Favorite implements _Favorite {
   const _$_Favorite(
-      {@JsonKey(name: '_id') required this.id, required this.data});
+      {@JsonKey(name: '_id') required this.id, required this.cases});
 
   factory _$_Favorite.fromJson(Map<String, dynamic> json) =>
       _$$_FavoriteFromJson(json);
@@ -131,11 +131,11 @@ class _$_Favorite implements _Favorite {
   @JsonKey(name: '_id')
   final String id;
   @override
-  final List<Case> data;
+  final List<Case> cases;
 
   @override
   String toString() {
-    return 'Favorite(id: $id, data: $data)';
+    return 'Favorite(id: $id, cases: $cases)';
   }
 
   @override
@@ -144,15 +144,15 @@ class _$_Favorite implements _Favorite {
         (other is _Favorite &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)));
+            (identical(other.cases, cases) ||
+                const DeepCollectionEquality().equals(other.cases, cases)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(data);
+      const DeepCollectionEquality().hash(cases);
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +168,7 @@ class _$_Favorite implements _Favorite {
 abstract class _Favorite implements Favorite {
   const factory _Favorite(
       {@JsonKey(name: '_id') required String id,
-      required List<Case> data}) = _$_Favorite;
+      required List<Case> cases}) = _$_Favorite;
 
   factory _Favorite.fromJson(Map<String, dynamic> json) = _$_Favorite.fromJson;
 
@@ -176,7 +176,7 @@ abstract class _Favorite implements Favorite {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   @override
-  List<Case> get data => throw _privateConstructorUsedError;
+  List<Case> get cases => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$FavoriteCopyWith<_Favorite> get copyWith =>

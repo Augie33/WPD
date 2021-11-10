@@ -7,6 +7,7 @@ import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/services/service_locator.dart';
 import 'package:wpd_app/ui/screens/splash_screen.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
+import 'package:wpd_app/view_models/favorite_viewmodel.dart';
 
 abstract class AppStartup {
   static Future<User?> setup() async {
@@ -19,6 +20,7 @@ abstract class AppStartup {
     // Checking the auth
     if (Platform.isIOS || Platform.isAndroid) {
       final user = await _requestRest.checkToken();
+
       return user;
     }
 
