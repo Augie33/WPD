@@ -54,7 +54,7 @@ class CreateAccountScreenViewModel extends ChangeNotifier {
           'role': _newRole,
         },
       );
-      HapticFeedback.heavyImpact();
+      HapticFeedback.lightImpact();
       BotToast.showText(
         text: 'Created ${newUser.firstName} ${newUser.lastName}',
       );

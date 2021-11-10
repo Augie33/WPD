@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/auth_parser.dart';
@@ -72,7 +73,7 @@ class AuthStateViewModel extends ChangeNotifier {
 
       // set the token header
       _requestRest.setUpToken(data.token);
-
+      HapticFeedback.lightImpact();
       BotToast.showText(text: 'Success');
       // nav
       _loggedIn = true;
