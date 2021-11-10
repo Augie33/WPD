@@ -27,7 +27,7 @@ class CaseTile extends ConsumerWidget {
           extentRatio: 0.25,
           children: [
             SlidableAction(
-              label: 'Add to Cart',
+              label: 'Add',
               backgroundColor: Theme.of(context).primaryColor,
               icon: Icons.add_shopping_cart,
               onPressed: (context) {
