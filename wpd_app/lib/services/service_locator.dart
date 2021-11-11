@@ -1,7 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wpd_app/api/http_client.dart';
-import 'package:wpd_app/models/favorite/favorite.dart';
 import 'package:wpd_app/services/file_picker/file_picker_implementation.dart';
 import 'package:wpd_app/services/file_picker/file_picker_service.dart';
 import 'package:wpd_app/services/pdf/pdf_implementation.dart';
@@ -14,7 +13,6 @@ import 'package:wpd_app/services/share/share_implementation.dart';
 import 'package:wpd_app/services/share/share_service.dart';
 import 'package:wpd_app/services/storage/storage_service.dart';
 import 'package:wpd_app/services/storage/storage_service_implementation.dart';
-import 'package:wpd_app/view_models/favorite_viewmodel.dart';
 
 GetIt serviceLocator = GetIt.instance;
 

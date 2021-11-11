@@ -34,38 +34,73 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+
+  # State management 
   flutter_riverpod: ^1.0.0
-  get_it: ^7.2.0
-  routemaster: ^0.9.5
+  
+  # Hooks
   flutter_hooks: ^0.18.0
   hooks_riverpod: ^1.0.0
-  bot_toast: ^4.0.1
-  freezed_annotation: ^0.14.3
-  intl: ^0.17.0
-  validators: ^3.0.0
-  url_launcher: ^6.0.11
-  google_fonts: ^2.1.0
-  shared_preferences: ^2.0.8
-  connectivity_plus: ^1.1.0
-  flutter_secure_storage: ^4.2.1
+
+  # Service provider
+  get_it: ^7.2.0
+
+  # Navigator 
+  routemaster: ^0.9.5
+
+  # HTTP
   dio_http: ^5.0.4
-  shimmer: ^2.0.0
   pretty_dio_logger: ^1.1.1
-  pretty_qr_code: ^2.0.2
-  qr_flutter: ^4.0.0
-  device_preview: ^0.7.4
-  flutter_cached_pdfview: ^0.4.0-nullsafety
-  share_plus: ^3.0.1
   http_parser: ^4.0.0
+
+  # Data
+  intl: ^0.17.0
+  freezed_annotation: ^0.14.3
+
+  # Securley store data in a keystore
+  flutter_secure_storage: ^4.2.1
+
+  # Shared prefs
+  shared_preferences: ^2.0.8
+
+  # File picker
   file_picker: ^4.2.0
-  modal_bottom_sheet: ^2.0.0
+
+  # QR
+  qr_flutter: ^4.0.0
+  pretty_qr_code: ^2.0.2
+
+  # PDF
+  flutter_cached_pdfview: ^0.4.0-nullsafety
   cross_file: ^0.3.2
+
+  # Launch external URLs
+  url_launcher: ^6.0.11
+
+  # Validators
+  validators: ^3.0.0
+  
+  # Debug
+  device_preview: ^0.7.4
+
+  # Plus
+  share_plus: ^3.0.1
+  connectivity_plus: ^1.1.0
+  
+  # Look
+  bot_toast: ^4.0.1
+  google_fonts: ^2.1.0
+  modal_bottom_sheet: ^2.0.0
+  shimmer: ^2.0.0
   flutter_speed_dial: ^4.6.6
   badges: ^2.0.1
   flutter_slidable: 
     git:
       url: https://github.com/dmakwt/flutter_slidable.git
-      ref: master    
+      ref: master   
+
+  
+
 
 
 
