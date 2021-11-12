@@ -36,9 +36,9 @@ class AddCaseScreenViewModel extends ChangeNotifier {
   CustomCategory? get selectedCateogry => _selectedCateogry;
   XFile? get file => _file;
 
-  void setUploadFromDevice(bool value, {bool notifyListener = true}) {
+  void setUploadFromDevice(bool value, {bool refresh = true}) {
     _uploadFromDevice = value;
-    if (notifyListener) {
+    if (refresh) {
       notifyListeners();
     }
   }

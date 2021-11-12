@@ -8,9 +8,10 @@ import 'package:wpd_app/ui/widgets/custom_input_text_field.dart';
 import 'package:wpd_app/view_models/create_account_screen_viewmodel.dart';
 
 class CreateAccountScreen extends HookConsumerWidget {
-  CreateAccountScreen({Key? key}) : super(key: key);
+  CreateAccountScreen({Key? key, this.user}) : super(key: key);
 
   final _key = GlobalKey<FormState>();
+  final User? user;
 
   String? _validateEmail(String? value) {
     if (value!.isEmpty) {
@@ -56,19 +57,57 @@ class CreateAccountScreen extends HookConsumerWidget {
     }
   }
 
+  Future<void> _update(
+    BuildContext context,
+    CreateAccountScreenViewModel viewModel, {
+    required User oldUser,
+  }) async {
+    if (_key.currentState?.validate() ?? false) {
+      await viewModel.updateUser(oldUser: oldUser);
+      Navigator.pop(context);
+      Routemaster.of(context).push('/more/accounts');
+    } else {
+      debugPrint('Error :(');
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final createAccountScreenViewModel =
         ref.watch(CreateAccountScreenViewModelProvider.provider);
 
-    final emailController = useTextEditingController();
+    final emailController = useTextEditingController(
+      text: user?.email,
+    );
     final passwordController = useTextEditingController();
-    final firstNameController = useTextEditingController();
-    final lastNameController = useTextEditingController();
-    final rankController = useTextEditingController();
-    final departmentController = useTextEditingController();
-    final phoneNumberController = useTextEditingController();
-    final stationPhoneNumberController = useTextEditingController();
+    final firstNameController = useTextEditingController(
+      text: user?.firstName,
+    );
+    final lastNameController = useTextEditingController(
+      text: user?.lastName,
+    );
+    final rankController = useTextEditingController(
+      text: user?.rank,
+    );
+    final departmentController = useTextEditingController(
+      text: user?.department,
+    );
+    final phoneNumberController = useTextEditingController(
+      text: user?.phoneNumber,
+    );
+    final stationPhoneNumberController = useTextEditingController(
+      text: user?.stationPhoneNumber,
+    );
+
+    // initState
+    useEffect(() {
+      if (user != null) {
+        createAccountScreenViewModel.setNewRole(user!.role, refresh: false);
+      }
+
+      // dispose
+      return () {};
+    }, []);
 
     return GestureDetector(
       onTap: () {
@@ -79,27 +118,45 @@ class CreateAccountScreen extends HookConsumerWidget {
           title: const Text('Create a new account'),
           actions: [
             IconButton(
-              icon: const Icon(
-                Icons.person_add,
+              icon: Icon(
+                user == null ? Icons.person_add : Icons.edit,
                 size: 30,
               ),
               onPressed: () async {
-                await _create(
-                  context,
-                  createAccountScreenViewModel,
-                  newUser: User(
-                    id: '0',
-                    firstName: firstNameController.text,
-                    lastName: lastNameController.text,
-                    rank: rankController.text,
-                    email: emailController.text,
-                    phoneNumber: phoneNumberController.text,
-                    department: departmentController.text,
-                    stationPhoneNumber: stationPhoneNumberController.text,
-                    role: Roles.regular,
-                  ),
-                  password: passwordController.text,
-                );
+                if (user != null) {
+                  await _update(
+                    context,
+                    createAccountScreenViewModel,
+                    oldUser: User(
+                      id: user!.id,
+                      firstName: firstNameController.text,
+                      lastName: lastNameController.text,
+                      rank: rankController.text,
+                      email: emailController.text,
+                      phoneNumber: phoneNumberController.text,
+                      department: departmentController.text,
+                      stationPhoneNumber: stationPhoneNumberController.text,
+                      role: user!.role,
+                    ),
+                  );
+                } else {
+                  await _create(
+                    context,
+                    createAccountScreenViewModel,
+                    newUser: User(
+                      id: '0',
+                      firstName: firstNameController.text,
+                      lastName: lastNameController.text,
+                      rank: rankController.text,
+                      email: emailController.text,
+                      phoneNumber: phoneNumberController.text,
+                      department: departmentController.text,
+                      stationPhoneNumber: stationPhoneNumberController.text,
+                      role: Roles.regular,
+                    ),
+                    password: passwordController.text,
+                  );
+                }
               },
             )
           ],
@@ -117,13 +174,14 @@ class CreateAccountScreen extends HookConsumerWidget {
                   hintText: 'Email',
                   icon: Icons.email,
                 ),
-                CustomInputTextField(
-                  controller: passwordController,
-                  validator: _validatePassword,
-                  hintText: 'Password',
-                  icon: Icons.vpn_key,
-                  obscureText: true,
-                ),
+                if (user == null)
+                  CustomInputTextField(
+                    controller: passwordController,
+                    validator: _validatePassword,
+                    hintText: 'Password',
+                    icon: Icons.vpn_key,
+                    obscureText: true,
+                  ),
                 Row(
                   children: [
                     SizedBox(

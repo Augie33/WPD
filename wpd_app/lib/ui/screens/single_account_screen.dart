@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/models/user/user.dart';
+import 'package:wpd_app/ui/screens/create_account_screen.dart';
 import 'package:wpd_app/ui/screens/profile_screen.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/show_accounts_screen_viewmodel.dart';
@@ -55,7 +56,18 @@ class _SingleAccountScreenState extends ConsumerState<SingleAccountScreen> {
                 icon: const Icon(Icons.delete),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: user?.role == Roles.admin
+                    ? null
+                    : () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => CreateAccountScreen(
+                              user: user,
+                            ),
+                          ),
+                        );
+                      },
                 icon: const Icon(Icons.edit),
               ),
             ],

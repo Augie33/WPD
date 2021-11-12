@@ -109,7 +109,7 @@ class AddCaseScreen extends HookConsumerWidget {
           notifyListener: false,
         );
 
-        addCaseViewmodel.setUploadFromDevice(false, notifyListener: false);
+        addCaseViewmodel.setUploadFromDevice(false, refresh: false);
       }
 
       // dispose
