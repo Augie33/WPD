@@ -85,7 +85,7 @@ dependencies:
 
   # Plus
   share_plus: ^3.0.1
-  connectivity_plus: ^1.1.0
+  # connectivity_plus: ^1.1.0
   
   # Look
   bot_toast: ^4.0.1
@@ -94,10 +94,7 @@ dependencies:
   shimmer: ^2.0.0
   flutter_speed_dial: ^4.6.6
   badges: ^2.0.1
-  flutter_slidable: 
-    git:
-      url: https://github.com/dmakwt/flutter_slidable.git
-      ref: master   
+  flutter_slidable: ^1.0.0
 
   
 

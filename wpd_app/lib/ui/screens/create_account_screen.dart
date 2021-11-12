@@ -65,7 +65,7 @@ class CreateAccountScreen extends HookConsumerWidget {
     if (_key.currentState?.validate() ?? false) {
       await viewModel.updateUser(oldUser: oldUser);
       Navigator.pop(context);
-      Routemaster.of(context).push('/more/accounts');
+      Routemaster.of(context).push('/more');
     } else {
       debugPrint('Error :(');
     }
