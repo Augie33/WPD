@@ -68,19 +68,49 @@ class AddCaseScreen extends HookConsumerWidget {
     }
   }
 
+  Future<void> _submitEdit(BuildContext context,
+      AddCaseScreenViewModel caseScreenViewModel, Case oldCase) async {
+    if (_key.currentState?.validate() ?? false) {
+      await caseScreenViewModel.editCase(oldCase);
+
+      Routemaster.of(context).pop();
+
+      Navigator.pop(context);
+    } else {
+      debugPrint('Error :(');
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final addCaseViewmodel = ref.watch(AddCaseScreenViewModelProvider.provider);
-    final titleController = useTextEditingController();
-    final descriptionController = useTextEditingController();
-    final urlController = useTextEditingController();
-    final urlPdfController = useTextEditingController();
+    final titleController = useTextEditingController(
+      text: myCase?.title,
+    );
+    final descriptionController = useTextEditingController(
+      text: myCase?.description,
+    );
+    final urlController = useTextEditingController(
+      text: myCase?.url,
+    );
+    final urlPdfController = useTextEditingController(
+      text: myCase?.urlPDF,
+    );
     final FocusNode _focusNode = FocusNode();
 
     // initState
     useEffect(() {
       addCaseViewmodel.file = null;
       addCaseViewmodel.selectedCategory(null, notifyListener: false);
+
+      if (myCase != null) {
+        addCaseViewmodel.selectedCategory(
+          myCase!.category,
+          notifyListener: false,
+        );
+
+        addCaseViewmodel.setUploadFromDevice(false, notifyListener: false);
+      }
 
       // dispose
       return () {
@@ -100,8 +130,8 @@ class AddCaseScreen extends HookConsumerWidget {
             title: const Text('Add Case'),
             actions: [
               IconButton(
-                icon: const Icon(
-                  Icons.add_box_outlined,
+                icon: Icon(
+                  myCase == null ? Icons.add_box_outlined : Icons.edit,
                   size: 30,
                 ),
                 onPressed: () async {
@@ -110,19 +140,35 @@ class AddCaseScreen extends HookConsumerWidget {
                     return;
                   }
 
-                  await _submit(
-                    context,
-                    addCaseViewmodel,
-                    Case(
-                      id: 'n/a',
-                      title: titleController.text,
-                      description: descriptionController.text,
-                      url: urlController.text,
-                      urlPDF: urlPdfController.text,
-                      caseNumber: 0,
-                      category: addCaseViewmodel.selectedCateogry!,
-                    ),
-                  );
+                  if (myCase != null) {
+                    await _submitEdit(
+                      context,
+                      addCaseViewmodel,
+                      Case(
+                        id: myCase!.id,
+                        title: titleController.text,
+                        description: descriptionController.text,
+                        url: urlController.text,
+                        urlPDF: urlPdfController.text,
+                        caseNumber: 0,
+                        category: addCaseViewmodel.selectedCateogry!,
+                      ),
+                    );
+                  } else {
+                    await _submit(
+                      context,
+                      addCaseViewmodel,
+                      Case(
+                        id: 'n/a',
+                        title: titleController.text,
+                        description: descriptionController.text,
+                        url: urlController.text,
+                        urlPDF: urlPdfController.text,
+                        caseNumber: 0,
+                        category: addCaseViewmodel.selectedCateogry!,
+                      ),
+                    );
+                  }
                 },
               )
             ],
@@ -133,7 +179,6 @@ class AddCaseScreen extends HookConsumerWidget {
                 children: [
                   CustomInputTextField(
                     controller: titleController,
-                    initialValue: myCase?.title,
                     validator: _validateTitle,
                     hintText: 'Title',
                     icon: Icons.title,
@@ -175,7 +220,6 @@ class AddCaseScreen extends HookConsumerWidget {
                   const SizedBox(height: 5),
                   CustomInputTextField(
                     controller: descriptionController,
-                    initialValue: myCase?.description,
                     validator: _validateDescription,
                     hintText: 'Description',
                     icon: Icons.description,
@@ -183,7 +227,6 @@ class AddCaseScreen extends HookConsumerWidget {
                   ),
                   CustomInputTextField(
                     controller: urlController,
-                    initialValue: myCase?.url,
                     validator: null,
                     hintText: 'URL',
                     icon: Icons.link,
@@ -191,7 +234,6 @@ class AddCaseScreen extends HookConsumerWidget {
                   if (!addCaseViewmodel.uploadFromDevice)
                     CustomInputTextField(
                       controller: urlPdfController,
-                      initialValue: myCase?.urlPDF,
                       validator: null,
                       hintText: 'PDF URL',
                       icon: Icons.picture_as_pdf,
@@ -209,7 +251,7 @@ class AddCaseScreen extends HookConsumerWidget {
                       activeColor: Theme.of(context).primaryColor,
                       value: addCaseViewmodel.uploadFromDevice,
                       onChanged: (value) {
-                        addCaseViewmodel.uploadFromDevice = value;
+                        addCaseViewmodel.setUploadFromDevice(value);
                       },
                     ),
                   ),

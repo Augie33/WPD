@@ -32,7 +32,8 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
   bool get isLoading => _loading;
   Case? get myCase => _case;
 
-  Future<void> fetchCase({required String? caseId}) async {
+  Future<void> fetchCase(
+      {required String? caseId, bool notifyListener = true}) async {
     try {
       _loading = true;
 
@@ -44,7 +45,9 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
       _case = data;
 
       _loading = false;
-      notifyListeners();
+      if (notifyListener) {
+        notifyListeners();
+      }
     } on DioError catch (e) {
       BotToast.showText(text: e.message);
 

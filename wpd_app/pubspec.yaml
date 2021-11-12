@@ -63,16 +63,16 @@ dependencies:
   # Shared prefs
   shared_preferences: ^2.0.8
 
-  # File picker
+  # File 
   file_picker: ^4.2.0
+  cross_file: ^0.3.2
 
   # QR
   qr_flutter: ^4.0.0
   pretty_qr_code: ^2.0.2
-
+  
   # PDF
   flutter_cached_pdfview: ^0.4.0-nullsafety
-  cross_file: ^0.3.2
 
   # Launch external URLs
   url_launcher: ^6.0.11

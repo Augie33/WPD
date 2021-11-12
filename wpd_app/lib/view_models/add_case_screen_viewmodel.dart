@@ -9,6 +9,7 @@ import 'package:dio/dio.dart';
 import 'package:wpd_app/api/http_client.dart';
 import 'package:wpd_app/api/json_parsers/case_parser.dart';
 import 'package:wpd_app/api/json_parsers/pdf_case_parser.dart';
+import 'package:wpd_app/api/json_parsers/void_parser.dart';
 import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/models/custom_category/custom_category.dart';
 import 'package:wpd_app/services/file_picker/file_picker_service.dart';
@@ -35,9 +36,11 @@ class AddCaseScreenViewModel extends ChangeNotifier {
   CustomCategory? get selectedCateogry => _selectedCateogry;
   XFile? get file => _file;
 
-  set uploadFromDevice(value) {
+  void setUploadFromDevice(bool value, {bool notifyListener = true}) {
     _uploadFromDevice = value;
-    notifyListeners();
+    if (notifyListener) {
+      notifyListeners();
+    }
   }
 
   set file(value) => _file = value;
@@ -104,6 +107,50 @@ class AddCaseScreenViewModel extends ChangeNotifier {
       BotToast.closeAllLoading();
 
       return data;
+    } on DioError catch (e) {
+      BotToast.showText(text: e.message);
+
+      _loading = false;
+      notifyListeners();
+    } catch (e) {
+      BotToast.showText(text: 'Error');
+      _loading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> editCase(Case oldCase) async {
+    try {
+      _loading = true;
+      BotToast.showCustomLoading(
+        toastBuilder: (_) => const AppLoader(),
+      );
+
+      await _requestRest.executePut<void>(
+        '/cases/${oldCase.id}',
+        const VoidParser(),
+        data: {
+          'title': oldCase.title,
+          'description': oldCase.description,
+          'url': oldCase.url,
+          'urlPDF': oldCase.urlPDF,
+          'category': oldCase.category.id,
+        },
+      );
+
+      if (_file != null && uploadFromDevice) {
+        await _requestRest.uploadFile(
+          '/cases/${oldCase.id}/pdf',
+          const PDFCaseParser(),
+          file: _file!,
+        );
+      }
+      HapticFeedback.lightImpact();
+      BotToast.showText(text: 'Edit ${oldCase.title} case');
+      notifyListeners();
+      _loading = false;
+
+      BotToast.closeAllLoading();
     } on DioError catch (e) {
       BotToast.showText(text: e.message);
 

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/models/user/user.dart';
+import 'package:wpd_app/ui/screens/add_case_screen.dart';
 import 'package:wpd_app/ui/screens/my_cart_screen.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
 import 'package:wpd_app/view_models/cart_viewmode.dart';
@@ -19,7 +21,9 @@ class FloatingButtons extends ConsumerWidget {
     final authViewModel = ref.watch(AuthStateViewModelProvider.provider);
     final cartViewModel = ref.watch(CartViewModelProvider.provider);
     final favoriteViewModel = ref.watch(FavoriteViewModelProvider.provider);
-    final myCase = ref.read(SingalCaseScreenViewModelProvider.provider).myCase;
+    final singleCaseViewModel =
+        ref.watch(SingalCaseScreenViewModelProvider.provider);
+    final myCase = singleCaseViewModel.myCase;
 
     return SpeedDial(
       icon: Icons.list,
@@ -60,7 +64,21 @@ class FloatingButtons extends ConsumerWidget {
           SpeedDialChild(
             child: const Icon(Icons.edit),
             label: 'Edit Case',
-            onTap: () {/* Do someting */},
+            onTap: () {
+              if (myCase != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AddCaseScreen(
+                      caseId: myCase.id,
+                      myCase: myCase,
+                    ),
+                  ),
+                ).then((value) => () {
+                      Routemaster.of(context).push('/case/${myCase.id}');
+                    });
+              }
+            },
           ),
         SpeedDialChild(
           child: Consumer(
