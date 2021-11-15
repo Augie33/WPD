@@ -1,6 +1,7 @@
 [
     {
       "_id": "618975fb7eceb93e5cfd1218",
+      "caseNumber": "123",
       "cases": [
         "5d713995b721c3bb38c1f5d0",
         "5d713a66ec8f2b88b8f830b8",
@@ -9,6 +10,7 @@
     },
     {
         "_id": "618975ff161e564e5df7acf1",
+        "caseNumber": "456",
         "cases": [
           "615d25cdb1d4b4360d0782d8",
           "615d25c4f7b3bd17d0da3944"

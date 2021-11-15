@@ -9,7 +9,10 @@ const User = require('../models/User');
 // @route     GET /api/v1/cart/:id
 // @access    Public
 exports.getCart = asyncHandler(async (req, res, next) => {
-    const cart = await Cart.findById(req.params.id).populate('cases');
+    const cart = await Cart.findById(req.params.id).populate({
+        path: 'cases',
+        populate: { path: 'category' }
+    });
 
     if (!cart) {
         return next(
@@ -29,7 +32,10 @@ exports.getCart = asyncHandler(async (req, res, next) => {
 // @route     GET /api/v1/cart/:cartId/:userId
 // @access    Private
 exports.getCartAndPoliceInfo = asyncHandler(async (req, res, next) => {
-    const cart = await Cart.findById(req.params.cartId);
+    const cart = await Cart.findById(req.params.cartId).populate({
+        path: 'cases',
+        populate: { path: 'category' }
+    });
 
     const user = await User.findById(req.params.userId);
 
