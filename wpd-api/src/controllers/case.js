@@ -7,7 +7,7 @@ const Category = require('../models/Category');
 const AWS = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
-
+const sendmail = require('sendmail')();
 
 
 // const { sendCaseEmail } = require('../utils/send-email');
@@ -148,11 +148,22 @@ exports.deleteCase = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v1/cases/email
 // @access    Private
 exports.sendEmail = asyncHandler(async (req, res, next) => {
-  await sendCaseEmail({
-    email: req.body.email,
-    subject: req.body.subject,
-    url: req.body.url,
+  // await sendCaseEmail({
+  //   email: req.body.email,
+  //   subject: req.body.subject,
+  //   url: req.body.url,
+  // });
+
+  sendmail({
+    from: 'no-reply@yourdomain.com',
+    to: 'dmakwt@gmail.com',
+    subject: 'test sendmail',
+    html: 'Mail of test sendmail ',
+  }, function (err, reply) {
+    console.log(err && err.stack);
+    console.dir(reply);
   });
+
 
   res.status(200).json();
 });
