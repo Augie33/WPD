@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
           builder: (context, child) {
             child = DevicePreview.appBuilder(context, child);
             child = botToastBuilder(context, child);
+
             return child;
           },
           routerDelegate: RoutemasterDelegate(

@@ -41,13 +41,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Home'),
-          leading: IconButton(
-            onPressed: () {},
-            iconSize: 32,
-            tooltip: 'History',
-            color: Theme.of(context).primaryColor,
-            icon: const Icon(Icons.history),
-          ),
           actions: [
             if (role == Roles.admin || role == Roles.regular)
               IconButton(

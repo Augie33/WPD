@@ -37,7 +37,6 @@ abstract class AppRoutes {
             child: SingleCaseScreen(caseId: info.pathParameters['id']),
           ),
       '/case/:id/qr': (info) => const MaterialPage(child: QRScreen()),
-      '/case/:id/email': (info) => MaterialPage(child: EmailScreen()),
       '/more': (_) => const MaterialPage(child: MoreScreen()),
       '/more/create': (_) => MaterialPage(child: CreateAccountScreen()),
       '/more/accounts': (_) => const MaterialPage(child: ShowAccountScreen()),

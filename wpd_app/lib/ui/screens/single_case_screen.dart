@@ -152,14 +152,6 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                                           },
                                         ),
                                         CustomButton(
-                                          icon: Icons.email,
-                                          label: 'Email',
-                                          onPressed: () {
-                                            Routemaster.of(context)
-                                                .push('email');
-                                          },
-                                        ),
-                                        CustomButton(
                                           icon: Icons.share,
                                           label: 'Share',
                                           onPressed: () async {
@@ -392,83 +384,6 @@ class QRScreen extends ConsumerWidget {
       body: Center(
         child: Card(
           child: singalCaseViewModel.showQR(userId: authViewModel.myUser!.id),
-        ),
-      ),
-    );
-  }
-}
-
-class EmailScreen extends HookConsumerWidget {
-  EmailScreen({Key? key}) : super(key: key);
-
-  final _key = GlobalKey<FormState>();
-
-  String? _validateEmail(String? value) {
-    if (value!.isEmpty) {
-      return 'Please, write your email';
-    } else if (!isEmail(value)) {
-      return 'Please, write valid email';
-    } else {
-      return null;
-    }
-  }
-
-  Future<void> _send(
-    BuildContext context,
-    SingalCaseScreenViewModel viewModel,
-    TextEditingController _emailController,
-  ) async {
-    if (_key.currentState?.validate() ?? false) {
-      HapticFeedback.lightImpact();
-      BotToast.showText(text: 'Email send to ${_emailController.text}');
-
-      Routemaster.of(context).pop();
-    } else {
-      debugPrint('Error :(');
-    }
-  }
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final singalCaseViewModel =
-        ref.watch(SingalCaseScreenViewModelProvider.provider);
-
-    final emailController = useTextEditingController();
-
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Send by Email'),
-        ),
-        body: Form(
-          key: _key,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  CustomFormField(
-                    controller: emailController,
-                    autofocus: true,
-                    hintText: 'Email',
-                    icon: Icons.email,
-                    validator: _validateEmail,
-                  ),
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.send),
-                    label: const Text('Send'),
-                    onPressed: () async {
-                      await _send(
-                          context, singalCaseViewModel, emailController);
-                    },
-                  )
-                ],
-              ),
-            ),
-          ),
         ),
       ),
     );
