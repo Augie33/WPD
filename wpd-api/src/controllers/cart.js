@@ -61,9 +61,6 @@ exports.getCartAndPoliceInfo = asyncHandler(async (req, res, next) => {
 
 
 
-
-
-
 // @desc      Create cart
 // @route     POST /api/v1/cart
 // @access    Private
