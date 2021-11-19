@@ -22,9 +22,12 @@ class _$CartTearOff {
   const _$CartTearOff();
 
   _Cart call(
-      {@JsonKey(name: '_id') required String id, required List<Case> cases}) {
+      {@JsonKey(name: '_id') required String id,
+      required String caseNumber,
+      required List<Case> cases}) {
     return _Cart(
       id: id,
+      caseNumber: caseNumber,
       cases: cases,
     );
   }
@@ -41,6 +44,7 @@ const $Cart = _$CartTearOff();
 mixin _$Cart {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
+  String get caseNumber => throw _privateConstructorUsedError;
   List<Case> get cases => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +56,8 @@ mixin _$Cart {
 abstract class $CartCopyWith<$Res> {
   factory $CartCopyWith(Cart value, $Res Function(Cart) then) =
       _$CartCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: '_id') String id, List<Case> cases});
+  $Res call(
+      {@JsonKey(name: '_id') String id, String caseNumber, List<Case> cases});
 }
 
 /// @nodoc
@@ -66,12 +71,17 @@ class _$CartCopyWithImpl<$Res> implements $CartCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? caseNumber = freezed,
     Object? cases = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      caseNumber: caseNumber == freezed
+          ? _value.caseNumber
+          : caseNumber // ignore: cast_nullable_to_non_nullable
               as String,
       cases: cases == freezed
           ? _value.cases
@@ -86,7 +96,8 @@ abstract class _$CartCopyWith<$Res> implements $CartCopyWith<$Res> {
   factory _$CartCopyWith(_Cart value, $Res Function(_Cart) then) =
       __$CartCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: '_id') String id, List<Case> cases});
+  $Res call(
+      {@JsonKey(name: '_id') String id, String caseNumber, List<Case> cases});
 }
 
 /// @nodoc
@@ -101,12 +112,17 @@ class __$CartCopyWithImpl<$Res> extends _$CartCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? caseNumber = freezed,
     Object? cases = freezed,
   }) {
     return _then(_Cart(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      caseNumber: caseNumber == freezed
+          ? _value.caseNumber
+          : caseNumber // ignore: cast_nullable_to_non_nullable
               as String,
       cases: cases == freezed
           ? _value.cases
@@ -120,7 +136,10 @@ class __$CartCopyWithImpl<$Res> extends _$CartCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$_Cart implements _Cart {
-  const _$_Cart({@JsonKey(name: '_id') required this.id, required this.cases});
+  const _$_Cart(
+      {@JsonKey(name: '_id') required this.id,
+      required this.caseNumber,
+      required this.cases});
 
   factory _$_Cart.fromJson(Map<String, dynamic> json) => _$$_CartFromJson(json);
 
@@ -128,11 +147,13 @@ class _$_Cart implements _Cart {
   @JsonKey(name: '_id')
   final String id;
   @override
+  final String caseNumber;
+  @override
   final List<Case> cases;
 
   @override
   String toString() {
-    return 'Cart(id: $id, cases: $cases)';
+    return 'Cart(id: $id, caseNumber: $caseNumber, cases: $cases)';
   }
 
   @override
@@ -141,6 +162,9 @@ class _$_Cart implements _Cart {
         (other is _Cart &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.caseNumber, caseNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.caseNumber, caseNumber)) &&
             (identical(other.cases, cases) ||
                 const DeepCollectionEquality().equals(other.cases, cases)));
   }
@@ -149,6 +173,7 @@ class _$_Cart implements _Cart {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(caseNumber) ^
       const DeepCollectionEquality().hash(cases);
 
   @JsonKey(ignore: true)
@@ -165,6 +190,7 @@ class _$_Cart implements _Cart {
 abstract class _Cart implements Cart {
   const factory _Cart(
       {@JsonKey(name: '_id') required String id,
+      required String caseNumber,
       required List<Case> cases}) = _$_Cart;
 
   factory _Cart.fromJson(Map<String, dynamic> json) = _$_Cart.fromJson;
@@ -172,6 +198,8 @@ abstract class _Cart implements Cart {
   @override
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
+  @override
+  String get caseNumber => throw _privateConstructorUsedError;
   @override
   List<Case> get cases => throw _privateConstructorUsedError;
   @override

@@ -12,11 +12,13 @@ import 'package:routemaster/routemaster.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:validators/validators.dart';
 import 'package:wpd_app/models/user/user.dart';
+import 'package:wpd_app/ui/screens/qr_screen.dart';
 import 'package:wpd_app/ui/widgets/custom_button.dart';
 import 'package:wpd_app/ui/widgets/custom_form_field.dart';
 import 'package:wpd_app/ui/widgets/floating_buttons.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 import 'package:wpd_app/view_models/auth_state_viewmodel.dart';
+import 'package:wpd_app/view_models/cart_viewmode.dart';
 import 'package:wpd_app/view_models/signal_case_screen_viewmodel.dart';
 
 class SingleCaseScreen extends ConsumerStatefulWidget {
@@ -37,6 +39,8 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
     ref
         .read(SingalCaseScreenViewModelProvider.provider)
         .fetchCase(caseId: widget.caseId);
+
+    ref.read(SingalCaseScreenViewModelProvider.provider).getDataFromStorage();
   }
 
   @override
@@ -48,6 +52,8 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
         final myCase = singalCaseViewModel.myCase;
 
         final authViewModel = ref.watch(AuthStateViewModelProvider.provider);
+
+        final cartViewModel = ref.watch(CartViewModelProvider.provider);
 
         return singalCaseViewModel.isLoading
             ? const Center(
@@ -100,17 +106,7 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                                       Container(
                                         alignment: Alignment.centerLeft,
                                         child: SelectableText(
-                                          'Case Number:   #${myCase.caseNumber}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: SelectableText(
-                                          'Case ID:   ${myCase.id}',
+                                          'Number:    #${myCase.caseNumber}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText1,
@@ -146,24 +142,101 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                                         CustomButton(
                                           icon: Icons.qr_code_2,
                                           label: 'QR',
-                                          onPressed: () {
-                                            HapticFeedback.lightImpact();
-                                            Routemaster.of(context).push('qr');
+                                          onPressed: () async {
+                                            if (singalCaseViewModel
+                                                .inclueCaseNumber) {
+                                              final success =
+                                                  await cartViewModel
+                                                          .showCaseNumberDialog(
+                                                              context) ??
+                                                      false;
+
+                                              if (!success) {
+                                                return;
+                                              }
+
+                                              final cart = await cartViewModel
+                                                  .createCart(
+                                                userId:
+                                                    authViewModel.myUser!.id,
+                                              );
+                                              HapticFeedback.lightImpact();
+
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  fullscreenDialog: true,
+                                                  builder: (context) =>
+                                                      QRScreen(
+                                                    cartId: cart?.id,
+                                                  ),
+                                                ),
+                                              );
+                                            } else {
+                                              HapticFeedback.lightImpact();
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  fullscreenDialog: true,
+                                                  builder: (context) =>
+                                                      const QRScreen(),
+                                                ),
+                                              );
+                                            }
                                           },
                                         ),
                                         CustomButton(
                                           icon: Icons.share,
                                           label: 'Share',
                                           onPressed: () async {
-                                            HapticFeedback.lightImpact();
-                                            await singalCaseViewModel.shareCase(
-                                              userId: authViewModel.myUser!.id,
-                                            );
+                                            if (singalCaseViewModel
+                                                .inclueCaseNumber) {
+                                              final success =
+                                                  await cartViewModel
+                                                          .showCaseNumberDialog(
+                                                              context) ??
+                                                      false;
+
+                                              if (!success) {
+                                                return;
+                                              }
+
+                                              final cart = await cartViewModel
+                                                  .createCart(
+                                                userId:
+                                                    authViewModel.myUser!.id,
+                                              );
+                                              HapticFeedback.lightImpact();
+                                              await singalCaseViewModel
+                                                  .shareCase(
+                                                userId:
+                                                    authViewModel.myUser!.id,
+                                                cartId: cart?.id,
+                                              );
+                                            } else {
+                                              HapticFeedback.lightImpact();
+                                              await singalCaseViewModel
+                                                  .shareCase(
+                                                userId:
+                                                    authViewModel.myUser!.id,
+                                              );
+                                            }
                                           },
                                         ),
                                       ],
                                     ),
                                     const SizedBox(height: 10),
+                                    SwitchListTile(
+                                      activeColor:
+                                          Theme.of(context).primaryColor,
+                                      title: const Text(
+                                        'Add case number',
+                                      ),
+                                      value:
+                                          singalCaseViewModel.inclueCaseNumber,
+                                      onChanged: singalCaseViewModel
+                                          .toggleInclueCaseNumber,
+                                    ),
                                     SwitchListTile(
                                       activeColor:
                                           Theme.of(context).primaryColor,
@@ -363,29 +436,6 @@ class _SingleCaseScreenState extends ConsumerState<SingleCaseScreen> {
                     ),
                   );
       },
-    );
-  }
-}
-
-class QRScreen extends ConsumerWidget {
-  const QRScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final singalCaseViewModel =
-        ref.watch(SingalCaseScreenViewModelProvider.provider);
-
-    final authViewModel = ref.watch(AuthStateViewModelProvider.provider);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('QR'),
-      ),
-      body: Center(
-        child: Card(
-          child: singalCaseViewModel.showQR(userId: authViewModel.myUser!.id),
-        ),
-      ),
     );
   }
 }

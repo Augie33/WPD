@@ -127,7 +127,7 @@ class AddCaseScreen extends HookConsumerWidget {
         child: Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
-            title: const Text('Add Case'),
+            title: const Text('Add Case Template'),
             actions: [
               IconButton(
                 icon: Icon(

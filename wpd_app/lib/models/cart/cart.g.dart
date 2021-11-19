@@ -8,6 +8,7 @@ part of 'cart.dart';
 
 _$_Cart _$$_CartFromJson(Map<String, dynamic> json) => _$_Cart(
       id: json['_id'] as String,
+      caseNumber: json['caseNumber'] as String,
       cases: (json['cases'] as List<dynamic>)
           .map((e) => Case.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -15,5 +16,6 @@ _$_Cart _$$_CartFromJson(Map<String, dynamic> json) => _$_Cart(
 
 Map<String, dynamic> _$$_CartToJson(_$_Cart instance) => <String, dynamic>{
       '_id': instance.id,
+      'caseNumber': instance.caseNumber,
       'cases': instance.cases.map((e) => e.toJson()).toList(),
     };

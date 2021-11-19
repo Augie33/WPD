@@ -9,6 +9,7 @@ class Cart with _$Cart {
   @JsonSerializable(explicitToJson: true)
   const factory Cart({
     @JsonKey(name: '_id') required String id,
+    required String caseNumber,
     required List<Case> cases,
   }) = _Cart;
 

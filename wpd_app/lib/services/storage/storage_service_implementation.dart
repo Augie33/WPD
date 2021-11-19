@@ -7,12 +7,12 @@ class StorageServiceImpl implements StorageService {
   final SharedPreferences sharedPreferences;
 
   @override
-  Future<void> setData(String key, String value) async {
-    await sharedPreferences.setString(key, value);
+  Future<void> setData(String key, bool value) async {
+    await sharedPreferences.setBool(key, value);
   }
 
   @override
-  String? getData(String key) {
-    return sharedPreferences.getString(key);
+  bool? getData(String key) {
+    return sharedPreferences.getBool(key);
   }
 }

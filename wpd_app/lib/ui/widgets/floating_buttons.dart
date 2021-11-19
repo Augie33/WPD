@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/models/user/user.dart';
 import 'package:wpd_app/ui/screens/add_case_screen.dart';
 import 'package:wpd_app/ui/screens/my_cart_screen.dart';

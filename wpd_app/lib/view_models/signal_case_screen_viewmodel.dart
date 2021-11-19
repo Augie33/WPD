@@ -11,6 +11,7 @@ import 'package:wpd_app/services/pdf/pdf_service.dart';
 import 'package:wpd_app/services/qr/qr_service.dart';
 import 'package:wpd_app/services/service_locator.dart';
 import 'package:wpd_app/services/share/share_service.dart';
+import 'package:wpd_app/services/storage/storage_service.dart';
 
 abstract class SingalCaseScreenViewModelProvider {
   static final provider = ChangeNotifierProvider(
@@ -23,11 +24,14 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
   final _qrService = serviceLocator<QRService>();
   final _pdfService = serviceLocator<PDFService>();
   final _shareService = serviceLocator<ShareService>();
+  final _storageService = serviceLocator<StorageService>();
 
   Case? _case;
 
-  bool _inclueInfo = false;
+  bool _inclueInfo = true;
   bool get inclueInfo => _inclueInfo;
+  bool _inclueCaseNumber = true;
+  bool get inclueCaseNumber => _inclueCaseNumber;
   bool _loading = false;
   bool get isLoading => _loading;
   Case? get myCase => _case;
@@ -60,8 +64,22 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
     }
   }
 
-  void toggleInclueInfo(bool value) {
+  void getDataFromStorage() {
+    _inclueCaseNumber = _storageService.getData('InclueCaseNumber') ?? true;
+    _inclueInfo = _storageService.getData('InclueInfo') ?? true;
+  }
+
+  void toggleInclueInfo(bool value) async {
     _inclueInfo = value;
+    await _storageService.setData('InclueInfo', value);
+    notifyListeners();
+  }
+
+  void toggleInclueCaseNumber(bool value) async {
+    _inclueCaseNumber = value;
+
+    await _storageService.setData('InclueCaseNumber', value);
+
     notifyListeners();
   }
 
@@ -73,12 +91,25 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
     return _pdfService.showPDF(_case!.urlPDF);
   }
 
-  Widget showQR({required String userId}) {
-    // TODO: ADD URL (include your info or not)
-    if (_inclueInfo) {
-      // return _qrService.generateQR(
-      //     value: 'https://andrewducnguyen.dev/user_case', size: 300);
+  Widget showQR({required String userId, String? cartId}) {
+    if (_inclueInfo && _inclueCaseNumber) {
+      if (cartId == null) {
+        return const SizedBox();
+      }
 
+      return _qrService.generateQR(
+        value: 'http://wichitapd.herokuapp.com/view/user-cart/$cartId/$userId',
+        size: 300,
+      );
+    } else if (_inclueCaseNumber) {
+      if (cartId == null) {
+        return const SizedBox();
+      }
+      return _qrService.generateQR(
+        value: 'http://wichitapd.herokuapp.com/view/cart/$cartId',
+        size: 300,
+      );
+    } else if (_inclueInfo) {
       return _qrService.generateQR(
         value:
             'https://wichitapd.herokuapp.com/view/user-case/${_case?.id}/$userId',
@@ -92,10 +123,14 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> shareCase({required String userId}) async {
-    // TODO: ADD URL (include your info or not)
-
-    if (_inclueInfo) {
+  Future<void> shareCase({required String userId, String? cartId}) async {
+    if (_inclueInfo && _inclueCaseNumber) {
+      await _shareService.shareURL(
+          url: 'http://wichitapd.herokuapp.com/view/user-cart/$cartId/$userId');
+    } else if (_inclueCaseNumber) {
+      await _shareService.shareURL(
+          url: 'http://wichitapd.herokuapp.com/view/cart/$cartId');
+    } else if (_inclueInfo) {
       await _shareService.shareURL(
           url:
               'https://wichitapd.herokuapp.com/view/user-case/${_case?.id}/$userId');

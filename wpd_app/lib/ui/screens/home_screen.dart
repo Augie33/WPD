@@ -33,6 +33,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final role = ref.watch(AuthStateViewModelProvider.provider).myUser?.role;
+    final brightness = MediaQuery.of(context).platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
     return RefreshIndicator(
       color: Theme.of(context).primaryColor,
       onRefresh: () => ref
@@ -44,8 +46,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           actions: [
             if (role == Roles.admin || role == Roles.regular)
               IconButton(
-                icon: const Icon(Icons.add),
-                iconSize: 32,
+                icon: const Icon(Icons.library_add),
+                iconSize: 28,
+                color: isDarkMode ? Colors.white : Colors.black,
                 tooltip: 'Add Case',
                 onPressed: () {
                   Routemaster.of(context).push('add');

@@ -1,5 +1,5 @@
 abstract class StorageService {
-  Future<void> setData(String key, String value);
+  Future<void> setData(String key, bool value);
 
-  String? getData(String key);
+  bool? getData(String key);
 }
