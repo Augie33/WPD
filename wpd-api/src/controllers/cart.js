@@ -68,8 +68,11 @@ exports.getCartAndPoliceInfo = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v1/cart
 // @access    Private
 exports.createCart = asyncHandler(async (req, res, next) => {
-    const cart = await Cart.create(req.body);
-
+    let cart = await Cart.create(req.body);
+    cart = await Cart.findById(cart._id).populate({
+        path: 'cases',
+        populate: { path: 'category' }
+    });
 
     res.status(201).json({
         success: true,
