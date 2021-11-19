@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const CartSchema = new mongoose.Schema({
     caseNumber: {
         type: String,
-        unique: true,
+        // unique: true,
         trim: true,
         required: [true, 'Please add a case number'],
     },
