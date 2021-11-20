@@ -37,7 +37,10 @@ exports.getCartAndPoliceInfo = asyncHandler(async (req, res, next) => {
         populate: { path: 'category' }
     });
 
-    const user = await User.findById(req.params.userId);
+    let user = await User.findById(req.params.userId);
+
+
+
 
     if (!cart || !user) {
         return next(
@@ -47,6 +50,8 @@ exports.getCartAndPoliceInfo = asyncHandler(async (req, res, next) => {
 
     user.role = undefined;
     user.__v = undefined;
+    user.token = undefined;
+    user.createdAt = undefined;
     cart.__v = undefined;
 
     res.status(200).json({
