@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +17,10 @@ class HelpScreenViewModel extends ChangeNotifier {
   final _pdfService = serviceLocator<PDFService>();
 
   Widget showPdf() {
-    return _pdfService.showPDFAsset('assets/manual.pdf');
+    if (Platform.isAndroid || Platform.isIOS) {
+      return _pdfService.showPDFAsset('assets/manual.pdf');
+    }
+
+    return const SizedBox();
   }
 }
