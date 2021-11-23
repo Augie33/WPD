@@ -11,7 +11,6 @@ import 'package:wpd_app/models/cart/cart.dart';
 import 'package:wpd_app/models/case/case.dart';
 import 'package:wpd_app/services/service_locator.dart';
 import 'package:wpd_app/ui/widgets/case_number_field.dart';
-import 'package:wpd_app/ui/widgets/custom_form_field.dart';
 import 'package:wpd_app/ui/widgets/loader.dart';
 
 abstract class CartViewModelProvider {

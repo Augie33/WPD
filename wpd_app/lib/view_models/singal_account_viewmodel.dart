@@ -82,8 +82,6 @@ class SingalAccountScreenViewModel extends ChangeNotifier {
   }
 
   Widget showQR() {
-    // TODO: ADD URL (include your info or not)
-
     return _qrService.generateQR(
       value: 'https://wichitapd.herokuapp.com/view/user/${_user?.id}',
       size: 200,
