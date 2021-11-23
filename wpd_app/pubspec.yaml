@@ -58,7 +58,7 @@ dependencies:
   freezed_annotation: ^0.14.3
 
   # Securley store data in a keystore
-  flutter_secure_storage: ^4.2.1
+  flutter_secure_storage: ^5.0.2
 
   # Shared prefs
   shared_preferences: ^2.0.8
@@ -73,6 +73,7 @@ dependencies:
   
   # PDF
   flutter_cached_pdfview: ^0.4.0-nullsafety
+  native_pdf_view: ^5.0.0
 
   # Launch external URLs
   url_launcher: ^6.0.11
@@ -136,6 +137,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/logo.png
+    - assets/manual.pdf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

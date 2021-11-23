@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 abstract class PDFService {
-  Widget showPDF(String url);
+  Widget showPDFUrl(String url);
+
+  Widget showPDFAsset(String path);
 }

@@ -48,8 +48,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               IconButton(
                 icon: const Icon(Icons.library_add),
                 iconSize: 28,
-                color: isDarkMode ? Colors.white : Colors.black,
-                tooltip: 'Add Case',
+                color: Theme.of(context).primaryColor,
+                tooltip: 'Add Case Template',
                 onPressed: () {
                   Routemaster.of(context).push('add');
                 },

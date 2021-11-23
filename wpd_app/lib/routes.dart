@@ -6,6 +6,7 @@ import 'package:wpd_app/ui/screens/add_edit_category_screen.dart';
 import 'package:wpd_app/ui/screens/create_account_screen.dart';
 import 'package:wpd_app/ui/screens/edit_profile_screen.dart';
 import 'package:wpd_app/ui/screens/favorite_screen.dart';
+import 'package:wpd_app/ui/screens/help_screen.dart';
 import 'package:wpd_app/ui/screens/home_screen.dart';
 import 'package:wpd_app/ui/screens/login_screen.dart';
 import 'package:wpd_app/ui/screens/more_screen.dart';
@@ -38,6 +39,7 @@ abstract class AppRoutes {
           ),
       '/more': (_) => const MaterialPage(child: MoreScreen()),
       '/more/create': (_) => MaterialPage(child: CreateAccountScreen()),
+      '/more/help': (_) => const MaterialPage(child: HelpScreen()),
       '/more/accounts': (_) => const MaterialPage(child: ShowAccountScreen()),
       '/more/accounts/:id': (info) => MaterialPage(
             child: SingleAccountScreen(userId: info.pathParameters['id']),

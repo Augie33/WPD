@@ -88,7 +88,7 @@ class SingalCaseScreenViewModel extends ChangeNotifier {
       return const SizedBox();
     }
 
-    return _pdfService.showPDF(_case!.urlPDF);
+    return _pdfService.showPDFUrl(_case!.urlPDF);
   }
 
   Widget showQR({required String userId, String? cartId}) {

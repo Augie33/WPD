@@ -72,7 +72,9 @@ class MoreScreen extends HookConsumerWidget {
           SettingTile(
             label: 'Help',
             icon: Icons.help,
-            onTap: () {},
+            onTap: () {
+              Routemaster.of(context).push('help');
+            },
           ),
           const SettingTileWithSubtitle(
             label: 'About APP',
