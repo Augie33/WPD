@@ -45,7 +45,7 @@ const importData = async () => {
   try {
     await Category.create(categories);
     await Case.create(cases);
-    // await User.create(users);
+    await User.create(users);
     await Cart.create(carts);
     console.log('Data Imported...'.green.inverse);
     process.exit();
@@ -59,7 +59,7 @@ const deleteData = async () => {
   try {
     await Category.deleteMany();
     await Case.deleteMany();
-    // await User.deleteMany();
+    await User.deleteMany();
     await Cart.deleteMany();
 
     console.log('Data Destroyed...'.red.inverse);
