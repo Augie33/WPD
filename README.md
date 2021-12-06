@@ -26,10 +26,8 @@
   
 
 ## Videos
-  - We Can Do It - Senior Design
-     https://youtu.be/W6ekRtpcY5A
-  - The Final Presentation for the first semester
-     https://youtu.be/DyEXAnuPA0A
+  - The Final Presentation
+     https://youtu.be/0COL4EpEtxU
   
   
 ## Technologies & Programming Languages
